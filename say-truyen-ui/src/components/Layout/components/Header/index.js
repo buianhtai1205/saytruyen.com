@@ -23,6 +23,7 @@ import AccountItem from "~/components/AccountItem";
 import Button from "~/components/Button";
 import Menu from "~/components/Popper/Menu";
 import LoginModal from "~/components/LoginModal";
+import i18next from "~/i18n";
 
 const MENU_ITEMS = [
 	{
@@ -123,7 +124,7 @@ const Header = () => {
 				<div className={clsx(styles.inner)}>
 					{/* Logo */}
 					<div className={clsx(styles.logo)}>
-						<img src={images.logo} alt="TikTok" />
+						<img src={images.logo} alt="saytruyen.com" />
 					</div>
 
 					{/* Search */}
@@ -152,7 +153,7 @@ const Header = () => {
 					>
 						<div className={clsx(styles.search)}>
 							<input
-								placeholder="Search account and video"
+								placeholder={i18next.t('header.test')}
 								spellCheck={false}
 							/>
 							<button className={clsx(styles.clear)}>
