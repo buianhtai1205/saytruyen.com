@@ -15,6 +15,7 @@ import {
 	faKeyboard,
 } from "@fortawesome/free-regular-svg-icons";
 import Tippy from "@tippyjs/react/headless";
+import { useTranslation } from 'react-i18next';
 
 import styles from "./Header.module.scss";
 import { images } from "~/assets/images";
@@ -23,7 +24,7 @@ import AccountItem from "~/components/AccountItem";
 import Button from "~/components/Button";
 import Menu from "~/components/Popper/Menu";
 import LoginModal from "~/components/LoginModal";
-import i18next from "~/i18n";
+import "~/i18n";
 
 const MENU_ITEMS = [
 	{
@@ -79,6 +80,7 @@ const Header = () => {
 	const [searchResult, setSearchResult] = useState([]);
 	const [isLogin, setIsLogin] = useState(false);
 	const [showLoginModal, setShowLoginModal] = useState(false);
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		//fake api
@@ -153,7 +155,7 @@ const Header = () => {
 					>
 						<div className={clsx(styles.search)}>
 							<input
-								placeholder={i18next.t('header.test')}
+								placeholder={t('header.search.description')}
 								spellCheck={false}
 							/>
 							<button className={clsx(styles.clear)}>
@@ -181,7 +183,7 @@ const Header = () => {
 									className={clsx(styles.iconPlus)}
 									icon={faPlus}
 								/>
-								<div className={clsx(styles.text)}>Upload</div>
+								<div className={clsx(styles.text)}>{t('header.button.upload')}</div>
 							</Button>
 						</div>
 
@@ -190,7 +192,7 @@ const Header = () => {
 							className={clsx(styles.login)}
 							onClick={handleShowLoginModal}
 						>
-							<Button primary>Log in</Button>
+							<Button primary>{t('header.button.login')}</Button>
 						</div>
 
 						{/* Menu */}

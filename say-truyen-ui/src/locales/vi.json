@@ -3,6 +3,10 @@
         "search": {
             "description": "Tìm kiếm truyện..."
         },
-        "test": "Hello"
-    }
+        "button": {
+            "upload": "Đăng truyện",
+            "login": "Đăng nhập"
+        }
+    },
+    "test": "Hello World"
 }

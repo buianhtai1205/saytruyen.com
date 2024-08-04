@@ -3,7 +3,7 @@
 	--search-button-height: 46px;
 	--search-border-radius: 92px;
 	--spacer-range-top: 9px;
-	--search-wrapper-width: 361px;
+	--search-wrapper-width: 400px;
 
 	width: 100%;
 	height: var(--default-layout-header-height, 60px);
@@ -119,7 +119,7 @@
 	}
 
 	.upload {
-		width: 120px;
+		width: 160px;
 
 		.iconPlus {
 			margin-right: 6px;
@@ -130,7 +130,7 @@
 	}
 
 	.login {
-		width: 100px;
+		width: 160px;
 	}
 
 	.menu {
