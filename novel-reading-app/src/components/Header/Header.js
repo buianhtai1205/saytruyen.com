@@ -7,10 +7,18 @@ import { images } from '../../assets/svg';
 const Header = () => (
     <header className={clsx(styles.header)}>
         <div>
-            <img src={images.searchIcon} alt='search' className={styles.searchIcon} />
+            <img
+                src={images.searchIcon}
+                alt="search"
+                className={styles.searchIcon}
+            />
         </div>
-        <img src={logo} alt='logo' className={styles.logo} />
-        <img src={images.menuIcon} alt='menu' className={clsx(styles.menuIcon)} />
+        <img src={logo} alt="logo" className={styles.logo} />
+        <img
+            src={images.menuIcon}
+            alt="menu"
+            className={clsx(styles.menuIcon)}
+        />
     </header>
 );
 
