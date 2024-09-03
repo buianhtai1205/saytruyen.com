@@ -1,0 +1,122 @@
+.topContainer {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: #1a1a1a;
+    box-sizing: border-box;
+}
+
+.topRank {
+    width: calc(50% - 1rem);
+
+    .title {
+        color: #ffd700;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .viewMore {
+            color: #888;
+            cursor: pointer;
+        }
+    }
+
+    .bookList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .bookItem {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        color: #fff;
+        font-size: 0.9rem;
+    }
+
+    .topBook {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+
+        .rankImage {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+            margin-right: 0.25rem;
+        }
+
+        .coverImage {
+            width: 60px;
+            height: 90px;
+            object-fit: cover;
+            margin-left: 0.5rem;
+        }
+
+        .bookInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .bookTitle {
+            font-size: 0.9rem;
+            margin: auto 0;
+            line-height: 1.2;
+            max-height: 3.6em; // Increased to accommodate 3 lines
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; // Changed to 3 lines
+            line-clamp: 3; // Changed to 3 lines
+            -webkit-box-orient: vertical;
+        }
+
+        .readers {
+            font-size: 0.8rem;
+            color: #ffd700;
+            margin: 0.5rem 0 0;
+        }
+
+        .author,
+        .genre {
+            margin: 0.75rem 0 0;
+            color: #888;
+            font-size: 0.8rem;
+        }
+    }
+
+    .rank {
+        width: 24px;
+        text-align: center;
+        margin-right: 0.25rem;
+        color: #888;
+    }
+
+    .bookTitle {
+        flex-grow: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+// Media query for screens smaller than 1024px
+@media (max-width: 1023px) {
+    .topContainer {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .topRank {
+        width: 100%;
+    }
+}

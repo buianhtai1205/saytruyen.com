@@ -1,0 +1,27 @@
+.footer {
+    background-color: #1a1a1a;
+    color: #6b7280;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+
+    .logo {
+        width: 64px;
+        height: auto;
+    }
+
+    &Links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        a {
+            color: #ffd700;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

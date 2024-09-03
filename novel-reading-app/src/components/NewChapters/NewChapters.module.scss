@@ -1,0 +1,64 @@
+.newChapters {
+    background-color: #1a1a1a;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+
+    .title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #ffd700;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .viewMore {
+            color: #888;
+            cursor: pointer;
+        }
+    }
+
+    .chapterList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .chapterItem {
+        display: grid;
+        grid-template-columns: 100px 1fr 200px 120px 100px;
+        align-items: center;
+        padding: 1rem 1rem;
+
+        &:nth-child(odd) {
+            background-color: #222;
+        }
+
+        &:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+
+        .genre {
+            color: #888;
+        }
+
+        .chapterTitle {
+            color: #fff;
+            padding: 0 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .author,
+        .chapterNumber {
+            color: #888;
+            text-align: left;
+        }
+
+        .time {
+            color: #888;
+            text-align: right;
+        }
+    }
+}
