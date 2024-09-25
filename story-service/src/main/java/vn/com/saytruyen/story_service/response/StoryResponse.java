@@ -1,25 +1,18 @@
-package vn.com.saytruyen.story_service.model;
+package vn.com.saytruyen.story_service.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-/**
- * The type Story.
- */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(value = "Story")
-public class Story {
+public class StoryResponse {
 
-    @Id
     private String id;
 
     private String name;
@@ -57,10 +50,6 @@ public class Story {
     private LocalDateTime newChapAt;
 
     private LocalDateTime publishedAt;
-
-    private LocalDateTime deletedAt;
-
-    private boolean isDeleted;
 
     private String others;
 }
