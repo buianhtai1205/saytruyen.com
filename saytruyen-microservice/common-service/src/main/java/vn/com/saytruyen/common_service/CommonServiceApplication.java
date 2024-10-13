@@ -1,20 +1,20 @@
-package vn.com.saytruyen.api_gateway;
+package vn.com.saytruyen.common_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * The type Api gateway application.
+ * The type Common service application.
  */
 @SpringBootApplication
-public class ApiGatewayApplication {
+public class CommonServiceApplication {
+
     /**
      * The entry point of application.
      *
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        SpringApplication.run(ApiGatewayApplication.class, args);
+        SpringApplication.run(CommonServiceApplication.class, args);
     }
 }
-

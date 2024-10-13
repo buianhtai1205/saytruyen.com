@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Story response.
+ */
 @Data
 @Builder
 @NoArgsConstructor

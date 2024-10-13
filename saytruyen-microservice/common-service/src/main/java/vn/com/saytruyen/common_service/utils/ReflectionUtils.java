@@ -1,4 +1,4 @@
-package vn.com.saytruyen.story_service.utils;
+package vn.com.saytruyen.common_service.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
