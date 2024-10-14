@@ -1,8 +1,9 @@
 package vn.com.saytruyen.story_service.service.impl;
 
+import io.github.buianhtai1205.saytruyen_common_service.utils.DateTimeUtils;
+import io.github.buianhtai1205.saytruyen_common_service.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.com.saytruyen.common_service.utils.ReflectionUtils;
 import vn.com.saytruyen.story_service.converter.StoryConverter;
 import vn.com.saytruyen.story_service.model.Story;
 import vn.com.saytruyen.story_service.repository.StoryRepository;
@@ -10,7 +11,6 @@ import vn.com.saytruyen.story_service.request.StoryRequest;
 import vn.com.saytruyen.story_service.response.StoryResponse;
 import vn.com.saytruyen.story_service.service.StoryService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,10 +32,10 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public void createStory(StoryRequest storyRequest) {
         Story story = StoryConverter.INSTANCE.storyRequestToStory(storyRequest);
-        story.setCreatedAt(LocalDateTime.now());
-        story.setUpdatedAt(LocalDateTime.now());
-        story.setNewChapAt(LocalDateTime.now());
-        story.setPublishedAt(LocalDateTime.now());
+        story.setCreatedAt(DateTimeUtils.getCurrentDateTime());
+        story.setUpdatedAt(DateTimeUtils.getCurrentDateTime());
+        story.setNewChapAt(DateTimeUtils.getCurrentDateTime());
+        story.setPublishedAt(DateTimeUtils.getCurrentDateTime());
         story.setDeleted(Boolean.FALSE);
         storyRepository.save(story);
     }
@@ -46,7 +46,7 @@ public class StoryServiceImpl implements StoryService {
         if (currentStory.isPresent() && Objects.nonNull(storyRequest)) {
             Story storyToUpdate = currentStory.get();
             ReflectionUtils.copyNonNullFields(storyRequest, storyToUpdate);
-            storyToUpdate.setUpdatedAt(LocalDateTime.now());
+            storyToUpdate.setUpdatedAt(DateTimeUtils.getCurrentDateTime());
             storyRepository.save(storyToUpdate);
         }
     }
@@ -57,7 +57,7 @@ public class StoryServiceImpl implements StoryService {
         if (currentStory.isPresent()) {
             Story storyToDelete = currentStory.get();
             storyToDelete.setDeleted(Boolean.TRUE);
-            storyToDelete.setDeletedAt(LocalDateTime.now());
+            storyToDelete.setDeletedAt(DateTimeUtils.getCurrentDateTime());
             storyRepository.save(storyToDelete);
         }
     }

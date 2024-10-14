@@ -1,5 +1,6 @@
 package vn.com.saytruyen.story_service.controller;
 
+import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,33 +29,36 @@ public interface StoryController {
      */
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    List<StoryResponse> getListStory();
+    ApiResponse<List<StoryResponse>> getListStory();
 
     /**
      * Create story.
      *
      * @param storyRequest the storyRequest
+     * @return the api response
      */
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    void createStory(@RequestBody StoryRequest storyRequest);
+    ApiResponse<Boolean> createStory(@RequestBody StoryRequest storyRequest);
 
     /**
      * Update story.
      *
      * @param storyRequest the storyRequest
      * @param id           the id
+     * @return the api response
      */
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    void updateStory(@RequestBody StoryRequest storyRequest, @PathVariable String id);
+    ApiResponse<Boolean> updateStory(@RequestBody StoryRequest storyRequest, @PathVariable String id);
 
     /**
      * Delete story.
      *
      * @param id the id
+     * @return the api response
      */
     @PutMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    void deleteStory(@PathVariable String id);
+    ApiResponse<Boolean> deleteStory(@PathVariable String id);
 }

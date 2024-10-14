@@ -1,5 +1,6 @@
 package vn.com.saytruyen.story_service.controller.impl;
 
+import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.com.saytruyen.story_service.controller.StoryController;
@@ -19,22 +20,25 @@ public class StoryControllerImpl implements StoryController {
     private StoryService storyService;
 
     @Override
-    public List<StoryResponse> getListStory() {
-        return storyService.getListStory();
+    public ApiResponse<List<StoryResponse>> getListStory() {
+        return new ApiResponse<>(storyService.getListStory());
     }
 
     @Override
-    public void createStory(StoryRequest storyRequest) {
+    public ApiResponse<Boolean> createStory(StoryRequest storyRequest) {
         storyService.createStory(storyRequest);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 
     @Override
-    public void updateStory(StoryRequest storyRequest, String id) {
+    public ApiResponse<Boolean> updateStory(StoryRequest storyRequest, String id) {
         storyService.updateStory(storyRequest, id);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 
     @Override
-    public void deleteStory(String id) {
+    public ApiResponse<Boolean> deleteStory(String id) {
         storyService.sortDeleteStory(id);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 }

@@ -22,7 +22,6 @@
         <module>admin-service</module>
         <module>discovery-server</module>
         <module>api-gateway</module>
-        <module>common-service</module>
     </modules>
 
     <properties>
