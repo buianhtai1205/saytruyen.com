@@ -19,7 +19,7 @@ import java.util.List;
  * The interface Story controller.
  */
 @RestController
-@RequestMapping("/api/story")
+@RequestMapping("/api/story-service/story")
 public interface StoryController {
 
     /**

@@ -20,7 +20,7 @@ import java.util.List;
  * The interface Chapter controller.
  */
 @RestController
-@RequestMapping("/api/story/chapter")
+@RequestMapping("/api/story-service/chapter")
 public interface ChapterController {
 
     /**
