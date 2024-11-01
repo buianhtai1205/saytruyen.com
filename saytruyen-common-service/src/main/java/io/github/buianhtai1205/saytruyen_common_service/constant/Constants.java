@@ -24,4 +24,19 @@ public class Constants {
      * The constant IMAGES.
      */
     public static final String IMAGES = "images/";
+
+    /**
+     * The constant PAGE_NUMBER_DEFAULT.
+     */
+    public static final Integer PAGE_NUMBER_DEFAULT = 1;
+
+    /**
+     * The constant PAGE_SIZE_DEFAULT.
+     */
+    public static final Integer PAGE_SIZE_DEFAULT = 10;
+
+    /**
+     * The constant PAGE_SIZE_SEARCH_DEFAULT.
+     */
+    public static final Integer PAGE_SIZE_SEARCH_DEFAULT = 5;
 }
