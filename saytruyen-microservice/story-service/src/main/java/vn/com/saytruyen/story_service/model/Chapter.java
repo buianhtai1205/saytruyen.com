@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * Represents a chapter in a story.
  *
- * @author Tabnine
+ * @author buianhtai1205
  */
 @Data
 @Builder
@@ -61,7 +61,7 @@ public class Chapter {
     /**
      * The unique identifier of the story the chapter belongs to.
      */
-    private Long storyId;
+    private String storyId;
 
     /**
      * The date and time when the chapter was created.

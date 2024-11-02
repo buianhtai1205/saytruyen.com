@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * The type Story response.
@@ -23,6 +24,8 @@ public class StoryResponse {
     private String slug;
 
     private String description;
+
+    private List<String> poster;
 
     private String status;
 

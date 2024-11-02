@@ -1,6 +1,8 @@
 package vn.com.saytruyen.story_service.service;
 
+import io.github.buianhtai1205.saytruyen_common_service.response.PageableResponse;
 import vn.com.saytruyen.story_service.request.StoryRequest;
+import vn.com.saytruyen.story_service.response.StoryCrawlResponse;
 import vn.com.saytruyen.story_service.response.StoryResponse;
 
 import java.util.List;
@@ -13,9 +15,11 @@ public interface StoryService {
     /**
      * Gets list story.
      *
+     * @param pageNumber the page number
+     * @param pageSize   the page size
      * @return the list story
      */
-    List<StoryResponse> getListStory();
+    PageableResponse getListStory(Integer pageNumber, Integer pageSize);
 
     /**
      * Create story.
@@ -38,4 +42,26 @@ public interface StoryService {
      * @param id the id
      */
     void sortDeleteStory(String id);
+
+    /**
+     * Gets list story crawl.
+     *
+     * @return the list story crawl
+     */
+    List<StoryCrawlResponse> getListStoryCrawl();
+
+    /**
+     * Gets story.
+     *
+     * @param id the id
+     * @return the story
+     */
+    StoryResponse getStory(String id);
+
+    /**
+     * Delete story crawl integer.
+     *
+     * @return the integer
+     */
+    Integer deleteStoryCrawl();
 }

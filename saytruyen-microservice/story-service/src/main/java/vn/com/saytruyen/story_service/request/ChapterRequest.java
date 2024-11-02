@@ -39,7 +39,7 @@ public class ChapterRequest {
     /**
      * The unique identifier of the story the chapter belongs to.
      */
-    private Long storyId;
+    private String storyId;
 
     /**
      * Additional information about the chapter.

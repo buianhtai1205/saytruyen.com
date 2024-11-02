@@ -1,9 +1,8 @@
 package vn.com.saytruyen.story_service.service;
 
+import io.github.buianhtai1205.saytruyen_common_service.response.PageableResponse;
 import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
-
-import java.util.List;
 
 /**
  * The interface Chapter service.
@@ -43,7 +42,10 @@ public interface ChapterService {
     /**
      * Gets all chapter.
      *
+     * @param pageNumber the page number
+     * @param pageSize   the page size
+     * @param storyId    the story id
      * @return the all chapter
      */
-    List<ChapterResponse> getAllChapter();
+    PageableResponse getAllChapter(Integer pageNumber, Integer pageSize, String storyId);
 }

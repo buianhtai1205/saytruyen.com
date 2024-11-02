@@ -1,9 +1,15 @@
 package vn.com.saytruyen.story_service.service.impl;
 
+import io.github.buianhtai1205.saytruyen_common_service.exception.BusinessException;
 import io.github.buianhtai1205.saytruyen_common_service.exception.ResourceNotFoundException;
+import io.github.buianhtai1205.saytruyen_common_service.response.PageableResponse;
 import io.github.buianhtai1205.saytruyen_common_service.utils.DateTimeUtils;
 import io.github.buianhtai1205.saytruyen_common_service.utils.ReflectionUtils;
+import io.github.buianhtai1205.saytruyen_common_service.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
 import vn.com.saytruyen.story_service.converter.ChapterConverter;
@@ -13,7 +19,7 @@ import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
 import vn.com.saytruyen.story_service.service.ChapterService;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -55,8 +61,24 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public List<ChapterResponse> getAllChapter() {
-        return ChapterConverter.INSTANCE.lstChapterToListChapterResponse(chapterRepository.findAll());
+    public PageableResponse getAllChapter(Integer pageNumber, Integer pageSize, String storyId) {
+        pageNumber = Objects.isNull(pageNumber) ? StoryServiceConst.PAGE_NUMBER_DEFAULT : pageNumber;
+        pageSize = Objects.isNull(pageSize) ? StoryServiceConst.PAGE_SIZE_SEARCH_DEFAULT : pageSize;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        if (StringUtils.isNullOrEmpty(storyId)) {
+            throw new BusinessException("Please enter story before!");
+        }
+
+        Page<Chapter> lstChapter = chapterRepository.findAllByStoryId(pageable, storyId);
+
+        return PageableResponse.builder()
+                .pageNumber(pageNumber)
+                .pageSize(pageSize)
+                .totalPages(lstChapter.getTotalPages())
+                .totalElements(lstChapter.getTotalElements())
+                .data(ChapterConverter.INSTANCE.lstChapterToListChapterResponse(lstChapter.getContent()))
+                .build();
     }
 
     /**

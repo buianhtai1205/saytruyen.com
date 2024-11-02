@@ -57,7 +57,7 @@ public class ChapterResponse {
     /**
      * The unique identifier of the story the chapter belongs to.
      */
-    private Long storyId;
+    private String storyId;
 
     /**
      * The date and time when the chapter was created.

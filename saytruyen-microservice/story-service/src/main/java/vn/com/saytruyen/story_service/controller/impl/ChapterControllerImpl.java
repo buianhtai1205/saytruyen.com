@@ -1,14 +1,13 @@
 package vn.com.saytruyen.story_service.controller.impl;
 
 import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
+import io.github.buianhtai1205.saytruyen_common_service.response.PageableResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.com.saytruyen.story_service.controller.ChapterController;
 import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
 import vn.com.saytruyen.story_service.service.ChapterService;
-
-import java.util.List;
 
 /**
  * The type Chapter controller.
@@ -43,7 +42,7 @@ public class ChapterControllerImpl implements ChapterController {
     }
 
     @Override
-    public ApiResponse<List<ChapterResponse>> getAllChapter() {
-        return new ApiResponse<>(chapterService.getAllChapter());
+    public ApiResponse<PageableResponse> getAllChapter(Integer pageNumber, Integer pageSize, String storyId) {
+        return new ApiResponse<>(chapterService.getAllChapter(pageNumber, pageSize, storyId));
     }
 }

@@ -38,11 +38,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.github.buianhtai1205</groupId>
-            <artifactId>saytruyen-common-service</artifactId>
-            <version>0.0.1</version>
-        </dependency>
     </dependencies>
 
 </project>

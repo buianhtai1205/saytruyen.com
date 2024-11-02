@@ -14,4 +14,24 @@ public class StoryServiceConst {
      * The constant CHAPTER_VN.
      */
     public static final String CHAPTER_VN = "Chương";
+
+    /**
+     * The constant STORY_EN.
+     */
+    public static final String STORY_EN = "Story";
+
+    /**
+     * The constant STORY_VN.
+     */
+    public static final String STORY_VN = "Truyện";
+
+    /**
+     * The constant PAGE_NUMBER_DEFAULT.
+     */
+    public static final Integer PAGE_NUMBER_DEFAULT = 0;
+
+    /**
+     * The constant PAGE_SIZE_SEARCH_DEFAULT.
+     */
+    public static final Integer PAGE_SIZE_SEARCH_DEFAULT = 10;
 }

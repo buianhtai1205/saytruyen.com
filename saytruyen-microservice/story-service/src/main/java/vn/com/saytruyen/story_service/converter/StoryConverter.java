@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import vn.com.saytruyen.story_service.model.Story;
 import vn.com.saytruyen.story_service.request.StoryRequest;
+import vn.com.saytruyen.story_service.response.StoryCrawlResponse;
 import vn.com.saytruyen.story_service.response.StoryResponse;
 
 import java.util.List;
@@ -34,4 +35,20 @@ public interface StoryConverter {
      * @return the list
      */
     List<StoryResponse> lstStoryToLstStoryResponse(List<Story> lstStory);
+
+    /**
+     * Lst story to lst story crawl response list.
+     *
+     * @param lstStory the lst story
+     * @return the list
+     */
+    List<StoryCrawlResponse> lstStoryToLstStoryCrawlResponse(List<Story> lstStory);
+
+    /**
+     * Story to story response story response.
+     *
+     * @param story the story
+     * @return the story response
+     */
+    StoryResponse storyToStoryResponse(Story story);
 }

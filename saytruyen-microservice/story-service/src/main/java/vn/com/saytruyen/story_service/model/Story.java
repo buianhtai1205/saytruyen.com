@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * The type Story.
@@ -27,6 +28,8 @@ public class Story {
     private String slug;
 
     private String description;
+
+    private List<String> poster;
 
     private String status;
 

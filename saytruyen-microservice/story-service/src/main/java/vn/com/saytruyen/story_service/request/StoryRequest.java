@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * The type Story request.
  */
@@ -19,6 +21,8 @@ public class StoryRequest {
     private String slug;
 
     private String description;
+
+    private List<String> poster;
 
     private String status;
 

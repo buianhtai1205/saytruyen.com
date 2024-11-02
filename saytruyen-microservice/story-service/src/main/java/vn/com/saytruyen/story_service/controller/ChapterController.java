@@ -1,6 +1,7 @@
 package vn.com.saytruyen.story_service.controller;
 
 import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
+import io.github.buianhtai1205.saytruyen_common_service.response.PageableResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
-
-import java.util.List;
 
 /**
  * The interface Chapter controller.
@@ -67,9 +67,14 @@ public interface ChapterController {
     /**
      * Gets all chapter.
      *
+     * @param pageNumber the page number
+     * @param pageSize   the page size
+     * @param storyId    the story id
      * @return the all chapter
      */
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    ApiResponse<List<ChapterResponse>> getAllChapter();
+    ApiResponse<PageableResponse> getAllChapter(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+                                                @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                @RequestParam(value = "storyId") String storyId);
 }

@@ -11,7 +11,7 @@ spring:
     gateway:
       httpclient:
         connect-timeout: 20000
-        response-timeout: 7s
+        response-timeout: 300s
       routes:
         - id: story-service
           uri: lb://story-service
