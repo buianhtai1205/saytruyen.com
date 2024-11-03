@@ -7,11 +7,14 @@ import io.github.buianhtai1205.saytruyen_common_service.utils.DateTimeUtils;
 import io.github.buianhtai1205.saytruyen_common_service.utils.ReflectionUtils;
 import io.github.buianhtai1205.saytruyen_common_service.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
+import vn.com.saytruyen.story_service.constant.StoryServiceMessage;
 import vn.com.saytruyen.story_service.converter.ChapterConverter;
 import vn.com.saytruyen.story_service.model.Chapter;
 import vn.com.saytruyen.story_service.repository.ChapterRepository;
@@ -30,6 +33,9 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
     private ChapterRepository chapterRepository;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @Override
     public void createChapter(ChapterRequest chapterRequest) {
@@ -67,7 +73,11 @@ public class ChapterServiceImpl implements ChapterService {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         if (StringUtils.isNullOrEmpty(storyId)) {
-            throw new BusinessException("Please enter story before!");
+            throw new BusinessException(messageSource.getMessage(
+                    StoryServiceMessage.ST_E000001,
+                    null,
+                    LocaleContextHolder.getLocale()
+            ));
         }
 
         Page<Chapter> lstChapter = chapterRepository.findAllByStoryId(pageable, storyId);

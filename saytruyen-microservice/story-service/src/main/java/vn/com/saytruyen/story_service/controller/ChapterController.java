@@ -76,5 +76,5 @@ public interface ChapterController {
     @ResponseStatus(HttpStatus.OK)
     ApiResponse<PageableResponse> getAllChapter(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                 @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                                @RequestParam(value = "storyId") String storyId);
+                                                @RequestParam(value = "storyId", required = false) String storyId);
 }
