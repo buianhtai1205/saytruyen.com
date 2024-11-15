@@ -31,7 +31,12 @@ public class StoryServiceConst {
     public static final Integer PAGE_NUMBER_DEFAULT = 0;
 
     /**
+     * The constant PAGE_SIZE_DEFAULT.
+     */
+    public static final Integer PAGE_SIZE_DEFAULT = 10;
+
+    /**
      * The constant PAGE_SIZE_SEARCH_DEFAULT.
      */
-    public static final Integer PAGE_SIZE_SEARCH_DEFAULT = 10;
+    public static final Integer PAGE_SIZE_SEARCH_DEFAULT = 5;
 }

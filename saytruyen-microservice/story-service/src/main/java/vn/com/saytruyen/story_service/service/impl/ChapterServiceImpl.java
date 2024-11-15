@@ -69,7 +69,7 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public PageableResponse getAllChapter(Integer pageNumber, Integer pageSize, String storyId) {
         pageNumber = Objects.isNull(pageNumber) ? StoryServiceConst.PAGE_NUMBER_DEFAULT : pageNumber;
-        pageSize = Objects.isNull(pageSize) ? StoryServiceConst.PAGE_SIZE_SEARCH_DEFAULT : pageSize;
+        pageSize = Objects.isNull(pageSize) ? StoryServiceConst.PAGE_SIZE_DEFAULT : pageSize;
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         if (StringUtils.isNullOrEmpty(storyId)) {

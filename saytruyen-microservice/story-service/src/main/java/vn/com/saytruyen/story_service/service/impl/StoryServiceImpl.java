@@ -35,7 +35,7 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public PageableResponse getListStory(Integer pageNumber, Integer pageSize) {
         pageNumber = Objects.isNull(pageNumber) ? StoryServiceConst.PAGE_NUMBER_DEFAULT : pageNumber;
-        pageSize = Objects.isNull(pageSize) ? StoryServiceConst.PAGE_SIZE_SEARCH_DEFAULT : pageSize;
+        pageSize = Objects.isNull(pageSize) ? StoryServiceConst.PAGE_SIZE_DEFAULT : pageSize;
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         Page<Story> lstStory = storyRepository.findAll(pageable);
