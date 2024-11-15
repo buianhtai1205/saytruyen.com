@@ -1,0 +1,117 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+.notification {
+    background-color: #f5f5dc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+
+    p {
+        margin: 0;
+        color: #666;
+        font-size: 0.875rem;
+    }
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f5f5dc;
+    border-radius: 4px;
+
+    .title {
+        display: flex;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: #666;
+
+        .author {
+            color: #333;
+            font-weight: 500;
+        }
+    }
+
+    .viewMore {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: #666;
+        text-decoration: none;
+        font-size: 0.875rem;
+
+        &:hover {
+            color: #333;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+.novelsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.novelCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .imageWrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 133%; // 3:4 aspect ratio
+        overflow: hidden;
+        border-radius: 4px;
+        background-color: #f0f0f0;
+
+        &:hover {
+            .coverImage {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    .coverImage {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.2s ease;
+    }
+
+    .novelTitle {
+        font-size: 0.875rem;
+        color: #fff;
+        margin: 0;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            color: #ffc107;
+        }
+    }
+}

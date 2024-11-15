@@ -1,0 +1,948 @@
+.container {
+    position: relative;
+    padding-left: 24px;
+}
+
+.btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    margin: 12px 0;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow:
+        inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    outline: none;
+    position: relative;
+}
+
+/* 1 */
+.btnRoyalBlue {
+    background: rgb(6, 14, 131);
+    background: linear-gradient(
+        0deg,
+        rgba(6, 14, 131, 1) 0%,
+        rgba(12, 25, 180, 1) 100%
+    );
+    border: none;
+}
+
+.btnRoyalBlue:hover {
+    background: rgb(0, 3, 255);
+    background: linear-gradient(
+        0deg,
+        rgba(0, 3, 255, 1) 0%,
+        rgba(2, 126, 251, 1) 100%
+    );
+}
+
+/* 2 */
+.btnVividPurple {
+    background: rgb(96, 9, 240);
+    background: linear-gradient(
+        0deg,
+        rgba(96, 9, 240, 1) 0%,
+        rgba(129, 5, 240, 1) 100%
+    );
+    border: none;
+}
+
+.btnVividPurple:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btnVividPurple:hover {
+    box-shadow:
+        4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+        -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+        inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* 3 */
+.btnSkyBlue {
+    background: rgb(0, 172, 238);
+    background: linear-gradient(
+        0deg,
+        rgba(0, 172, 238, 1) 0%,
+        rgba(2, 126, 251, 1) 100%
+    );
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+}
+
+.btnSkyBlue span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btnSkyBlue:before,
+.btnSkyBlue:after {
+    position: absolute;
+    content: '';
+    right: 0;
+    top: 0;
+    background: rgba(2, 126, 251, 1);
+    transition: all 0.3s ease;
+}
+
+.btnSkyBlue:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btnSkyBlue:after {
+    width: 0%;
+    height: 2px;
+}
+
+.btnSkyBlue:hover {
+    background: transparent;
+    box-shadow: none;
+}
+
+.btnSkyBlue:hover:before {
+    height: 100%;
+}
+
+.btnSkyBlue:hover:after {
+    width: 100%;
+}
+
+.btnSkyBlue span:hover {
+    color: rgba(2, 126, 251, 1);
+}
+
+.btnSkyBlue span:before,
+.btnSkyBlue span:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    background: rgba(2, 126, 251, 1);
+    transition: all 0.3s ease;
+}
+
+.btnSkyBlue span:before {
+    width: 2px;
+    height: 0%;
+}
+
+.btnSkyBlue span:after {
+    width: 0%;
+    height: 2px;
+}
+
+.btnSkyBlue span:hover:before {
+    height: 100%;
+}
+
+.btnSkyBlue span:hover:after {
+    width: 100%;
+}
+
+/* 4 */
+.btnAquamarine {
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+    line-height: 42px;
+    padding: 0;
+    border: none;
+}
+
+.btnAquamarine:hover {
+    background-color: #89d8d3;
+    background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+}
+
+.btnAquamarine span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btnAquamarine:before,
+.btnAquamarine:after {
+    position: absolute;
+    content: '';
+    right: 0;
+    top: 0;
+    box-shadow:
+        4px 4px 6px 0 rgba(255, 255, 255, 0.9),
+        -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, 0.9),
+        inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btnAquamarine:before {
+    height: 0%;
+    width: 0.1px;
+}
+
+.btnAquamarine:after {
+    width: 0%;
+    height: 0.1px;
+}
+
+.btnAquamarine:hover:before {
+    height: 100%;
+}
+
+.btnAquamarine:hover:after {
+    width: 100%;
+}
+
+.btnAquamarine span:before,
+.btnAquamarine span:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    box-shadow:
+        4px 4px 6px 0 rgba(255, 255, 255, 0.9),
+        -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, 0.9),
+        inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btnAquamarine span:before {
+    width: 0.1px;
+    height: 0%;
+}
+
+.btnAquamarine span:after {
+    width: 0%;
+    height: 0.1px;
+}
+
+.btnAquamarine span:hover:before {
+    height: 100%;
+}
+
+.btnAquamarine span:hover:after {
+    width: 100%;
+}
+
+/* 5 */
+.btnCrimson {
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    background: rgb(255, 27, 0);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 27, 0, 1) 0%,
+        rgba(251, 75, 2, 1) 100%
+    );
+}
+
+.btnCrimson:hover {
+    color: #f0094a;
+    background: transparent;
+    box-shadow: none;
+}
+
+.btnCrimson:before,
+.btnCrimson:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: #f0094a;
+    box-shadow:
+        -1px -1px 5px 0px #fff,
+        7px 7px 20px 0px #0003,
+        4px 4px 5px 0px #0002;
+    transition: 400ms ease all;
+}
+
+.btnCrimson:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+}
+
+.btnCrimson:hover:before,
+.btnCrimson:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+}
+
+/* 6 */
+.btnLavender {
+    background: rgb(247, 150, 192);
+    background: radial-gradient(
+        circle,
+        rgba(247, 150, 192, 1) 0%,
+        rgba(118, 174, 241, 1) 100%
+    );
+    line-height: 42px;
+    padding: 0;
+    border: none;
+}
+
+.btnLavender span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btnLavender:before,
+.btnLavender:after {
+    position: absolute;
+    content: '';
+    height: 0%;
+    width: 1px;
+    box-shadow:
+        -1px -1px 20px 0px rgba(255, 255, 255, 1),
+        -4px -4px 5px 0px rgba(255, 255, 255, 1),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.4),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btnLavender:before {
+    right: 0;
+    top: 0;
+    transition: all 500ms ease;
+}
+
+.btnLavender:after {
+    left: 0;
+    bottom: 0;
+    transition: all 500ms ease;
+}
+
+.btnLavender:hover {
+    background: transparent;
+    color: #76aef1;
+    box-shadow: none;
+}
+
+.btnLavender:hover:before {
+    transition: all 500ms ease;
+    height: 100%;
+}
+
+.btnLavender:hover:after {
+    transition: all 500ms ease;
+    height: 100%;
+}
+
+.btnLavender span:before,
+.btnLavender span:after {
+    position: absolute;
+    content: '';
+    box-shadow:
+        -1px -1px 20px 0px rgba(255, 255, 255, 1),
+        -4px -4px 5px 0px rgba(255, 255, 255, 1),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.4),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btnLavender span:before {
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: 0.5px;
+    transition: all 500ms ease;
+}
+
+.btnLavender span:after {
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: 0.5px;
+    transition: all 500ms ease;
+}
+
+.btnLavender span:hover:before {
+    width: 100%;
+}
+
+.btnLavender span:hover:after {
+    width: 100%;
+}
+
+/* 7 */
+.btnOrange {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 151, 0, 1) 0%,
+        rgba(251, 75, 2, 1) 100%
+    );
+    line-height: 42px;
+    padding: 0;
+    border: none;
+}
+
+.btnOrange span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btnOrange:before,
+.btnOrange:after {
+    position: absolute;
+    content: '';
+    right: 0;
+    bottom: 0;
+    background: rgba(251, 75, 2, 1);
+    box-shadow:
+        -7px -7px 20px 0px rgba(255, 255, 255, 0.9),
+        -4px -4px 5px 0px rgba(255, 255, 255, 0.9),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.2),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btnOrange:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btnOrange:after {
+    width: 0%;
+    height: 2px;
+}
+
+.btnOrange:hover {
+    color: rgba(251, 75, 2, 1);
+    background: transparent;
+}
+
+.btnOrange:hover:before {
+    height: 100%;
+}
+
+.btnOrange:hover:after {
+    width: 100%;
+}
+
+.btnOrange span:before,
+.btnOrange span:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    background: rgba(251, 75, 2, 1);
+    box-shadow:
+        -7px -7px 20px 0px rgba(255, 255, 255, 0.9),
+        -4px -4px 5px 0px rgba(255, 255, 255, 0.9),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.2),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btnOrange span:before {
+    width: 2px;
+    height: 0%;
+}
+
+.btnOrange span:after {
+    height: 2px;
+    width: 0%;
+}
+
+.btnOrange span:hover:before {
+    height: 100%;
+}
+
+.btnOrange span:hover:after {
+    width: 100%;
+}
+
+/* 8 */
+.btnLilac {
+    background-color: #f0ecfc;
+    background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
+    line-height: 42px;
+    padding: 0;
+    border: none;
+}
+
+.btnLilac span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btnLilac:before,
+.btnLilac:after {
+    position: absolute;
+    content: '';
+    right: 0;
+    bottom: 0;
+    background: #c797eb;
+    /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+      inset -4px -4px 6px 0 rgba(255,255,255,.5),
+      inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+    transition: all 0.3s ease;
+}
+
+.btnLilac:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btnLilac:after {
+    width: 0%;
+    height: 2px;
+}
+
+.btnLilac:hover:before {
+    height: 100%;
+}
+
+.btnLilac:hover:after {
+    width: 100%;
+}
+
+.btnLilac:hover {
+    background: transparent;
+}
+
+.btnLilac span:hover {
+    color: #c797eb;
+}
+
+.btnLilac span:before,
+.btnLilac span:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    background: #c797eb;
+    /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+      inset -4px -4px 6px 0 rgba(255,255,255,.5),
+      inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+    transition: all 0.3s ease;
+}
+
+.btnLilac span:before {
+    width: 2px;
+    height: 0%;
+}
+
+.btnLilac span:after {
+    height: 2px;
+    width: 0%;
+}
+
+.btnLilac span:hover:before {
+    height: 100%;
+}
+
+.btnLilac span:hover:after {
+    width: 100%;
+}
+
+/* 9 */
+.btnElectricPurple {
+    border: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.btnElectricPurple:after {
+    position: absolute;
+    content: ' ';
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1fd1f9;
+    background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+    transition: all 0.3s ease;
+}
+
+.btnElectricPurple:hover {
+    background: transparent;
+    box-shadow:
+        4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+        -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+        inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+    color: #fff;
+}
+
+.btnElectricPurple:hover:after {
+    -webkit-transform: scale(2) rotate(180deg);
+    transform: scale(2) rotate(180deg);
+    box-shadow:
+        4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+        -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+        inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+}
+
+/* 10 */
+.btnHotPink {
+    background: rgb(22, 9, 240);
+    background: linear-gradient(
+        0deg,
+        rgba(22, 9, 240, 1) 0%,
+        rgba(49, 110, 244, 1) 100%
+    );
+    color: #fff;
+    border: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.btnHotPink:after {
+    position: absolute;
+    content: ' ';
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    -webkit-transform: scale(0.1);
+    transform: scale(0.1);
+}
+
+.btnHotPink:hover {
+    color: #fff;
+    border: none;
+    background: transparent;
+}
+
+.btnHotPink:hover:after {
+    background: rgb(0, 3, 255);
+    background: linear-gradient(
+        0deg,
+        rgba(2, 126, 251, 1) 0%,
+        rgba(0, 3, 255, 1) 100%
+    );
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+/* 11 */
+.btnAzure {
+    border: none;
+    background: rgb(251, 33, 117);
+    background: linear-gradient(
+        0deg,
+        rgba(251, 33, 117, 1) 0%,
+        rgba(234, 76, 137, 1) 100%
+    );
+    color: #fff;
+    overflow: hidden;
+}
+
+.btnAzure:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.btnAzure:before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: -180px;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+
+.btnAzure:hover {
+    opacity: 0.7;
+}
+
+.btnAzure:active {
+    box-shadow:
+        4px 4px 6px 0 rgba(255, 255, 255, 0.3),
+        -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+        inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+@-webkit-keyframes shiny-btn1 {
+    0% {
+        -webkit-transform: scale(0) rotate(45deg);
+        opacity: 0;
+    }
+
+    80% {
+        -webkit-transform: scale(0) rotate(45deg);
+        opacity: 0.5;
+    }
+
+    81% {
+        -webkit-transform: scale(4) rotate(45deg);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(50) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* 12 */
+.btnTurquoise {
+    position: relative;
+    right: 25px;
+    bottom: 20px;
+    border: none;
+    box-shadow: none;
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+}
+
+.btnTurquoise span {
+    background: rgb(0, 172, 238);
+    background: linear-gradient(
+        0deg,
+        rgba(0, 172, 238, 1) 0%,
+        rgba(2, 126, 251, 1) 100%
+    );
+    display: block;
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    box-shadow:
+        inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.btnTurquoise span:nth-child(1) {
+    box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+}
+
+.btnTurquoise span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+}
+
+.btnTurquoise:hover span:nth-child(1) {
+    box-shadow:
+        inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.btnTurquoise:hover span:nth-child(2) {
+    box-shadow:
+        inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+}
+
+/* 13 */
+.btnGoldenrod {
+    background-color: #89d8d3;
+    background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+    border: none;
+    z-index: 1;
+}
+
+.btnGoldenrod:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 5px;
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+    box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+}
+
+.btnGoldenrod:hover {
+    color: #fff;
+}
+
+.btnGoldenrod:hover:after {
+    top: 0;
+    height: 100%;
+}
+
+.btnGoldenrod:active {
+    top: 2px;
+}
+
+/* 14 */
+.btnViolet {
+    background: rgb(255, 151, 0);
+    border: none;
+    z-index: 1;
+}
+
+.btnViolet:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 5px;
+    background-color: #eaf818;
+    background-image: linear-gradient(315deg, #eaf818 0%, #f6fc9c 74%);
+    box-shadow:
+        inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btnViolet:hover {
+    color: #000;
+}
+
+.btnViolet:hover:after {
+    top: auto;
+    bottom: 0;
+    height: 100%;
+}
+
+.btnViolet:active {
+    top: 2px;
+}
+
+/* 15 */
+.btnGhostWhite {
+    background: #b621fe;
+    border: none;
+    z-index: 1;
+}
+
+.btnGhostWhite:after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background-color: #663dff;
+    border-radius: 5px;
+    box-shadow:
+        inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+        4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btnGhostWhite:hover {
+    color: #fff;
+}
+
+.btnGhostWhite:hover:after {
+    left: 0;
+    width: 100%;
+}
+
+.btnGhostWhite:active {
+    top: 2px;
+}
+
+/* 16 */
+.btnSlate {
+    border: none;
+    color: #fff;
+}
+
+.btnSlate:after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+}
+
+.btnSlate:hover {
+    color: #fff;
+}
+
+.btnSlate:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+}
+
+.btnSlate:active {
+    top: 2px;
+}

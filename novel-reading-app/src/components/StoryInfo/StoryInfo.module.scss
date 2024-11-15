@@ -1,55 +1,175 @@
-.storyInfo {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    padding: 20px;
+.container {
+}
+
+.main {
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    @media (min-width: 768px) {
+        grid-template-columns: 240px 1fr;
+    }
+}
+
+.coverColumn {
+    @media (max-width: 767px) {
+        text-align: center;
+    }
+}
+
+.coverImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
     border-radius: 8px;
-    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.storyTitle {
-    font-size: 24px;
+.infoColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-size: 1.5rem;
     font-weight: bold;
-}
+    margin: 0;
 
-.storyAuthor {
-    font-size: 18px;
-    color: #ffd700;
-}
-
-.storyStats {
-    margin: 10px 0;
-
-    span {
-        margin-right: 15px;
+    @media (min-width: 768px) {
+        font-size: 1.5rem;
     }
 }
 
-.storyButtons {
-    margin: 15px 0;
+.author {
+    font-size: 1rem;
+    color: #6c757d;
+    margin: 0;
+}
 
-    button {
-        background-color: #ffd700;
-        color: #1e1e1e;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 15px;
-        margin-right: 10px;
-        cursor: pointer;
+.actionButtons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 
-        &:hover {
-            background-color: #ffc107;
-        }
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(5, 1fr);
     }
 }
 
-.latestChapter {
-    margin-top: 20px;
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #495057;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-    h3 {
-        margin: 0;
+    &:hover {
+        background-color: #f8f9fa;
     }
 
-    p {
-        margin: 5px 0;
+    svg {
+        width: 16px;
+        height: 16px;
     }
+}
+
+.primaryButton {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+.badge {
+    background-color: #6c757d;
+    color: #fff;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 4px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.statItem {
+    text-align: center;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.statLabel {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tag {
+    font-size: 1rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.tagAmber {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.tagPurple {
+    background-color: rgba(111, 66, 193, 0.1);
+    color: #6f42c1;
+}
+
+.tagGreen {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.tagBlue {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+.tagRed {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
 }
