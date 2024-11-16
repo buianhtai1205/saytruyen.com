@@ -88,7 +88,7 @@ export default function ListChapter() {
                             key={chapter.id}
                             className={clsx(styles.chapterItem)}
                         >
-                            <a href="#" className={styles.chapterLink}>
+                            <a href="/#" className={styles.chapterLink}>
                                 Chương {chapter.id}: {chapter.title}
                             </a>
                             <div className={styles.timestamp}>
@@ -170,7 +170,7 @@ export default function ListChapter() {
                                             className={styles.chapterItem}
                                         >
                                             <a
-                                                href="#"
+                                                href="/#"
                                                 className={styles.chapterLink}
                                             >
                                                 Chương{' '}

@@ -4,6 +4,7 @@ import StoryInfo from '../../components/StoryInfo/StoryInfo';
 import RelatedStory from '../../components/RelatedStory/RelatedStory.tsx';
 import ListChapter from '../../components/ListChapter/ListChapter.tsx';
 import RatingStory from '../../components/RatingStory/RatingStory.tsx';
+import StoryDescription from '../../components/StoryDescription/StoryDescription.tsx';
 
 const storyData = {
     title: 'Bắt Đầu Kim Phong Tế Vũ Lâu Chủ, Một Đao Kinh Thiên Hạ',
@@ -45,6 +46,7 @@ const StoryDetail = () => {
                 linkUrl="/story-detail"
                 altText="Lam Ruong Duc Yeu"
             />
+            <StoryDescription />
             <RelatedStory />
             <Banner
                 imageUrl="https://static.cdnno.com/storage/topbox/24bb76ef34c9a2962727fae9f62ae4de.webp"

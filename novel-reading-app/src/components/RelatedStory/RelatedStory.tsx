@@ -59,7 +59,7 @@ export default function RelatedStory() {
                     <span>CÙNG ĐĂNG BỞI</span>
                     <span className={clsx(styles.author)}>SHIN ĐẸP TRAI</span>
                 </div>
-                <a href="#" className={clsx(styles.viewMore)}>
+                <a href="/#" className={clsx(styles.viewMore)}>
                     xem thêm
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
