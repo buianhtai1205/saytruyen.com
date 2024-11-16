@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './StoryInfo.module.scss';
 
-const StoryInfo = ({ title, author, stats, latestChapter }) => {
+const StoryInfo = () => {
     return (
         <div className={clsx(styles.container)}>
             <main className={clsx(styles.main)}>

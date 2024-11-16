@@ -1,10 +1,10 @@
 import React from 'react';
 import Banner from '../../components/Banner/Banner';
 import StoryInfo from '../../components/StoryInfo/StoryInfo';
-import RelatedStory from '../../components/RelatedStory/RelatedStory.tsx';
-import ListChapter from '../../components/ListChapter/ListChapter.tsx';
-import RatingStory from '../../components/RatingStory/RatingStory.tsx';
-import StoryDescription from '../../components/StoryDescription/StoryDescription.tsx';
+import RelatedStory from '../../components/RelatedStory/RelatedStory';
+import ListChapter from '../../components/ListChapter/ListChapter';
+import RatingStory from '../../components/RatingStory/RatingStory';
+import StoryDescription from '../../components/StoryDescription/StoryDescription';
 
 const storyData = {
     title: 'Bắt Đầu Kim Phong Tế Vũ Lâu Chủ, Một Đao Kinh Thiên Hạ',
@@ -39,7 +39,7 @@ const StoryDetail = () => {
                 linkUrl="/story-detail"
                 altText="Lam Ruong Duc Yeu"
             />
-            <StoryInfo {...storyData} />
+            <StoryInfo />
             <ListChapter />
             <Banner
                 imageUrl="https://static.cdnno.com/storage/topbox/28b185eb7cd5474d4cad2723edc3ff45.webp"

@@ -5,7 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles/GlobalStyles';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+    throw new Error('Failed to find the root element');
+}
+const root = ReactDOM.createRoot(rootElement);
+
+// Render the App component into the root element
 root.render(
     <React.StrictMode>
         <GlobalStyles>

@@ -6,7 +6,23 @@ import rankIndex3 from '../../assets/images/rank-index-3.webp';
 
 const rankImages = [rankIndex1, rankIndex2, rankIndex3];
 
-const TopRank = ({ title, books }) => (
+// Định nghĩa kiểu cho book
+interface Book {
+    id: number;
+    title: string;
+    readers: string;
+    author?: string;
+    genre?: string;
+    coverImage?: string;
+}
+
+// Định nghĩa kiểu cho props của TopRank
+interface TopRankProps {
+    title: string;
+    books: Book[];
+}
+
+const TopRank: React.FC<TopRankProps> = ({ title, books }) => (
     <div className={styles.topRank}>
         <h2 className={styles.title}>
             {title} <span className={styles.viewMore}>»</span>
@@ -35,16 +51,24 @@ const TopRank = ({ title, books }) => (
                                     {book.title}
                                 </h3>
                                 <p className={styles.readers}>{book.readers}</p>
-                                <p className={styles.author}>{book.author}</p>
-                                <span className={styles.genre}>
-                                    {book.genre}
-                                </span>
+                                {book.author && (
+                                    <p className={styles.author}>
+                                        {book.author}
+                                    </p>
+                                )}
+                                {book.genre && (
+                                    <span className={styles.genre}>
+                                        {book.genre}
+                                    </span>
+                                )}
                             </div>
-                            <img
-                                src={book.coverImage}
-                                alt={book.title}
-                                className={styles.coverImage}
-                            />
+                            {book.coverImage && (
+                                <img
+                                    src={book.coverImage}
+                                    alt={book.title}
+                                    className={styles.coverImage}
+                                />
+                            )}
                         </>
                     ) : (
                         <>
@@ -63,7 +87,7 @@ const TopRank = ({ title, books }) => (
 );
 
 const Top = () => {
-    const timeRankBooks = [
+    const timeRankBooks: Book[] = [
         {
             id: 1,
             title: 'Vì Phu Chi Muốn Lẳng Lặng Nhìn Xem Người Trưởng Sinh',
@@ -108,7 +132,7 @@ const Top = () => {
         },
     ];
 
-    const topRecommendedBooks = [
+    const topRecommendedBooks: Book[] = [
         {
             id: 1,
             title: 'Cầu Thả Tại Nữ Ma Đầu Bên Người Vụng Trộm Tu Luyện',

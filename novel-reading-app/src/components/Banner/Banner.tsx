@@ -2,7 +2,15 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './Banner.module.scss';
 
-const Banner = ({
+// Định nghĩa kiểu props
+interface BannerProps {
+    imageUrl: string;
+    linkUrl?: string;
+    altText?: string;
+}
+
+// Sử dụng kiểu đã định nghĩa
+const Banner: React.FC<BannerProps> = ({
     imageUrl,
     linkUrl = '/story-detail',
     altText = 'Banner Image',

@@ -108,7 +108,10 @@ function NewCompletedStory() {
         ],
     };
 
-    const handleClick = (e, storyId) => {
+    const handleClick = (
+        e: React.MouseEvent<HTMLDivElement>,
+        storyId: number
+    ) => {
         if (isDragging) {
             e.preventDefault();
         } else {

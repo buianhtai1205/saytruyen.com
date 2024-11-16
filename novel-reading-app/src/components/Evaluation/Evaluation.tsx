@@ -47,13 +47,13 @@ const initialEvaluations = [
 
 function Evaluation() {
     const [evaluations, setEvaluations] = useState(initialEvaluations);
-    const [expandedId, setExpandedId] = useState(null); // Track expanded evaluation
-    const contentRefs = useRef([]);
+    const [expandedId, setExpandedId] = useState<number | null>(null);
+    const contentRefs = useRef<(HTMLParagraphElement | null)[]>([]);
     const [showReadMore, setShowReadMore] = useState(
         Array(initialEvaluations.length).fill(false)
     ); // Track overflow
 
-    const handleLike = (id) => {
+    const handleLike = (id: number) => {
         setEvaluations((prev) =>
             prev.map((evaluation) =>
                 evaluation.id === id
@@ -63,7 +63,7 @@ function Evaluation() {
         );
     };
 
-    const toggleExpand = (id) => {
+    const toggleExpand = (id: number) => {
         setExpandedId(expandedId === id ? null : id); // Toggle expanded state
     };
 
