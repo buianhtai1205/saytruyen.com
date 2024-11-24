@@ -13,11 +13,11 @@ const root = ReactDOM.createRoot(rootElement);
 
 // Render the App component into the root element
 root.render(
-    <React.StrictMode>
-        <GlobalStyles>
-            <App />
-        </GlobalStyles>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <GlobalStyles>
+        <App />
+    </GlobalStyles>
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,4 +1,5 @@
 import apiClient from '../../axiosConfig';
+import { ApiResponse } from '../../common/apiResponse';
 import { storyServicePath as basePath } from '../../apiPaths';
 
 // Định nghĩa interface tương ứng với `StoryRequest`
@@ -50,9 +51,21 @@ export interface StoryResponse {
     others: string;
 }
 
+export interface PageableResponse {
+    pageNumber: number;
+    pageSize: number;
+    totalPages: number;
+    totalElements: number;
+    data: Array<StoryResponse>;
+}
+
 // Hàm gọi API để lấy danh sách stories
-export const fetchStories = async (): Promise<StoryResponse[]> => {
-    const response = await apiClient.get<StoryResponse[]>(`${basePath}/story`);
+export const fetchStories = async (): Promise<
+    ApiResponse<PageableResponse>
+> => {
+    const response = await apiClient.get<ApiResponse<PageableResponse>>(
+        `${basePath}/story`
+    );
     return response.data;
 };
 
