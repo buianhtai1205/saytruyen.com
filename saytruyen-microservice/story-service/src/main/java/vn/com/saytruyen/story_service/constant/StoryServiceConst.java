@@ -39,4 +39,14 @@ public class StoryServiceConst {
      * The constant PAGE_SIZE_SEARCH_DEFAULT.
      */
     public static final Integer PAGE_SIZE_SEARCH_DEFAULT = 5;
+
+    /**
+     * The constant BANNER_EN.
+     */
+    public static final String BANNER_EN = "Banner";
+
+    /**
+     * The constant BANNER_VN.
+     */
+    public static final String BANNER_VN = "Giới thiệu truyện";
 }
