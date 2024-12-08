@@ -5,11 +5,11 @@ import Top from '../../components/Top/Top';
 import NewChapters from '../../components/NewChapters/NewChapters';
 import NewCompletedStory from '../../components/NewCompletedStory/NewCompletedStory';
 import Evaluation from '../../components/Evaluation/Evaluation';
-import { PageableResponse } from '../../api/common/pageableResponse';
+import { PageableResponse } from '../../../api/common/pageableResponse';
 import {
     fetchBanners,
     BannerResponse,
-} from '../../api/services/story-service/bannerService';
+} from '../../../api/services/story-service/bannerService';
 
 const HomePage: React.FC = () => {
     const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();

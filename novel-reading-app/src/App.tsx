@@ -1,25 +1,50 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import HomePage from './pages/HomePage/HomePage';
-import StoryDetail from './pages/StoryDetail/StoryDetail';
-import CommonComponent from './pages/CommonComponent/CommonComponent';
+import UserMainLayout from './user/layout/UserMainLayout';
+import AdminMainLayout from './admin/layout/AdminMainLayout';
+import HomePage from './user/pages/HomePage/HomePage';
+import StoryDetail from './user/pages/StoryDetail/StoryDetail';
+import CommonComponent from './user/pages/CommonComponent/CommonComponent';
 import './App.css';
 
 function App() {
     return (
         <Router>
             <div className="app">
-                <Header />
+                {/* User routes */}
                 <Routes>
                     <Route
                         path="/common-component"
                         element={<CommonComponent />}
                     />
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/story/:id" element={<StoryDetail />} />
+                    <Route
+                        path="/"
+                        element={
+                            <UserMainLayout>
+                                <HomePage />
+                            </UserMainLayout>
+                        }
+                    />
+                    <Route
+                        path="/story/:id"
+                        element={
+                            <UserMainLayout>
+                                <StoryDetail />
+                            </UserMainLayout>
+                        }
+                    />
                 </Routes>
-                <Footer />
+
+                {/* Admin routes */}
+                <Routes>
+                    <Route
+                        path="/admin/common-component"
+                        element={
+                            <AdminMainLayout>
+                                <CommonComponent />
+                            </AdminMainLayout>
+                        }
+                    />
+                </Routes>
             </div>
         </Router>
     );

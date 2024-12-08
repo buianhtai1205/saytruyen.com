@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import styles from './BookList.module.scss';
-import { PageableResponse } from '../../api/common/pageableResponse';
+import { PageableResponse } from '../../../api/common/pageableResponse';
 import {
     fetchStories,
     StoryResponse,
-} from '../../api/services/story-service/storyService';
+} from '../../../api/services/story-service/storyService';
 
 const BookList: React.FC = () => {
     const [stories, setStories] = useState<PageableResponse<StoryResponse>>();
