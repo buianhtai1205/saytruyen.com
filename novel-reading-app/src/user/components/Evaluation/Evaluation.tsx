@@ -129,7 +129,9 @@ function Evaluation() {
                                 </span>
                             </div>
                             <p
-                                ref={(el) => (contentRefs.current[index] = el)}
+                                ref={(el) => {
+                                    contentRefs.current[index] = el;
+                                }}
                                 className={clsx(styles.evaluationContent, {
                                     [styles.expanded]: isExpanded,
                                 })}

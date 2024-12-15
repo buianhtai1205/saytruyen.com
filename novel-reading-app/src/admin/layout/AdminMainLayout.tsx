@@ -1,15 +1,25 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import Layout from './Layout';
+import { PrimeReactProvider } from 'primereact/api';
+import { LayoutProvider } from './context/LayoutContext';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
+import '../../styles/layout/layout.scss';
+import '../../styles/demo/Demos.scss';
 
-interface UserLayoutProps {
-    children: ReactNode;
+interface AppLayoutProps {
+    children: React.ReactNode;
 }
 
-const UserMainLayout: React.FC<UserLayoutProps> = ({ children }) => {
+const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
     return (
-        <>
-            <div className="admin-content">{children}</div>
-        </>
+        <PrimeReactProvider>
+            <LayoutProvider>
+                <Layout>{children}</Layout>
+            </LayoutProvider>
+        </PrimeReactProvider>
     );
 };
 
-export default UserMainLayout;
+export default AppLayout;

@@ -7,30 +7,35 @@
 }
 
 body {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5;
-    text-rendering: optimizeSpeed;
-    text-align: justify;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    text-rendering: optimizeSpeed !important;
+    text-align: justify !important;
 }
 
 input,
 button,
 [tabindex] {
-    border: none;
-    outline: none;
+    border: none !important;
+    outline: none !important;
 }
 
 a[href] {
-    color: var(--text-color);
-    text-decoration: none;
+    color: var(--text-color) !important;
+    text-decoration: none !important;
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 .d-none {
-    display: none;
+    display: none !important;
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
 }
