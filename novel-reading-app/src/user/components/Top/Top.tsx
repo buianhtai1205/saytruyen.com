@@ -47,9 +47,9 @@ const TopRank: React.FC<TopRankProps> = ({ title, books }) => (
                     {index === 0 ? (
                         <>
                             <div className={styles.bookInfo}>
-                                <h3 className={styles.bookTitle}>
+                                <div className={styles.bookTitle}>
                                     {book.title}
-                                </h3>
+                                </div>
                                 <p className={styles.readers}>{book.readers}</p>
                                 {book.author && (
                                     <p className={styles.author}>

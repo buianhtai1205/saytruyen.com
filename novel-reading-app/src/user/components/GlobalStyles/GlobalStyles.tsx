@@ -6,7 +6,11 @@ interface GlobalStylesProps {
 }
 
 const GlobalStyles = ({ children }: GlobalStylesProps) => {
-    return <div className="container">{children}</div>;
+    return (
+        <div className="appUser">
+            <div className="container">{children}</div>
+        </div>
+    )
 };
 
 export default GlobalStyles;

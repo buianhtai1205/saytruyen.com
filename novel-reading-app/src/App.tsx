@@ -5,7 +5,6 @@ import HomePage from './user/pages/HomePage/HomePage';
 import StoryDetail from './user/pages/StoryDetail/StoryDetail';
 import CommonComponent from './user/pages/CommonComponent/CommonComponent';
 import Dashboard from './admin/components/Dashboard/Dashboard';
-import './App.css';
 
 function App() {
     return (
