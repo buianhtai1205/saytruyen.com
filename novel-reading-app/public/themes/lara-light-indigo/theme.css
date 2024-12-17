@@ -451,7 +451,7 @@
     padding: 0.5rem;
     background: #ffffff;
     color: #4b5563;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     border-radius: 6px;
   }
   .p-datepicker:not(.p-datepicker-inline) {
@@ -662,7 +662,7 @@
   }
   .p-cascadeselect {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
   }
@@ -870,7 +870,7 @@
 
   .p-dropdown {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
   }
@@ -1112,7 +1112,7 @@
     color: #4b5563;
     background: #ffffff;
     padding: 0.75rem 0.75rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     appearance: none;
     border-radius: 6px;
@@ -1213,7 +1213,7 @@
   .p-listbox {
     background: #ffffff;
     color: #4b5563;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     border-radius: 6px;
   }
   .p-listbox .p-listbox-header {
@@ -1302,7 +1302,7 @@
 
   .p-multiselect {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
   }
@@ -1571,7 +1571,7 @@
 
   .p-selectbutton .p-button {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     color: #4b5563;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
@@ -1652,7 +1652,7 @@
 
   .p-treeselect {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
   }
@@ -1773,7 +1773,7 @@
 
   .p-togglebutton.p-button {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid #d1d5db!important;
     color: #4b5563;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }

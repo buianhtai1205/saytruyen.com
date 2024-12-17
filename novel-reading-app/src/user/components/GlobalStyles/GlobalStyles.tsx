@@ -10,7 +10,7 @@ const GlobalStyles = ({ children }: GlobalStylesProps) => {
         <div className="appUser">
             <div className="container">{children}</div>
         </div>
-    )
+    );
 };
 
 export default GlobalStyles;

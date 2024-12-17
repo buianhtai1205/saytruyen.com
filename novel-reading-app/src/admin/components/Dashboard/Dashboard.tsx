@@ -142,7 +142,9 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">24 new </span>
-                    <span className="text-500 font-special-span">since last visit</span>
+                    <span className="text-500 font-special-span">
+                        since last visit
+                    </span>
                 </div>
             </div>
             <div className="col-12 lg:col-6 xl:col-3">
@@ -164,7 +166,9 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">%52+ </span>
-                    <span className="text-500 font-special-span">since last week</span>
+                    <span className="text-500 font-special-span">
+                        since last week
+                    </span>
                 </div>
             </div>
             <div className="col-12 lg:col-6 xl:col-3">
@@ -186,7 +190,9 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">520 </span>
-                    <span className="text-500 font-special-span">newly registered</span>
+                    <span className="text-500 font-special-span">
+                        newly registered
+                    </span>
                 </div>
             </div>
             <div className="col-12 lg:col-6 xl:col-3">
@@ -208,7 +214,9 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">85 </span>
-                    <span className="text-500 font-special-span">responded</span>
+                    <span className="text-500 font-special-span">
+                        responded
+                    </span>
                 </div>
             </div>
 

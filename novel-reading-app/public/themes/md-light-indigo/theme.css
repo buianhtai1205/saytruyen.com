@@ -667,7 +667,7 @@
   }
   .p-cascadeselect {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(0, 0, 0, 0.38)!important;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
     border-radius: 4px;
   }
@@ -875,7 +875,7 @@
 
   .p-dropdown {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(0, 0, 0, 0.38)!important;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
     border-radius: 4px;
   }
@@ -1117,7 +1117,7 @@
     color: rgba(0, 0, 0, 0.87);
     background: #ffffff;
     padding: 1rem 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(0, 0, 0, 0.38)!important;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
     appearance: none;
     border-radius: 4px;
@@ -1307,7 +1307,7 @@
 
   .p-multiselect {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(0, 0, 0, 0.38)!important;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
     border-radius: 4px;
   }
@@ -1657,7 +1657,7 @@
 
   .p-treeselect {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(0, 0, 0, 0.38)!important;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
     border-radius: 4px;
   }
@@ -6278,7 +6278,7 @@
   }
 
   .p-calendar-w-btn {
-    border: 1px solid rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(0, 0, 0, 0.38)!important;
     background: #ffffff;
     border-radius: 4px;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
