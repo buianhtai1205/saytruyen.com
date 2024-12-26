@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
 import vn.com.saytruyen.story_service.converter.StoryConverter;
@@ -47,6 +49,19 @@ public class StoryServiceImpl implements StoryService {
                 .totalElements(lstStory.getTotalElements())
                 .data(StoryConverter.INSTANCE.lstStoryToLstStoryResponse(lstStory.getContent()))
                 .build();
+    }
+
+    /**
+     * Listen string.
+     *
+     * @param in the in
+     * @return the string
+     */
+    @KafkaListener(id = "server", topics = "kRequests")
+    @SendTo // use default replyTo expression
+    public String listen(String in) {
+        System.out.println("Server received: " + in);
+        return in.toUpperCase() + " : story-service send to admin-service";
     }
 
     @Override

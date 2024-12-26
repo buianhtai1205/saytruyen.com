@@ -27,6 +27,12 @@ public class ApiGatewayApplication {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
+    /**
+     * Route locator route locator.
+     *
+     * @param builder the builder
+     * @return the route locator
+     */
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder

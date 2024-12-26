@@ -17,6 +17,10 @@ spring:
           uri: lb://story-service
           predicates:
             - Path=/api/story-service/** , /api/story-service/v3/api-docs
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            - Path=/api/admin-service/** , /api/admin-service/v3/api-docs
 
 springdoc:
   enable-native-support: true
@@ -31,6 +35,8 @@ springdoc:
         name: API Gateway Service
       - url: /api/story-service/v3/api-docs
         name: Story Service
+      - url: /api/admin-service/v3/api-docs
+        name: Admin Service
 
 eureka:
   client:
