@@ -1,4 +1,4 @@
-package vn.com.saytruyen.story_service.config;
+package vn.com.saytruyen.admin_service.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

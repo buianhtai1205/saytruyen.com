@@ -9,8 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
+import vn.com.saytruyen.story_service.config.KafkaTopic;
+import vn.com.saytruyen.story_service.constant.RequestType;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
 import vn.com.saytruyen.story_service.converter.StoryConverter;
 import vn.com.saytruyen.story_service.model.Story;
@@ -33,6 +36,8 @@ public class StoryServiceImpl implements StoryService {
 
     @Autowired
     private StoryRepository storyRepository;
+    @Autowired
+    private KafkaTopic kafkaTopic;
 
     @Override
     public PageableResponse getListStory(Integer pageNumber, Integer pageSize) {
@@ -54,14 +59,27 @@ public class StoryServiceImpl implements StoryService {
     /**
      * Listen string.
      *
-     * @param in the in
+     * @param requestTypeBytes the request type bytes
+     * @param message          the message
      * @return the string
      */
-    @KafkaListener(id = "server", topics = "kRequests")
-    @SendTo // use default replyTo expression
-    public String listen(String in) {
-        System.out.println("Server received: " + in);
-        return in.toUpperCase() + " : story-service send to admin-service";
+    @KafkaListener(topics = "story-service")
+    @SendTo
+    public String handleGetStoryRequest(
+            @Header("requestType") byte[] requestTypeBytes,
+            String message) {
+        System.out.println("story-service received: " + message);
+
+        String requestTypeString = new String(requestTypeBytes);
+        RequestType requestType = RequestType.fromValue(requestTypeString);
+
+        String payload = "Unknown request type";
+
+        if (requestType == RequestType.GET_ALL_STORIES) {
+            System.out.println("Returning all stories");
+            payload = "All stories: {}";
+        }
+        return payload;
     }
 
     @Override
