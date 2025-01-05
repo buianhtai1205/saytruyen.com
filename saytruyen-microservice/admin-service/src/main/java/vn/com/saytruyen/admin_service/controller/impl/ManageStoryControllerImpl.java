@@ -1,15 +1,10 @@
 package vn.com.saytruyen.admin_service.controller.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.com.saytruyen.admin_service.constant.RequestType;
 import vn.com.saytruyen.admin_service.controller.ManageStoryController;
-import vn.com.saytruyen.admin_service.request.GetStoriesRequest;
-import vn.com.saytruyen.admin_service.service.KafkaProducerService;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
+import vn.com.saytruyen.admin_service.service.StoryService;
 
 /**
  * The type Manage story controller.
@@ -17,60 +12,43 @@ import java.util.concurrent.TimeoutException;
 @Component
 public class ManageStoryControllerImpl implements ManageStoryController {
 
-    private final KafkaProducerService producerService;
+    private final StoryService storyService;
 
     /**
      * Instantiates a new Manage story controller.
      *
-     * @param producerService the producer service
+     * @param storyService the story service
      */
     @Autowired
-    public ManageStoryControllerImpl(KafkaProducerService producerService) {
-        this.producerService = producerService;
+    public ManageStoryControllerImpl(StoryService storyService) {
+        this.storyService = storyService;
     }
 
     @Override
-    public Object getListStory(Integer pageNumber, Integer pageSize) {
-        try {
-            // Tạo request object (nếu cần)
-            GetStoriesRequest request = new GetStoriesRequest();
-            request.setPageNumber(pageNumber);
-            request.setPageSize(pageSize);
-
-            // Gửi message với topic và request type chính xác
-            Object response = producerService.sendMessage(
-                    request,
-                    RequestType.GET_ALL_STORIES);
-
-            // Response handling
-            if (response != null) {
-                return response;
-            } else {
-                return "No response received from Story Service";
-            }
-
-        } catch (ExecutionException | InterruptedException | TimeoutException | JsonProcessingException e) {
-            return "Error communicating with Story Service: " + e.getMessage();// Return error message in response body
-        }
+    public ApiResponse<Object> getListStory(Integer pageNumber, Integer pageSize) {
+        return new ApiResponse<>(storyService.getListStory(pageNumber, pageSize));
     }
 
     @Override
-    public Object createStory(Object storyRequest) {
-        return null;
+    public ApiResponse<Object> createStory(Object storyRequest) {
+        storyService.createStory(storyRequest);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 
     @Override
-    public Object updateStory(Object storyRequest, String id) {
-        return null;
+    public ApiResponse<Object> updateStory(Object storyRequest, String id) {
+        storyService.updateStory(storyRequest, id);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 
     @Override
-    public Object deleteStory(String id) {
-        return null;
+    public ApiResponse<Object> deleteStory(String id) {
+        storyService.deleteStory(id);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 
     @Override
-    public Object getStory(String id) {
-        return null;
+    public ApiResponse<Object> getStory(String id) {
+        return new ApiResponse<>(storyService.getStory(id));
     }
 }

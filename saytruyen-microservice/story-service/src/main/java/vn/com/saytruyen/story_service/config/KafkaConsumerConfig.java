@@ -28,7 +28,7 @@ public class KafkaConsumerConfig {
     private String groupConfig;
 
     /**
-     * Consumer factory consumer factory.
+     * Consumer factory config
      *
      * @return the consumer factory
      */

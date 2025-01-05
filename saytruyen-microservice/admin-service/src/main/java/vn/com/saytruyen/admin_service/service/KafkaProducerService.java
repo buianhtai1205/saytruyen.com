@@ -11,6 +11,7 @@ import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.requestreply.RequestReplyFuture;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
+import vn.com.saytruyen.admin_service.constant.KafkaConst;
 import vn.com.saytruyen.admin_service.constant.RequestType;
 
 import java.time.Duration;
@@ -60,22 +61,20 @@ public class KafkaProducerService {
      */
     public Object sendMessage(Object message, RequestType requestType)
             throws ExecutionException, InterruptedException, TimeoutException, JsonProcessingException {
-        String topic = "story-service";
-
         if (!replyingKafkaTemplate.waitForAssignment(Duration.ofSeconds(10))) {
             throw new IllegalStateException("Reply container did not initialize");
         }
 
         String serializedMessage = objectMapper.writeValueAsString(message);
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic, serializedMessage);
-        record.headers().add("requestType", requestType.getValue().getBytes());
+        ProducerRecord<String, String> record = new ProducerRecord<>(KafkaConst.STORY_TOPIC, serializedMessage);
+        record.headers().add(KafkaConst.REQUEST_TYPE, requestType.getValue().getBytes());
 
         RequestReplyFuture<String, String, String> replyFuture = replyingKafkaTemplate.sendAndReceive(record);
 
-        SendResult<String, String> sendResult = replyFuture.getSendFuture().get(10, TimeUnit.SECONDS);
+        SendResult<String, String> sendResult = replyFuture.getSendFuture().get(KafkaConst.TIMEOUT_10, TimeUnit.SECONDS);
         System.out.println("Sent ok: " + sendResult.getRecordMetadata());
 
-        ConsumerRecord<String, String> consumerRecord = replyFuture.get(10, TimeUnit.SECONDS);
+        ConsumerRecord<String, String> consumerRecord = replyFuture.get(KafkaConst.TIMEOUT_10, TimeUnit.SECONDS);
         System.out.println("Return value: " + consumerRecord.value());
         return consumerRecord.value();
     }

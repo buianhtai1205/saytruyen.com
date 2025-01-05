@@ -1,5 +1,6 @@
 package vn.com.saytruyen.admin_service.controller;
 
+import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +28,8 @@ public interface ManageStoryController {
      */
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    Object getListStory(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
-                        @RequestParam(value = "pageSize", required = false) Integer pageSize);
+    ApiResponse<Object> getListStory(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+                                     @RequestParam(value = "pageSize", required = false) Integer pageSize);
 
     /**
      * Create story object.
@@ -38,7 +39,7 @@ public interface ManageStoryController {
      */
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    Object createStory(@RequestBody Object storyRequest);
+    ApiResponse<Object> createStory(@RequestBody Object storyRequest);
 
     /**
      * Update story object.
@@ -49,7 +50,7 @@ public interface ManageStoryController {
      */
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    Object updateStory(@RequestBody Object storyRequest, @PathVariable String id);
+    ApiResponse<Object> updateStory(@RequestBody Object storyRequest, @PathVariable String id);
 
     /**
      * Delete story object.
@@ -59,7 +60,7 @@ public interface ManageStoryController {
      */
     @PutMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    Object deleteStory(@PathVariable String id);
+    ApiResponse<Object> deleteStory(@PathVariable String id);
 
     /**
      * Gets story.
@@ -69,5 +70,5 @@ public interface ManageStoryController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    Object getStory(@PathVariable String id);
+    ApiResponse<Object> getStory(@PathVariable String id);
 }

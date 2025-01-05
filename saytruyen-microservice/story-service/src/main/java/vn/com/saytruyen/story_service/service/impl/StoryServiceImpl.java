@@ -36,6 +36,7 @@ public class StoryServiceImpl implements StoryService {
 
     @Autowired
     private StoryRepository storyRepository;
+
     @Autowired
     private KafkaTopic kafkaTopic;
 
@@ -63,12 +64,12 @@ public class StoryServiceImpl implements StoryService {
      * @param message          the message
      * @return the string
      */
-    @KafkaListener(topics = "story-service")
+    @KafkaListener(topics = "STORY-SERVICE")
     @SendTo
     public String handleGetStoryRequest(
-            @Header("requestType") byte[] requestTypeBytes,
+            @Header("REQUEST_TYPE") byte[] requestTypeBytes,
             String message) {
-        System.out.println("story-service received: " + message);
+        System.out.println("STORY-SERVICE received: " + message);
 
         String requestTypeString = new String(requestTypeBytes);
         RequestType requestType = RequestType.fromValue(requestTypeString);
