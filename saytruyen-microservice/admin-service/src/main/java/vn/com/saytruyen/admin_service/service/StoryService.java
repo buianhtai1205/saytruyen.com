@@ -1,5 +1,7 @@
 package vn.com.saytruyen.admin_service.service;
 
+import vn.com.saytruyen.admin_service.request.StoryRequest;
+
 /**
  * The interface Story service.
  */
@@ -19,7 +21,7 @@ public interface StoryService {
      *
      * @param storyRequest the story request
      */
-    void createStory(Object storyRequest);
+    void createStory(StoryRequest storyRequest);
 
     /**
      * Update story.
@@ -27,7 +29,7 @@ public interface StoryService {
      * @param storyRequest the story request
      * @param id           the id
      */
-    void updateStory(Object storyRequest, String id);
+    void updateStory(StoryRequest storyRequest, String id);
 
     /**
      * Delete story.

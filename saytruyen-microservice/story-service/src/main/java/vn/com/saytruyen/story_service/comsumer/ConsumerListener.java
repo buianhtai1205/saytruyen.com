@@ -12,6 +12,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 import vn.com.saytruyen.story_service.constant.RequestType;
 import vn.com.saytruyen.story_service.request.GetStoriesRequest;
+import vn.com.saytruyen.story_service.request.StoryRequest;
+import vn.com.saytruyen.story_service.request.UpdateStoryRequest;
 import vn.com.saytruyen.story_service.service.StoryService;
 
 /**
@@ -57,10 +59,26 @@ public class ConsumerListener {
 
         String payload = "Unknown request type";
 
+        log.info("Handling REQUEST_TYPE: {}", requestType);
+
         switch (requestType) {
             case GET_ALL_STORIES:
-                log.info("Handling REQUEST_TYPE: {}", requestType);
                 payload = handleGetStoriesRequest(message);
+                break;
+            case GET_STORY_BY_ID:
+                payload = handleGetStoryByIdRequest(message);
+                break;
+            case CREATE_NEW_STORY:
+                handleCreateNewStoryRequest(message);
+                payload = null;
+                break;
+            case UPDATE_STORY:
+                handleUpdateStoryRequest(message);
+                payload = null;
+                break;
+            case DELETE_STORY:
+                handleDeleteStoryRequest(message);
+                payload = null;
                 break;
             default:
                 break;
@@ -79,9 +97,53 @@ public class ConsumerListener {
                     storyService.getListStory(request.getPageNumber(), request.getPageSize())
             );
         } catch (JsonProcessingException e) {
-            log.info("Error while processing request");
-            e.printStackTrace();
+            logErrorJsonProcessing(e);
             return "Invalid request";
         }
+    }
+
+    private String handleGetStoryByIdRequest(String message) {
+        try {
+            String storyId = objectMapper.readValue(message, String.class);
+            return objectMapper.writeValueAsString(storyService.getStory(storyId));
+        } catch (JsonProcessingException e) {
+            logErrorJsonProcessing(e);
+            return "Invalid request";
+        }
+    }
+
+    private void handleCreateNewStoryRequest(String message) {
+        StoryRequest request;
+
+        try {
+            request = objectMapper.readValue(message, StoryRequest.class);
+            storyService.createStory(request);
+        } catch (JsonProcessingException e) {
+            logErrorJsonProcessing(e);
+        }
+    }
+
+    private void handleUpdateStoryRequest(String message) {
+        UpdateStoryRequest request;
+
+        try {
+            request = objectMapper.readValue(message, UpdateStoryRequest.class);
+            storyService.updateStory(request.getStoryRequest(), request.getStoryId());
+        } catch (JsonProcessingException e) {
+            logErrorJsonProcessing(e);
+        }
+    }
+
+    private void handleDeleteStoryRequest(String message) {
+        try {
+            storyService.hardDeleteStory(objectMapper.readValue(message, String.class));
+        } catch (JsonProcessingException e) {
+            logErrorJsonProcessing(e);
+        }
+    }
+
+    private void logErrorJsonProcessing(JsonProcessingException e) {
+        log.info("Error while processing request");
+        e.printStackTrace();
     }
 }

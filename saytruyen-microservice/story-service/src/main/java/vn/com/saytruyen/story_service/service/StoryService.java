@@ -44,6 +44,13 @@ public interface StoryService {
     void sortDeleteStory(String id);
 
     /**
+     * Hard delete story.
+     *
+     * @param id the id
+     */
+    void hardDeleteStory(String id);
+
+    /**
      * Gets list story crawl.
      *
      * @return the list story crawl

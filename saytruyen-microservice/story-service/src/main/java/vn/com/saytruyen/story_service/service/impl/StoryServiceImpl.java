@@ -83,6 +83,11 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    public void hardDeleteStory(String id) {
+        storyRepository.deleteById(id);
+    }
+
+    @Override
     public List<StoryCrawlResponse> getListStoryCrawl() {
         return StoryConverter.INSTANCE.lstStoryToLstStoryCrawlResponse(storyRepository.findAll());
     }

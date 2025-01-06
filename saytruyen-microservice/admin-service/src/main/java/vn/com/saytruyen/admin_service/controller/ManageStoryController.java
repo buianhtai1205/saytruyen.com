@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import vn.com.saytruyen.admin_service.request.StoryRequest;
 
 /**
  * The interface Manage story controller.
@@ -39,7 +40,7 @@ public interface ManageStoryController {
      */
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    ApiResponse<Object> createStory(@RequestBody Object storyRequest);
+    ApiResponse<Object> createStory(@RequestBody StoryRequest storyRequest);
 
     /**
      * Update story object.
@@ -50,7 +51,7 @@ public interface ManageStoryController {
      */
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    ApiResponse<Object> updateStory(@RequestBody Object storyRequest, @PathVariable String id);
+    ApiResponse<Object> updateStory(@RequestBody StoryRequest storyRequest, @PathVariable String id);
 
     /**
      * Delete story object.

@@ -4,6 +4,7 @@ import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.com.saytruyen.admin_service.controller.ManageStoryController;
+import vn.com.saytruyen.admin_service.request.StoryRequest;
 import vn.com.saytruyen.admin_service.service.StoryService;
 
 /**
@@ -30,13 +31,13 @@ public class ManageStoryControllerImpl implements ManageStoryController {
     }
 
     @Override
-    public ApiResponse<Object> createStory(Object storyRequest) {
+    public ApiResponse<Object> createStory(StoryRequest storyRequest) {
         storyService.createStory(storyRequest);
         return new ApiResponse<>(Boolean.TRUE);
     }
 
     @Override
-    public ApiResponse<Object> updateStory(Object storyRequest, String id) {
+    public ApiResponse<Object> updateStory(StoryRequest storyRequest, String id) {
         storyService.updateStory(storyRequest, id);
         return new ApiResponse<>(Boolean.TRUE);
     }

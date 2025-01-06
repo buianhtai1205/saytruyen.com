@@ -84,4 +84,22 @@ public class KafkaProducerService {
             return "Error communicating with Story Service: " + e.getMessage();
         }
     }
+
+    /**
+     * Send message without waiting for a reply.
+     *
+     * @param message     the message to send
+     * @param requestType the type of request to identify the message
+     */
+    public void sendMessageWithoutReply(Object message, RequestType requestType) {
+        try {
+            String serializedMessage = objectMapper.writeValueAsString(message);
+            ProducerRecord<String, String> record = new ProducerRecord<>(KafkaConst.STORY_TOPIC, serializedMessage);
+            record.headers().add(KafkaConst.REQUEST_TYPE, requestType.getValue().getBytes());
+            kafkaTemplate.send(record);
+        } catch (JsonProcessingException e) {
+            log.error("Error sending message: {}", e.getMessage());
+            throw new RuntimeException("Error sending message: " + e.getMessage());
+        }
+    }
 }
