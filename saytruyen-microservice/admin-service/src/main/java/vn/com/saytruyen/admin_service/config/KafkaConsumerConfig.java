@@ -40,7 +40,7 @@ public class KafkaConsumerConfig {
             ConcurrentKafkaListenerContainerFactory<String, String> containerFactory) {
 
         ConcurrentMessageListenerContainer<String, String> repliesContainer =
-                containerFactory.createContainer("story-service-reply");
+                containerFactory.createContainer("STORY-SERVICE-reply");
         repliesContainer.getContainerProperties().setGroupId("repliesGroup");
         repliesContainer.setAutoStartup(false);
         return repliesContainer;

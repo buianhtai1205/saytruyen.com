@@ -8,12 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
-import vn.com.saytruyen.story_service.config.KafkaTopic;
-import vn.com.saytruyen.story_service.constant.RequestType;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
 import vn.com.saytruyen.story_service.converter.StoryConverter;
 import vn.com.saytruyen.story_service.model.Story;
@@ -37,9 +32,6 @@ public class StoryServiceImpl implements StoryService {
     @Autowired
     private StoryRepository storyRepository;
 
-    @Autowired
-    private KafkaTopic kafkaTopic;
-
     @Override
     public PageableResponse getListStory(Integer pageNumber, Integer pageSize) {
         pageNumber = Objects.isNull(pageNumber) ? StoryServiceConst.PAGE_NUMBER_DEFAULT : pageNumber;
@@ -55,32 +47,6 @@ public class StoryServiceImpl implements StoryService {
                 .totalElements(lstStory.getTotalElements())
                 .data(StoryConverter.INSTANCE.lstStoryToLstStoryResponse(lstStory.getContent()))
                 .build();
-    }
-
-    /**
-     * Listen string.
-     *
-     * @param requestTypeBytes the request type bytes
-     * @param message          the message
-     * @return the string
-     */
-    @KafkaListener(topics = "STORY-SERVICE")
-    @SendTo
-    public String handleGetStoryRequest(
-            @Header("REQUEST_TYPE") byte[] requestTypeBytes,
-            String message) {
-        System.out.println("STORY-SERVICE received: " + message);
-
-        String requestTypeString = new String(requestTypeBytes);
-        RequestType requestType = RequestType.fromValue(requestTypeString);
-
-        String payload = "Unknown request type";
-
-        if (requestType == RequestType.GET_ALL_STORIES) {
-            System.out.println("Returning all stories");
-            payload = "All stories: {}";
-        }
-        return payload;
     }
 
     @Override

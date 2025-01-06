@@ -1,7 +1,9 @@
-package vn.com.saytruyen.admin_service.service;
+package vn.com.saytruyen.admin_service.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -9,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.requestreply.RequestReplyFuture;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import vn.com.saytruyen.admin_service.constant.KafkaConst;
 import vn.com.saytruyen.admin_service.constant.RequestType;
@@ -46,36 +47,41 @@ public class KafkaProducerService {
         this.kafkaTemplate = kafkaTemplate;
         this.replyingKafkaTemplate = replyingKafkaTemplate;
         this.objectMapper = objectMapper;
+        this.objectMapper.registerModule(new JavaTimeModule());
+        this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
     /**
      * Send message object.
      *
-     * @param message     the message
-     * @param requestType the request type
+     * @param <T>           the type parameter
+     * @param message       the message
+     * @param requestType   the request type
+     * @param responseClass the response class
      * @return the object
      * @throws ExecutionException      the execution exception
      * @throws InterruptedException    the interrupted exception
      * @throws TimeoutException        the timeout exception
      * @throws JsonProcessingException the json processing exception
      */
-    public Object sendMessage(Object message, RequestType requestType)
-            throws ExecutionException, InterruptedException, TimeoutException, JsonProcessingException {
-        if (!replyingKafkaTemplate.waitForAssignment(Duration.ofSeconds(10))) {
-            throw new IllegalStateException("Reply container did not initialize");
+    public <T> Object sendMessage(Object message, RequestType requestType, Class<T> responseClass) {
+        try {
+            if (!replyingKafkaTemplate.waitForAssignment(Duration.ofSeconds(10))) {
+                throw new IllegalStateException("Reply container did not initialize");
+            }
+
+            String serializedMessage = objectMapper.writeValueAsString(message);
+            ProducerRecord<String, String> record = new ProducerRecord<>(KafkaConst.STORY_TOPIC, serializedMessage);
+            record.headers().add(KafkaConst.REQUEST_TYPE, requestType.getValue().getBytes());
+
+            RequestReplyFuture<String, String, String> replyFuture = replyingKafkaTemplate.sendAndReceive(record);
+
+            ConsumerRecord<String, String> consumerRecord = replyFuture.get(KafkaConst.TIMEOUT_10, TimeUnit.SECONDS);
+            System.out.println("Return value: " + consumerRecord.value());
+            return objectMapper.readValue(consumerRecord.value(), responseClass);
+
+        } catch (ExecutionException | InterruptedException | TimeoutException | JsonProcessingException e) {
+            return "Error communicating with Story Service: " + e.getMessage();
         }
-
-        String serializedMessage = objectMapper.writeValueAsString(message);
-        ProducerRecord<String, String> record = new ProducerRecord<>(KafkaConst.STORY_TOPIC, serializedMessage);
-        record.headers().add(KafkaConst.REQUEST_TYPE, requestType.getValue().getBytes());
-
-        RequestReplyFuture<String, String, String> replyFuture = replyingKafkaTemplate.sendAndReceive(record);
-
-        SendResult<String, String> sendResult = replyFuture.getSendFuture().get(KafkaConst.TIMEOUT_10, TimeUnit.SECONDS);
-        System.out.println("Sent ok: " + sendResult.getRecordMetadata());
-
-        ConsumerRecord<String, String> consumerRecord = replyFuture.get(KafkaConst.TIMEOUT_10, TimeUnit.SECONDS);
-        System.out.println("Return value: " + consumerRecord.value());
-        return consumerRecord.value();
     }
 }
