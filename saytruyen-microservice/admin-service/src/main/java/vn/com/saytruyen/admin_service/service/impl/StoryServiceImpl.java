@@ -1,7 +1,9 @@
 package vn.com.saytruyen.admin_service.service.impl;
 
 import io.github.buianhtai1205.saytruyen_common_service.response.PageableResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import vn.com.saytruyen.admin_service.constant.RequestType;
 import vn.com.saytruyen.admin_service.producer.KafkaProducerService;
@@ -11,37 +13,61 @@ import vn.com.saytruyen.admin_service.request.UpdateStoryRequest;
 import vn.com.saytruyen.admin_service.response.StoryResponse;
 import vn.com.saytruyen.admin_service.service.StoryService;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * The type Story service.
  */
 @Service
+@Slf4j
 public class StoryServiceImpl implements StoryService {
 
     private final KafkaProducerService producerService;
+
+    private final RedisTemplate<String, Object> redisTemplate;
 
     /**
      * Instantiates a new Story service.
      *
      * @param producerService the producer service
+     * @param redisTemplate   the redis template
      */
     @Autowired
-    public StoryServiceImpl(KafkaProducerService producerService) {
+    public StoryServiceImpl(KafkaProducerService producerService,
+                            RedisTemplate<String, Object> redisTemplate) {
         this.producerService = producerService;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
     public Object getListStory(Integer pageNumber, Integer pageSize) {
+        // Check cache
+        String cacheKey = "stories:" + pageNumber + ":" + pageSize;
+        Object cachedResponse = redisTemplate.opsForValue().get(cacheKey);
+
+        if (cachedResponse != null) {
+            log.info("Get list stories from cache: {}", cacheKey);
+            return cachedResponse;
+        }
+
         // Make request object
         GetStoriesRequest request = new GetStoriesRequest();
         request.setPageNumber(pageNumber);
         request.setPageSize(pageSize);
 
         // Send message with topic, request, and response type
-        return producerService.sendMessage(
+        log.info("Get list stories from story-service: {}", request);
+        Object response = producerService.sendMessage(
                 request,
                 RequestType.GET_ALL_STORIES,
                 PageableResponse.class
         );
+
+        // Save cache
+        log.info("Save list stories to cache: {}", cacheKey);
+        redisTemplate.opsForValue().set(cacheKey, response, 10, TimeUnit.MINUTES);
+
+        return response;
     }
 
     @Override
