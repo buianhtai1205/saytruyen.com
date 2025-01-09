@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.requestreply.RequestReplyFuture;
@@ -29,23 +30,30 @@ public class KafkaProducerService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    private final ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate;
+    private final ReplyingKafkaTemplate<String, String, String> storyReplyingKafkaTemplate;
+
+    private final ReplyingKafkaTemplate<String, String, String> userReplyingKafkaTemplate;
 
     private final ObjectMapper objectMapper;
 
     /**
      * Instantiates a new Kafka producer service.
      *
-     * @param kafkaTemplate         the kafka template
-     * @param replyingKafkaTemplate the replying Kafka Template
-     * @param objectMapper          the object mapper
+     * @param kafkaTemplate              the kafka template
+     * @param storyReplyingKafkaTemplate the story replying kafka template
+     * @param userReplyingKafkaTemplate  the user replying kafka template
+     * @param objectMapper               the object mapper
      */
     @Autowired
     public KafkaProducerService(KafkaTemplate<String, String> kafkaTemplate,
-                                ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate,
+                                @Qualifier("storyReplyingTemplate")
+                                ReplyingKafkaTemplate<String, String, String> storyReplyingKafkaTemplate,
+                                @Qualifier("userReplyingTemplate")
+                                ReplyingKafkaTemplate<String, String, String> userReplyingKafkaTemplate,
                                 ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
-        this.replyingKafkaTemplate = replyingKafkaTemplate;
+        this.storyReplyingKafkaTemplate = storyReplyingKafkaTemplate;
+        this.userReplyingKafkaTemplate = userReplyingKafkaTemplate;
         this.objectMapper = objectMapper;
         this.objectMapper.registerModule(new JavaTimeModule());
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -66,7 +74,7 @@ public class KafkaProducerService {
      */
     public <T> Object sendMessage(Object message, RequestType requestType, Class<T> responseClass) {
         try {
-            if (!replyingKafkaTemplate.waitForAssignment(Duration.ofSeconds(10))) {
+            if (!storyReplyingKafkaTemplate.waitForAssignment(Duration.ofSeconds(10))) {
                 throw new IllegalStateException("Reply container did not initialize");
             }
 
@@ -74,7 +82,7 @@ public class KafkaProducerService {
             ProducerRecord<String, String> record = new ProducerRecord<>(KafkaConst.STORY_TOPIC, serializedMessage);
             record.headers().add(KafkaConst.REQUEST_TYPE, requestType.getValue().getBytes());
 
-            RequestReplyFuture<String, String, String> replyFuture = replyingKafkaTemplate.sendAndReceive(record);
+            RequestReplyFuture<String, String, String> replyFuture = storyReplyingKafkaTemplate.sendAndReceive(record);
 
             ConsumerRecord<String, String> consumerRecord = replyFuture.get(KafkaConst.TIMEOUT_10, TimeUnit.SECONDS);
             System.out.println("Return value: " + consumerRecord.value());

@@ -11,7 +11,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 import vn.com.saytruyen.story_service.constant.RequestType;
-import vn.com.saytruyen.story_service.request.GetStoriesRequest;
+import vn.com.saytruyen.story_service.request.PageInfoRequest;
 import vn.com.saytruyen.story_service.request.StoryRequest;
 import vn.com.saytruyen.story_service.request.UpdateStoryRequest;
 import vn.com.saytruyen.story_service.service.StoryService;
@@ -88,10 +88,10 @@ public class ConsumerListener {
     }
 
     private String handleGetStoriesRequest(String message) {
-        GetStoriesRequest request;
+        PageInfoRequest request;
 
         try {
-            request = objectMapper.readValue(message, GetStoriesRequest.class);
+            request = objectMapper.readValue(message, PageInfoRequest.class);
 
             return objectMapper.writeValueAsString(
                     storyService.getListStory(request.getPageNumber(), request.getPageSize())

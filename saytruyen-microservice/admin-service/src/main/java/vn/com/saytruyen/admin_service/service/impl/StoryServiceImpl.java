@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import vn.com.saytruyen.admin_service.constant.RequestType;
 import vn.com.saytruyen.admin_service.producer.KafkaProducerService;
-import vn.com.saytruyen.admin_service.request.GetStoriesRequest;
+import vn.com.saytruyen.admin_service.request.PageInfoRequest;
 import vn.com.saytruyen.admin_service.request.StoryRequest;
 import vn.com.saytruyen.admin_service.request.UpdateStoryRequest;
 import vn.com.saytruyen.admin_service.response.StoryResponse;
@@ -51,7 +51,7 @@ public class StoryServiceImpl implements StoryService {
         }
 
         // Make request object
-        GetStoriesRequest request = new GetStoriesRequest();
+        PageInfoRequest request = new PageInfoRequest();
         request.setPageNumber(pageNumber);
         request.setPageSize(pageSize);
 
@@ -91,6 +91,21 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public Object getStory(String id) {
-        return producerService.sendMessage(id, RequestType.GET_STORY_BY_ID, StoryResponse.class);
+        // Check cache
+        String cacheKey = "story:" + id;
+        Object cachedResponse = redisTemplate.opsForValue().get(cacheKey);
+
+        if (cachedResponse != null) {
+            log.info("Get story from cache: {}", cacheKey);
+            return cachedResponse;
+        }
+
+        Object response = producerService.sendMessage(id, RequestType.GET_STORY_BY_ID, StoryResponse.class);
+
+        // Save cache
+        log.info("Save story to cache: {}", cacheKey);
+        redisTemplate.opsForValue().set(cacheKey, response, 10, TimeUnit.MINUTES);
+
+        return response;
     }
 }

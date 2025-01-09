@@ -1,4 +1,4 @@
-package vn.com.saytruyen.story_service.request;
+package vn.com.saytruyen.admin_service.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * The type Get stories request.
+ * The type Page info request.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetStoriesRequest {
+public class PageInfoRequest {
 
     private Integer pageNumber;
 

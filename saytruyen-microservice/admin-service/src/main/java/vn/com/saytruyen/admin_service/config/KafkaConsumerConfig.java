@@ -14,34 +14,67 @@ import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 public class KafkaConsumerConfig {
 
     /**
-     * Replying template replying kafka template.
+     * Story replying template replying kafka template.
      *
-     * @param pf               the pf
-     * @param repliesContainer the replies container
+     * @param pf                    the pf
+     * @param storyRepliesContainer the story replies container
      * @return the replying kafka template
      */
     @Bean
-    public ReplyingKafkaTemplate<String, String, String> replyingTemplate(
+    public ReplyingKafkaTemplate<String, String, String> storyReplyingTemplate(
             ProducerFactory<String, String> pf,
-            ConcurrentMessageListenerContainer<String, String> repliesContainer) {
-        ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate = new ReplyingKafkaTemplate<>(pf, repliesContainer);
+            ConcurrentMessageListenerContainer<String, String> storyRepliesContainer) {
+        ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate = new ReplyingKafkaTemplate<>(pf, storyRepliesContainer);
         replyingKafkaTemplate.setSharedReplyTopic(true);
         return replyingKafkaTemplate;
     }
 
     /**
-     * Replies container concurrent message listener container.
+     * Story replies container concurrent message listener container.
      *
      * @param containerFactory the container factory
      * @return the concurrent message listener container
      */
     @Bean
-    public ConcurrentMessageListenerContainer<String, String> repliesContainer(
+    public ConcurrentMessageListenerContainer<String, String> storyRepliesContainer(
             ConcurrentKafkaListenerContainerFactory<String, String> containerFactory) {
 
         ConcurrentMessageListenerContainer<String, String> repliesContainer =
                 containerFactory.createContainer("STORY-SERVICE-reply");
-        repliesContainer.getContainerProperties().setGroupId("repliesGroup");
+        repliesContainer.getContainerProperties().setGroupId("storyRepliesGroup");
+        repliesContainer.setAutoStartup(false);
+        return repliesContainer;
+    }
+
+    /**
+     * User replying template replying kafka template.
+     *
+     * @param pf                   the pf
+     * @param userRepliesContainer the user replies container
+     * @return the replying kafka template
+     */
+    @Bean
+    public ReplyingKafkaTemplate<String, String, String> userReplyingTemplate(
+            ProducerFactory<String, String> pf,
+            ConcurrentMessageListenerContainer<String, String> userRepliesContainer) {
+        ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate = new ReplyingKafkaTemplate<>(pf, userRepliesContainer);
+        replyingKafkaTemplate.setSharedReplyTopic(true);
+        return replyingKafkaTemplate;
+    }
+
+    /**
+     * User replies container concurrent message listener container.
+     *
+     * @param containerFactory the container factory
+     * @return the concurrent message listener container
+     */
+    @Bean
+    public ConcurrentMessageListenerContainer<String, String> userRepliesContainer(
+            ConcurrentKafkaListenerContainerFactory<String, String> containerFactory) {
+
+        ConcurrentMessageListenerContainer<String, String> repliesContainer =
+                containerFactory.createContainer("USER-SERVICE-reply");
+        repliesContainer.getContainerProperties().setGroupId("userRepliesGroup");
         repliesContainer.setAutoStartup(false);
         return repliesContainer;
     }
