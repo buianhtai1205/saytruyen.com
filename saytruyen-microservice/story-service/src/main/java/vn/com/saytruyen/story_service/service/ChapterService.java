@@ -48,4 +48,11 @@ public interface ChapterService {
      * @return the all chapter
      */
     PageableResponse getAllChapter(Integer pageNumber, Integer pageSize, String storyId);
+
+    /**
+     * Hard delete chapter.
+     *
+     * @param chapterId the chapter id
+     */
+    void hardDeleteChapter(String chapterId);
 }

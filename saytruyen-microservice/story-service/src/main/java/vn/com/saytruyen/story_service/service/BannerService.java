@@ -46,4 +46,11 @@ public interface BannerService {
      * @return the banner
      */
     BannerResponse getBanner(String id);
+
+    /**
+     * Hard delete banner.
+     *
+     * @param id the id
+     */
+    void hardDeleteBanner(String id);
 }

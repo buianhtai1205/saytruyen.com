@@ -82,6 +82,12 @@ public class BannerServiceImpl implements BannerService {
         return BannerConverter.INSTANCE.bannerToBannerResponse(getExistingBanner(id));
     }
 
+    @Override
+    public void hardDeleteBanner(String id) {
+        Banner banner = getExistingBanner(id);
+        bannerRepository.delete(banner);
+    }
+
     /**
      * Gets existing banner.
      *

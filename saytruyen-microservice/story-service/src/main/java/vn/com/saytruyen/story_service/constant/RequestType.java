@@ -36,6 +36,56 @@ public enum RequestType {
     GET_STORIES_BY_AUTHOR("get_stories_by_author"),
 
     /**
+     * Get all banners request type.
+     */
+    GET_ALL_BANNERS("get_all_banners"),
+
+    /**
+     * Create new banner request type.
+     */
+    CREATE_NEW_BANNER("create_new_banner"),
+
+    /**
+     * Update banner request type.
+     */
+    UPDATE_BANNER("update_banner"),
+
+    /**
+     * Delete banner request type.
+     */
+    DELETE_BANNER("delete_banner"),
+
+    /**
+     * Get banner by id request type.
+     */
+    GET_BANNER_BY_ID("get_banner_by_id"),
+
+    /**
+     * Create new chapter request type.
+     */
+    CREATE_NEW_CHAPTER("create_new_chapter"),
+
+    /**
+     * Update chapter request type.
+     */
+    UPDATE_CHAPTER("update_chapter"),
+
+    /**
+     * Delete chapter request type.
+     */
+    DELETE_CHAPTER("delete_chapter"),
+
+    /**
+     * Get chapter by id request type.
+     */
+    GET_CHAPTER_BY_ID("get_chapter_by_id"),
+
+    /**
+     * Get all chapters request type.
+     */
+    GET_ALL_CHAPTERS("get_all_chapters"),
+
+    /**
      * Unknown request type.
      */
     UNKNOWN("unknown"); // Default value for unknown request types

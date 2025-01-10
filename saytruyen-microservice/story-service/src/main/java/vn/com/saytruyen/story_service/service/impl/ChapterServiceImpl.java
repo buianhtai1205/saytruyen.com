@@ -91,6 +91,12 @@ public class ChapterServiceImpl implements ChapterService {
                 .build();
     }
 
+    @Override
+    public void hardDeleteChapter(String chapterId) {
+        Chapter existChapter = getExistingChapter(chapterId);
+        chapterRepository.delete(existChapter);
+    }
+
     /**
      * Gets existing chapter.
      *
