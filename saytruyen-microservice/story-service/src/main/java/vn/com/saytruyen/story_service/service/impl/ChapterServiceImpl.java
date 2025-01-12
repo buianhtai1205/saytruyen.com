@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
 import vn.com.saytruyen.story_service.constant.StoryServiceMessage;
 import vn.com.saytruyen.story_service.converter.ChapterConverter;
@@ -38,6 +39,7 @@ public class ChapterServiceImpl implements ChapterService {
     private MessageSource messageSource;
 
     @Override
+    @Transactional
     public void createChapter(ChapterRequest chapterRequest) {
         Chapter chapter = ChapterConverter.INSTANCE.chapterRequestToChapter(chapterRequest);
         chapter.setCreatedAt(DateTimeUtils.getCurrentDateTime());
@@ -48,6 +50,7 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
+    @Transactional
     public void updateChapter(ChapterRequest chapterRequest, String chapterId) {
         Chapter existChapter = getExistingChapter(chapterId);
         ReflectionUtils.copyNonNullFields(chapterRequest, existChapter);
@@ -56,6 +59,7 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
+    @Transactional
     public void deleteChapter(String chapterId) {
         Chapter existChapter = getExistingChapter(chapterId);
         chapterRepository.delete(existChapter);
@@ -92,6 +96,7 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
+    @Transactional
     public void hardDeleteChapter(String chapterId) {
         Chapter existChapter = getExistingChapter(chapterId);
         chapterRepository.delete(existChapter);

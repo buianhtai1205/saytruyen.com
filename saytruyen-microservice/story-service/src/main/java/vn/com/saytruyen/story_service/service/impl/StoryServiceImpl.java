@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
 import vn.com.saytruyen.story_service.converter.StoryConverter;
 import vn.com.saytruyen.story_service.model.Story;
@@ -50,6 +51,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional
     public void createStory(StoryRequest storyRequest) {
         Story story = StoryConverter.INSTANCE.storyRequestToStory(storyRequest);
         story.setCreatedAt(DateTimeUtils.getCurrentDateTime());
@@ -61,6 +63,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional
     public void updateStory(StoryRequest storyRequest, String id) {
         Optional<Story> currentStory = storyRepository.findById(id);
         if (currentStory.isPresent() && Objects.nonNull(storyRequest)) {
@@ -72,6 +75,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional
     public void sortDeleteStory(String id) {
         Optional<Story> currentStory = storyRepository.findById(id);
         if (currentStory.isPresent()) {
@@ -83,6 +87,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional
     public void hardDeleteStory(String id) {
         storyRepository.deleteById(id);
     }
@@ -98,6 +103,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional
     public Integer deleteStoryCrawl() {
         List<Story> lstDeleteStory = storyRepository.findByNowCreatedAt(LocalDate.now().atStartOfDay());
         storyRepository.deleteAll(lstDeleteStory);

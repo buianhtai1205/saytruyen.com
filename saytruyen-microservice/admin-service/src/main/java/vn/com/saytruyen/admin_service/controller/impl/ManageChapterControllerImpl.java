@@ -3,7 +3,7 @@ package vn.com.saytruyen.admin_service.controller.impl;
 import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.com.saytruyen.admin_service.controller.ManagerChapterController;
+import vn.com.saytruyen.admin_service.controller.ManageChapterController;
 import vn.com.saytruyen.admin_service.request.ChapterRequest;
 import vn.com.saytruyen.admin_service.service.ChapterService;
 
@@ -11,7 +11,7 @@ import vn.com.saytruyen.admin_service.service.ChapterService;
  * The type Manager chapter controller.
  */
 @Component
-public class ManagerChapterControllerImpl implements ManagerChapterController {
+public class ManageChapterControllerImpl implements ManageChapterController {
 
     private final ChapterService chapterService;
 
@@ -21,7 +21,7 @@ public class ManagerChapterControllerImpl implements ManagerChapterController {
      * @param chapterService the chapter service
      */
     @Autowired
-    public ManagerChapterControllerImpl(ChapterService chapterService) {
+    public ManageChapterControllerImpl(ChapterService chapterService) {
         this.chapterService = chapterService;
     }
 

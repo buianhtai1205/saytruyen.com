@@ -2,8 +2,10 @@ version: '3.9'
 
 volumes:
   mongo-data:
-      driver: local
+    driver: local
   redis-data:
+  mysql-admin-service-data:
+  mysql-user-service-data:
 
 networks:
   my-network:
@@ -75,9 +77,35 @@ services:
       - 6379:6379
     environment:
       REDIS_PASSWORD: qwerty
-    volumes: 
+    volumes:
       - redis-data:/data
     networks:
       - my-network
+  
+  # mysql-admin
+  mysql-admin-service:
+    image: mysql:8.0
+    container_name: mysql-admin-service
+    environment:
+      MYSQL_DATABASE: admin-database
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-admin-service-data:/var/lib/mysql
+    networks:
+      - my-network
 
-
+  # mysql-user
+  mysql-user-service:
+    image: mysql:8.0
+    container_name: mysql-user-service
+    environment:
+      MYSQL_DATABASE: user-database
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-user-service-data:/var/lib/mysql
+    networks:
+      - my-network

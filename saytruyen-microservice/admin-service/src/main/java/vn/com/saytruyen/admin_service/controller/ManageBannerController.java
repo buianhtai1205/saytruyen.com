@@ -18,7 +18,7 @@ import vn.com.saytruyen.admin_service.request.BannerRequest;
  */
 @RestController
 @RequestMapping("/api/admin-service/banner")
-public interface ManagerBannerController {
+public interface ManageBannerController {
 
 
     /**

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import vn.com.saytruyen.story_service.constant.StoryServiceConst;
 import vn.com.saytruyen.story_service.converter.BannerConverter;
 import vn.com.saytruyen.story_service.model.Banner;
@@ -47,6 +48,7 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
+    @Transactional
     public void createBanner(BannerRequest bannerRequest) {
         Banner banner = BannerConverter.INSTANCE.bannerRequestToBanner(bannerRequest);
         banner.setCreatedAt(DateTimeUtils.getCurrentDateTime());
@@ -56,6 +58,7 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
+    @Transactional
     public void updateBanner(BannerRequest bannerRequest, String id) {
         Optional<Banner> currentBanner = bannerRepository.findById(id);
         if (currentBanner.isPresent() && Objects.nonNull(bannerRequest)) {
@@ -67,6 +70,7 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
+    @Transactional
     public void deleteBanner(String id) {
         Optional<Banner> currentBanner = bannerRepository.findById(id);
         if (currentBanner.isPresent()) {
@@ -83,6 +87,7 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
+    @Transactional
     public void hardDeleteBanner(String id) {
         Banner banner = getExistingBanner(id);
         bannerRepository.delete(banner);

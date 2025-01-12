@@ -3,7 +3,7 @@ package vn.com.saytruyen.admin_service.controller.impl;
 import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.com.saytruyen.admin_service.controller.ManagerBannerController;
+import vn.com.saytruyen.admin_service.controller.ManageBannerController;
 import vn.com.saytruyen.admin_service.request.BannerRequest;
 import vn.com.saytruyen.admin_service.service.BannerService;
 
@@ -11,7 +11,7 @@ import vn.com.saytruyen.admin_service.service.BannerService;
  * The type Manager banner controller.
  */
 @Component
-public class ManagerBannerControllerImpl implements ManagerBannerController {
+public class ManageBannerControllerImpl implements ManageBannerController {
 
     private final BannerService bannerService;
 
@@ -21,7 +21,7 @@ public class ManagerBannerControllerImpl implements ManagerBannerController {
      * @param bannerService the banner service
      */
     @Autowired
-    public ManagerBannerControllerImpl(BannerService bannerService) {
+    public ManageBannerControllerImpl(BannerService bannerService) {
         this.bannerService = bannerService;
     }
 

@@ -18,8 +18,8 @@ import vn.com.saytruyen.admin_service.request.ChapterRequest;
  * The interface Chapter controller.
  */
 @RestController
-@RequestMapping("/api/story-service/chapter")
-public interface ManagerChapterController {
+@RequestMapping("/api/admin-service/chapter")
+public interface ManageChapterController {
 
     /**
      * Create chapter.
