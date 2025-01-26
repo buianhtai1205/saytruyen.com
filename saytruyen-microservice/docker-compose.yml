@@ -1,111 +1,111 @@
 version: '3.9'
 
 volumes:
-  mongo-data:
-    driver: local
-  redis-data:
-  mysql-admin-service-data:
-  mysql-user-service-data:
+    mongo-data:
+        driver: local
+    redis-data:
+    mysql-admin-service-data:
+    mysql-user-service-data:
 
 networks:
-  my-network:
-    driver: bridge
+    my-network:
+        driver: bridge
 
 services:
 
-  # MongoDB
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_DATABASE: story-database
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    volumes:
-      - mongo-data:/data/db
-    networks:
-      - my-network
-    restart: always
+    # MongoDB
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_DATABASE: story-database
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+        volumes:
+            - mongo-data:/data/db
+        networks:
+            - my-network
+        restart: always
 
-  # Mongo Express
-  mongo-express:
-    image: mongo-express
-    ports:
-      - "9090:8081"
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
-      ME_CONFIG_BASICAUTH: false
-    networks:
-      - my-network
-    restart: always
-  
-  # zookeeper
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    restart: always
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 22181:2181
+    # Mongo Express
+    mongo-express:
+        image: mongo-express
+        ports:
+            - "9090:8081"
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: root
+            ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+            ME_CONFIG_BASICAUTH: false
+        networks:
+            - my-network
+        restart: always
 
-  # kafka
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    restart: always
-    depends_on:
-      - zookeeper
-    ports:
-      - 29092:29092
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_OFFSETS_RETENTION_MINUTES: 15
-  
-  # redis 
-  redis:
-    image: redis:latest
-    restart: always
-    ports:
-      - 6379:6379
-    environment:
-      REDIS_PASSWORD: qwerty
-    volumes:
-      - redis-data:/data
-    networks:
-      - my-network
-  
-  # mysql-admin
-  mysql-admin-service:
-    image: mysql:8.0
-    container_name: mysql-admin-service
-    environment:
-      MYSQL_DATABASE: admin-database
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-admin-service-data:/var/lib/mysql
-    networks:
-      - my-network
+    # zookeeper
+    zookeeper:
+        image: confluentinc/cp-zookeeper:latest
+        restart: always
+        environment:
+            ZOOKEEPER_CLIENT_PORT: 2181
+            ZOOKEEPER_TICK_TIME: 2000
+        ports:
+            - 22181:2181
 
-  # mysql-user
-  mysql-user-service:
-    image: mysql:8.0
-    container_name: mysql-user-service
-    environment:
-      MYSQL_DATABASE: user-database
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-user-service-data:/var/lib/mysql
-    networks:
-      - my-network
+    # kafka
+    kafka:
+        image: confluentinc/cp-kafka:latest
+        restart: always
+        depends_on:
+            - zookeeper
+        ports:
+            - 29092:29092
+        environment:
+            KAFKA_BROKER_ID: 1
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+            KAFKA_OFFSETS_RETENTION_MINUTES: 15
+
+    # redis
+    redis:
+        image: redis:latest
+        restart: always
+        ports:
+            - 6379:6379
+        environment:
+            REDIS_PASSWORD: qwerty
+        volumes:
+            - redis-data:/data
+        networks:
+            - my-network
+
+    # mysql-admin
+    mysql-admin-service:
+        image: mysql:8.0
+        container_name: mysql-admin-service
+        environment:
+            MYSQL_DATABASE: admin-database
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql-admin-service-data:/var/lib/mysql
+        networks:
+            - my-network
+
+    # mysql-user
+    mysql-user-service:
+        image: mysql:8.0
+        container_name: mysql-user-service
+        environment:
+            MYSQL_DATABASE: user-database
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "3307:3306"
+        volumes:
+            - mysql-user-service-data:/var/lib/mysql
+        networks:
+            - my-network
