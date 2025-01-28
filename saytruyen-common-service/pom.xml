@@ -11,7 +11,7 @@
 
     <groupId>io.github.buianhtai1205</groupId>
     <artifactId>saytruyen-common-service</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <name>saytruyen-common-service</name>
     <description>Common Service for Spring Boot SayTruyen.com.vn</description>
@@ -105,6 +105,22 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
             <version>1.12.506</version>
+        </dependency>
+        <!--JWT-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
         </dependency>
     </dependencies>
 
