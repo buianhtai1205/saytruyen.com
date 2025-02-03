@@ -39,7 +39,7 @@
         <dependency>
             <groupId>io.github.buianhtai1205</groupId>
             <artifactId>saytruyen-common-service</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
         <!-- MapStruct dependencies -->
         <dependency>
@@ -98,6 +98,27 @@
             <artifactId>mockito-core</artifactId>
             <version>5.15.2</version>
             <scope>test</scope>
+        </dependency>
+        <!--Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!--JWT-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
         </dependency>
     </dependencies>
 
