@@ -6,7 +6,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
-import io.github.buianhtai1205.saytruyen_common_service.constant.Constants;
+import io.github.buianhtai1205.saytruyen_common_service.constant.CommonConstants;
 import io.github.buianhtai1205.saytruyen_common_service.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +43,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<FileResponse> uploadFileToAWSS3(MultipartFile[] files) {
-        String defaultFolder = Constants.IMAGES;
+        String defaultFolder = CommonConstants.IMAGES;
         return uploadFileToAWSS3(files, defaultFolder);
     }
 
@@ -171,7 +171,7 @@ public class FileServiceImpl implements FileService {
         File[] files = folder.listFiles();
         if (files != null) {
             for (File file : files) {
-                FileResponse fileResponse = uploadFileToAWSS3(file, Constants.IMAGES);
+                FileResponse fileResponse = uploadFileToAWSS3(file, CommonConstants.IMAGES);
                 fileUrls.add(fileResponse.getFileUrl());
             }
         }

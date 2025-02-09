@@ -3,7 +3,7 @@ package io.github.buianhtai1205.saytruyen_common_service.constant;
 /**
  * The type Constants.
  */
-public class Constants {
+public class CommonConstants {
 
     /**
      * The constant SUCCESS_REQUEST.

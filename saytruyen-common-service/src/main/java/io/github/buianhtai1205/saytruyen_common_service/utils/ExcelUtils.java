@@ -1,6 +1,6 @@
 package io.github.buianhtai1205.saytruyen_common_service.utils;
 
-import io.github.buianhtai1205.saytruyen_common_service.constant.Constants;
+import io.github.buianhtai1205.saytruyen_common_service.constant.CommonConstants;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -94,7 +94,7 @@ public class ExcelUtils {
             for (int j = 0; j < row.getLastCellNum(); j++) {
                 XSSFCell cell = row.getCell(j);
                 if (cell == null) {
-                    rowData.add(Constants.BLANK);
+                    rowData.add(CommonConstants.BLANK);
                     continue;
                 }
                 rowData.add(getCellValue(cell));

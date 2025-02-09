@@ -15,8 +15,8 @@ public class ResourceNotFoundException extends RuntimeException {
      * @param param1 the param 1
      * @param param2 the param 2
      */
-    public ResourceNotFoundException(String param1, String param2) {
-        super(param1 + " with ID: " + param2 + " is not found in system!");
+    public ResourceNotFoundException(Object param1, Object param2) {
+        super(param1.toString() + " with ID: " + param2.toString() + " is not found in system!");
     }
 
     /**
