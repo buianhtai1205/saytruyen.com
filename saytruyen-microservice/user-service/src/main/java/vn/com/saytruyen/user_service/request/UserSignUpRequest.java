@@ -14,7 +14,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserSignUpRequest {
 
+    private String fullName;
+
     private String username;
 
     private String password;
+
+    private String email;
+
+    private Short gender;
+
+    private String address;
+
+    private String imageUrl;
+
+    private String backgroundUrl;
 }

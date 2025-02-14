@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import vn.com.saytruyen.user_service.model.User;
 import vn.com.saytruyen.user_service.request.UserRequest;
+import vn.com.saytruyen.user_service.request.UserSignUpRequest;
 import vn.com.saytruyen.user_service.response.UserResponse;
 
 import java.util.List;
@@ -42,4 +43,12 @@ public interface UserConverter {
      * @return the list
      */
     List<UserResponse> lstUserToLstUserResponse(List<User> lstUser);
+
+    /**
+     * User sign up request to user user.
+     *
+     * @param request the request
+     * @return the user
+     */
+    User userSignUpRequestToUser(UserSignUpRequest request);
 }

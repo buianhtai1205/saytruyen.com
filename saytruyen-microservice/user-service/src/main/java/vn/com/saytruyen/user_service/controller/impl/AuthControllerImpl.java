@@ -44,6 +44,7 @@ public class AuthControllerImpl implements AuthController {
 
     @Override
     public ApiResponse<Boolean> signUp(UserSignUpRequest request) {
-        return null;
+        authService.signUp(request);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 }
