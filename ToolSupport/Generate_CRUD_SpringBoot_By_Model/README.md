@@ -80,6 +80,8 @@ python3 gen_crud.py -model=Banner.java -orm=Mongo
 
 ## Chạy Tool Từ Bất Kỳ Vị Trí Nào
 
+### Linux
+
 Để chạy tool từ bất kỳ đâu, bạn có thể:
 
 1. **Thêm thư mục chứa file generate.py vào biến PATH:**
@@ -115,6 +117,22 @@ python3 gen_crud.py -model=Banner.java -orm=Mongo
     ```bash
     gen-crud -model=Banner.java -orm=Jpa
     ```
+
+### Windows
+
+Để run lệnh như linux, bạn có thể add đường dẫn gen-crud.py vào environment path.
+
+Ngoài ra với windows bạn có thể config để run bằng cách click chuột phải vào file model chọn gen-crud.
+
+Để làm được việc này, bạn cần add gen-crud vào context của windows. 
+
+Keyword để thực hiện là windows registry
+
+Các bạn có thể thêm gen-crud vào windows context thông qua registry
+
+### Mac
+
+Chờ có tiền mua sài rồi mình viết hướng dẫn 😁😁😁
 
 ## Xử Lý Lỗi
 
