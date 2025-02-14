@@ -25,8 +25,12 @@ import java.util.Optional;
 @Service
 public class {{ entity_name }}ServiceImpl implements {{ entity_name }}Service {
 
+    private final {{ entity_name }}Repository {{ entity_name | lower_first }}Repository;
+
     @Autowired
-    private {{ entity_name }}Repository {{ entity_name | lower }}Repository;
+    public {{ entity_name }}ServiceImpl({{ entity_name }}Repository {{ entity_name | lower_first }}Repository) {
+        this.{{ entity_name | lower_first }}Repository = {{ entity_name | lower_first }}Repository;
+    }
 
     @Override
     public PageableResponse getList{{ entity_name }}(Integer pageNumber, Integer pageSize) {
@@ -34,7 +38,7 @@ public class {{ entity_name }}ServiceImpl implements {{ entity_name }}Service {
         pageSize = Objects.isNull(pageSize) ? CommonConstants.PAGE_SIZE_DEFAULT : pageSize;
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        Page<{{ entity_name }}> lst{{ entity_name }} = {{ entity_name | lower }}Repository.findAll(pageable);
+        Page<{{ entity_name }}> lst{{ entity_name }} = {{ entity_name | lower_first }}Repository.findAll(pageable);
 
         return PageableResponse.builder()
                 .pageNumber(pageNumber)
@@ -47,54 +51,54 @@ public class {{ entity_name }}ServiceImpl implements {{ entity_name }}Service {
 
     @Override
     @Transactional
-    public void create{{ entity_name }}({{ entity_name }}Request {{ entity_name | lower }}Request) {
-        {{ entity_name }} {{ entity_name | lower }} = {{ entity_name }}Converter.INSTANCE.{{ entity_name | lower }}RequestTo{{ entity_name }}({{ entity_name | lower }}Request);
-        {{ entity_name | lower }}.setCreatedAt(DateTimeUtils.getCurrentDateTime());
-        {{ entity_name | lower }}.setUpdatedAt(DateTimeUtils.getCurrentDateTime());
-        {{ entity_name | lower }}.setDeleted(Boolean.FALSE);
-        {{ entity_name | lower }}Repository.save({{ entity_name | lower }});
+    public void create{{ entity_name }}({{ entity_name }}Request {{ entity_name | lower_first }}Request) {
+        {{ entity_name }} {{ entity_name | lower_first }} = {{ entity_name }}Converter.INSTANCE.{{ entity_name | lower_first }}RequestTo{{ entity_name }}({{ entity_name | lower_first }}Request);
+        {{ entity_name | lower_first }}.setCreatedAt(DateTimeUtils.getCurrentDateTime());
+        {{ entity_name | lower_first }}.setUpdatedAt(DateTimeUtils.getCurrentDateTime());
+        {{ entity_name | lower_first }}.setDeleted(Boolean.FALSE);
+        {{ entity_name | lower_first }}Repository.save({{ entity_name | lower_first }});
     }
 
     @Override
     @Transactional
-    public void update{{ entity_name }}({{ entity_name }}Request {{ entity_name | lower }}Request, {{ id_type}} id) {
-        Optional<{{ entity_name }}> current{{ entity_name }} = {{ entity_name | lower }}Repository.findById(id);
-        if (current{{ entity_name }}.isPresent() && Objects.nonNull({{ entity_name | lower }}Request)) {
-            {{ entity_name }} {{ entity_name | lower }}ToUpdate = current{{ entity_name }}.get();
-            ReflectionUtils.copyNonNullFields({{ entity_name | lower }}Request, {{ entity_name | lower }}ToUpdate);
-            {{ entity_name | lower }}ToUpdate.setUpdatedAt(DateTimeUtils.getCurrentDateTime());
-            {{ entity_name | lower }}Repository.save({{ entity_name | lower }}ToUpdate);
+    public void update{{ entity_name }}({{ entity_name }}Request {{ entity_name | lower_first }}Request, {{ id_type}} id) {
+        Optional<{{ entity_name }}> current{{ entity_name }} = {{ entity_name | lower_first }}Repository.findById(id);
+        if (current{{ entity_name }}.isPresent() && Objects.nonNull({{ entity_name | lower_first }}Request)) {
+            {{ entity_name }} {{ entity_name | lower_first }}ToUpdate = current{{ entity_name }}.get();
+            ReflectionUtils.copyNonNullFields({{ entity_name | lower_first }}Request, {{ entity_name | lower_first }}ToUpdate);
+            {{ entity_name | lower_first }}ToUpdate.setUpdatedAt(DateTimeUtils.getCurrentDateTime());
+            {{ entity_name | lower_first }}Repository.save({{ entity_name | lower_first }}ToUpdate);
         }
     }
 
     @Override
     @Transactional
     public void delete{{ entity_name }}({{ id_type}} id) {
-        Optional<{{ entity_name }}> current{{ entity_name }} = {{ entity_name | lower }}Repository.findById(id);
+        Optional<{{ entity_name }}> current{{ entity_name }} = {{ entity_name | lower_first }}Repository.findById(id);
         if (current{{ entity_name }}.isPresent()) {
-            {{ entity_name }} {{ entity_name | lower }}ToDelete = current{{ entity_name }}.get();
-            {{ entity_name | lower }}ToDelete.setDeleted(Boolean.TRUE);
-            {{ entity_name | lower }}ToDelete.setDeletedAt(DateTimeUtils.getCurrentDateTime());
-            {{ entity_name | lower }}Repository.save({{ entity_name | lower }}ToDelete);
+            {{ entity_name }} {{ entity_name | lower_first }}ToDelete = current{{ entity_name }}.get();
+            {{ entity_name | lower_first }}ToDelete.setDeleted(Boolean.TRUE);
+            {{ entity_name | lower_first }}ToDelete.setDeletedAt(DateTimeUtils.getCurrentDateTime());
+            {{ entity_name | lower_first }}Repository.save({{ entity_name | lower_first }}ToDelete);
         }
     }
 
     @Override
     public {{ entity_name }}Response get{{ entity_name }}({{ id_type}} id) {
-        return {{ entity_name }}Converter.INSTANCE.{{ entity_name | lower }}To{{ entity_name }}Response(getExisting{{ entity_name }}(id));
+        return {{ entity_name }}Converter.INSTANCE.{{ entity_name | lower_first }}To{{ entity_name }}Response(getExisting{{ entity_name }}(id));
     }
 
     @Override
     @Transactional
     public void hardDelete{{ entity_name }}({{ id_type}} id) {
-        {{ entity_name }} {{ entity_name | lower }} = getExisting{{ entity_name }}(id);
-        {{ entity_name | lower }}Repository.delete({{ entity_name | lower }});
+        {{ entity_name }} {{ entity_name | lower_first }} = getExisting{{ entity_name }}(id);
+        {{ entity_name | lower_first }}Repository.delete({{ entity_name | lower_first }});
     }
 
-    public {{ entity_name }} getExisting{{ entity_name }}({{ id_type}} {{ entity_name | lower }}Id) {
-        Optional<{{ entity_name }}> exist{{ entity_name }} = {{ entity_name | lower }}Repository.findById({{ entity_name | lower }}Id);
+    public {{ entity_name }} getExisting{{ entity_name }}({{ id_type}} {{ entity_name | lower_first }}Id) {
+        Optional<{{ entity_name }}> exist{{ entity_name }} = {{ entity_name | lower_first }}Repository.findById({{ entity_name | lower_first }}Id);
         if (exist{{ entity_name }}.isPresent()) {
             return exist{{ entity_name }}.get();
-        } else throw new ResourceNotFoundException(ServiceConst.{{ entity_name | upper }}, {{ entity_name | lower }}Id);
+        } else throw new ResourceNotFoundException(ServiceConst.{{ entity_name | upper }}, {{ entity_name | lower_first }}Id);
     }
 }

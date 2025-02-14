@@ -13,9 +13,9 @@ public interface {{ entity_name }}Converter {
 
     {{ entity_name }}Converter INSTANCE = Mappers.getMapper({{ entity_name }}Converter.class);
 
-    {{ entity_name }} {{ entity_name  | lower }}RequestTo{{ entity_name }}({{ entity_name }}Request {{ entity_name  | lower }}Request);
+    {{ entity_name }} {{ entity_name  | lower_first }}RequestTo{{ entity_name }}({{ entity_name }}Request {{ entity_name  | lower_first }}Request);
 
-    {{ entity_name }}Response {{ entity_name  | lower }}To{{ entity_name }}Response({{ entity_name }} {{ entity_name  | lower }});
+    {{ entity_name }}Response {{ entity_name  | lower_first }}To{{ entity_name }}Response({{ entity_name }} {{ entity_name  | lower_first }});
 
     List<{{ entity_name }}Response> lst{{ entity_name }}ToLst{{ entity_name }}Response(List<{{ entity_name }}> lst{{ entity_name }});
 }

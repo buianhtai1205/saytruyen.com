@@ -6,10 +6,12 @@ import sys
 from jinja2 import Environment, FileSystemLoader
 
 import read_model
+import utils
 
 # Cấu hình thư mục chứa các template
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR), trim_blocks=True, lstrip_blocks=True)
+env.filters['lower_first'] = utils.lower_first
 
 def render_template(template_name, context, output_path):
     """
@@ -58,7 +60,8 @@ if __name__ == "__main__":
         )
         parser.add_argument(
             "-model",
-            required=True,
+            required=False,
+            default="Bag.java",
             help="Đường dẫn đến file model entity (ví dụ: Banner.java)"
         )
         parser.add_argument(

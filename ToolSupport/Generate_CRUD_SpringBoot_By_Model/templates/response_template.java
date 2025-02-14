@@ -12,9 +12,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class {{ entity_name }}Response {
-
     {% for field in fields %}
-    private {{ field.type }} {{ field.name }};
+    {% if field.isRelationship %}
+
+    private {{ field.idType }} {{ field.name }};
+    {% else %}
     
+    private {{ field.type }} {{ field.name }};
+    {% endif %}
     {% endfor %}
 }

@@ -1,4 +1,5 @@
 import re
+import os
 
 def parse_model_file(model_file_path):
     """
@@ -23,6 +24,8 @@ def parse_model_file(model_file_path):
     lines = content.splitlines()
     fields = []
     id_next = False
+    relationship_next = False
+    skip_next_field = False
     package_name = "com.example.demo"
 
     for line in lines:
@@ -31,13 +34,47 @@ def parse_model_file(model_file_path):
         if line.startswith("@Id"):
             id_next = True
             continue
+        
+        # Nếu gặp annotation của quan hệ, đánh dấu rằng field tiếp theo là relationship
+        if line.startswith("@ManyToOne") or line.startswith("@OneToOne"):
+            relationship_next = True
+            continue
+
+        # Nếu gặp annotation @OneToMany thì bỏ qua field tiếp theo
+        if line.startswith("@OneToMany"):
+            skip_next_field = True
+            continue
+
+
         # Tìm dòng khai báo field, ví dụ: "private String id;"
         field_match = re.match(r'private\s+(\S+)\s+(\w+)\s*;', line)
         if field_match:
+            # Nếu flag bỏ qua được set (do @OneToMany), thì reset flag và bỏ qua field này
+            if skip_next_field:
+                skip_next_field = False
+                continue
+
             field_type, field_name = field_match.groups()
             field = {"type": field_type, "name": field_name, "isKey": id_next}
             fields.append(field)
             id_next = False
+
+            if relationship_next:
+                field["isRelationship"] = True
+                field["name"] = field["name"] + "Id"
+                # Tìm file của entity liên quan trong cùng thư mục
+                dir_model = os.path.dirname(model_file_path)
+                related_file = os.path.join(dir_model, field_type + ".java")
+                try:
+                    related_context = parse_model_file(related_file)
+                    field["idType"] = related_context.get("id_type", "Long")
+                except Exception as e:
+                    # Nếu không tìm thấy hoặc có lỗi, mặc định là "Long"
+                    field["idType"] = "Long"
+                relationship_next = False
+            else:
+                field["isRelationship"] = False
+
         # Lấy package name
         if line.startswith("package"):
                 # Loại bỏ từ khóa 'package' và ký tự ';'
@@ -58,6 +95,6 @@ def parse_model_file(model_file_path):
     }
 
 if __name__ == "__main__":
-    model_file_path = "Banner.java"
+    model_file_path = "Bag.java"
     context = parse_model_file(model_file_path)
     print(context)

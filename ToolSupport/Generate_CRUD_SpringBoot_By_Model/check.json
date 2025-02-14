@@ -1,0 +1,98 @@
+{
+    "entity_name": "User",
+    "id_type": "String",
+    "fields": [
+        {
+            "type": "String",
+            "name": "id",
+            "isKey": true,
+            "isRelationship": false
+        },
+        {
+            "type": "String",
+            "name": "fullName",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "String",
+            "name": "username",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "String",
+            "name": "password",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "String",
+            "name": "email",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "Short",
+            "name": "gender",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "String",
+            "name": "address",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "String",
+            "name": "imageUrl",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "String",
+            "name": "backgroundUrl",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "Long",
+            "name": "essencePoint",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "Long",
+            "name": "vitalEnergyPoint",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "Long",
+            "name": "spiritPoint",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "Long",
+            "name": "goldPoint",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "Long",
+            "name": "diamondPoint",
+            "isKey": false,
+            "isRelationship": false
+        },
+        {
+            "type": "Level",
+            "name": "level",
+            "isKey": false,
+            "isRelationship": true,
+            "idType": "Long"
+        }
+    ],
+    "package_name": "vn.com.saytruyen.user_service"
+}
