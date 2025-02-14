@@ -6,15 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * The type User sign up request.
+ * The type Bag request.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSignUpRequest {
+public class BagRequest {
 
-    private String username;
+    private Long number;
 
-    private String password;
+    private boolean isLock;
+
+    private Long userId;
+
+    private Long itemId;
 }

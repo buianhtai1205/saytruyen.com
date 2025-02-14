@@ -6,15 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * The type User sign up request.
+ * The type Equip location request.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSignUpRequest {
+public class EquipLocationRequest {
 
-    private String username;
-
-    private String password;
+    private String name;
 }

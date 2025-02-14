@@ -1,4 +1,4 @@
-package vn.com.saytruyen.user_service.request;
+package vn.com.saytruyen.user_service.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,15 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * The type User sign up request.
+ * The type Equip location response.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSignUpRequest {
+public class EquipLocationResponse {
 
-    private String username;
+    private Long id;
 
-    private String password;
+    private String name;
 }
