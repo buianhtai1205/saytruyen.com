@@ -20,10 +20,6 @@ a:hover {
     display: none !important;
 }
 
-* {
-    font-size: 12px;
-}
-
 .appUser {
     background-color: #1e1e1e;
     color: #ffffff;
@@ -36,7 +32,7 @@ a:hover {
 }
 
 .container {
-    max-width: 1024px;
+    max-width: 900px;
     margin: 0 auto;
     min-height: 100vh;
 }

@@ -63,11 +63,12 @@ const TopRank: React.FC<TopRankProps> = ({ title, books }) => (
                                 )}
                             </div>
                             {book.coverImage && (
-                                <img
-                                    src={book.coverImage}
-                                    alt={book.title}
-                                    className={styles.coverImage}
-                                />
+                                <div className={styles.coverImage}>
+                                    <img
+                                        src={book.coverImage}
+                                        alt={book.title}
+                                    />
+                                </div>
                             )}
                         </>
                     ) : (

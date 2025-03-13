@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import Banner from '../../components/Banner/Banner';
-import BookList from '../../components/BookList/BookList';
-import Top from '../../components/Top/Top';
-import NewChapters from '../../components/NewChapters/NewChapters';
-import NewCompletedStory from '../../components/NewCompletedStory/NewCompletedStory';
-import Evaluation from '../../components/Evaluation/Evaluation';
-import { PageableResponse } from '../../../api/common/pageableResponse';
+import Banner from '@userComponents/Banner/Banner';
+import BookList from '@userComponents/BookList/BookList';
+import Top from '@userComponents/Top/Top';
+import NewChapters from '@userComponents/NewChapters/NewChapters';
+import NewCompletedStory from '@userComponents/NewCompletedStory/NewCompletedStory';
+import Evaluation from '@userComponents/Evaluation/Evaluation';
+import { PageableResponse } from '@api/common/pageableResponse';
 import {
     fetchBanners,
     BannerResponse,
-} from '../../../api/services/story-service/bannerService';
+} from '@api/services/story-service/bannerService';
 
 const HomePage: React.FC = () => {
     const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();
     const [error, setError] = useState<string | null>(null);
 
+    const loadBanners = async () => {
+        try {
+            const data = await fetchBanners();
+            setBanners(data.data);
+        } catch (err) {
+            setError('Unable to fetch Banners. Please try again later.');
+        }
+    };
+
     useEffect(() => {
-        const loadBanners = async () => {
-            try {
-                const data = await fetchBanners();
-                setBanners(data.data);
-            } catch (err) {
-                setError('Unable to fetch Banners. Please try again later.');
-            }
-        };
         loadBanners();
     }, []);
 

@@ -10,25 +10,27 @@ const AppMenu: React.FC = () => {
     const model: AppMenuItem[] = [
         {
             label: 'Home',
-            items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/admin' }],
+            items: [
+                { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/admin' },
+            ],
         },
         {
             label: 'Management',
             items: [
-                { 
-                    label: 'Users', 
-                    icon: 'pi pi-fw pi-users', 
-                    to: '/admin/users'  
+                {
+                    label: 'Users',
+                    icon: 'pi pi-fw pi-users',
+                    to: '/admin/users',
                 },
-                { 
-                    label: 'Stories', 
-                    icon: 'pi pi-fw pi-book', 
-                    to: '/admin/stories' 
+                {
+                    label: 'Stories',
+                    icon: 'pi pi-fw pi-book',
+                    to: '/admin/stories',
                 },
-                { 
-                    label: 'Chapters', 
-                    icon: 'pi pi-fw pi-bookmark', 
-                    to: '/admin/story/chapters'  
+                {
+                    label: 'Chapters',
+                    icon: 'pi pi-fw pi-bookmark',
+                    to: '/admin/story/chapters',
                 },
             ],
         },

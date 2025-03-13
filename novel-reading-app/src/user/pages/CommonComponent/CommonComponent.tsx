@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import CustomButton from '../../components/CustomButton/CustomButton';
+import CustomButton from '@userComponents/CustomButton/CustomButton';
 import styles from './CommonComponent.module.scss';
 
 const CommonComponent = () => {

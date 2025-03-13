@@ -16,7 +16,7 @@ const Banner: React.FC<BannerProps> = ({
     altText = 'Banner Image',
 }) => (
     <div className={clsx(styles.bannerWrapper)}>
-        <a href={linkUrl} className={clsx(styles.bannerLink)}>
+        <a href={linkUrl} className={clsx(styles.bannerLink)} target="_blank">
             <img
                 src={imageUrl}
                 alt={altText}

@@ -1,3 +1,8 @@
+.bookLink {
+    &:hover {
+        text-decoration: none !important;
+    }
+}
 .bookList {
     background-color: #1a1a1a;
     padding: 1rem;

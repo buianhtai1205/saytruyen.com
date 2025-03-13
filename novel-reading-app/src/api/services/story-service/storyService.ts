@@ -63,8 +63,10 @@ export const fetchStories = async (): Promise<
 };
 
 // Hàm gọi API để lấy thông tin một story theo ID
-export const fetchStoryById = async (id: string): Promise<StoryResponse> => {
-    const response = await apiClient.get<StoryResponse>(
+export const fetchStoryById = async (
+    id: string
+): Promise<ApiResponse<StoryResponse>> => {
+    const response = await apiClient.get<ApiResponse<StoryResponse>>(
         `${basePath}/story/${id}`
     );
     return response.data;

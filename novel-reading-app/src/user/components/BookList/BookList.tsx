@@ -31,31 +31,42 @@ const BookList: React.FC = () => {
             <div className={clsx(styles.books)}>
                 {stories &&
                     stories.data.map((story) => (
-                        <div key={story.id} className={clsx(styles.bookCard)}>
-                            <div className={clsx(styles.imageWrapper)}>
-                                <img
-                                    src={story.poster[1]}
-                                    alt={story.name}
-                                    className={clsx(styles.bookImage)}
-                                />
-                            </div>
-                            <div className={clsx(styles.bookInfo)}>
-                                <h3 className={clsx(styles.bookTitle)}>
-                                    {story.name}
-                                </h3>
-                                <p className={clsx(styles.bookDescription)}>
-                                    {story.description}
-                                </p>
-                                <div className={clsx(styles.bookMeta)}>
-                                    <span className={clsx(styles.author)}>
-                                        {story.authorId}
-                                    </span>
-                                    <span className={clsx(styles.genreButton)}>
-                                        {story.kind}
-                                    </span>
+                        <a
+                            href={`/truyen/${story.slug}-${story.id}`}
+                            className={clsx(styles.bookLink)}
+                            target="_blank"
+                        >
+                            <div
+                                key={story.id}
+                                className={clsx(styles.bookCard)}
+                            >
+                                <div className={clsx(styles.imageWrapper)}>
+                                    <img
+                                        src={story.poster[1]}
+                                        alt={story.name}
+                                        className={clsx(styles.bookImage)}
+                                    />
+                                </div>
+                                <div className={clsx(styles.bookInfo)}>
+                                    <h3 className={clsx(styles.bookTitle)}>
+                                        {story.name}
+                                    </h3>
+                                    <p className={clsx(styles.bookDescription)}>
+                                        {story.description}
+                                    </p>
+                                    <div className={clsx(styles.bookMeta)}>
+                                        <span className={clsx(styles.author)}>
+                                            {story.authorId}
+                                        </span>
+                                        <span
+                                            className={clsx(styles.genreButton)}
+                                        >
+                                            {story.kind}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
             </div>
         </div>

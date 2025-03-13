@@ -1,15 +1,20 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './StoryInfo.module.scss';
+import { StoryResponse } from '../../../api/services/story-service/storyService';
 
-const StoryInfo = () => {
+interface StoryInfoProps {
+    storyProps: StoryResponse;
+}
+
+const StoryInfo: React.FC<StoryInfoProps> = ({ storyProps }) => {
     return (
         <div className={clsx(styles.container)}>
             <main className={clsx(styles.main)}>
                 <div className={clsx(styles.grid)}>
                     <div className={clsx(styles.coverColumn)}>
                         <img
-                            src="https://static.cdnno.com/poster/dai-tan-co-thuy-hoang-tien-to-nghich-thien-vi-nhan-dao/300.jpg?1720424591"
+                            src={storyProps.poster[1]}
                             alt="Book cover"
                             width={300}
                             height={400}
@@ -18,8 +23,7 @@ const StoryInfo = () => {
                     </div>
                     <div className={clsx(styles.infoColumn)}>
                         <h1 className={clsx(styles.title)}>
-                            Từ Dạy Đồ Tần Thủy Hoàng Bắt Đầu, Ta Đại Tần Khai
-                            Quốc Thủy Tổ
+                            {storyProps.name}
                         </h1>
                         <p className={clsx(styles.author)}>Vô Lượng 888</p>
 
@@ -74,7 +78,9 @@ const StoryInfo = () => {
                                     <line x1="3" y1="18" x2="3.01" y2="18" />
                                 </svg>
                                 Mục Lục
-                                <span className={clsx(styles.badge)}>290</span>
+                                <span className={clsx(styles.badge)}>
+                                    {storyProps.chapterCount}
+                                </span>
                             </button>
                             <button className={clsx(styles.button)}>
                                 <svg
@@ -89,7 +95,9 @@ const StoryInfo = () => {
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                 </svg>
                                 Đánh Giá
-                                <span className={clsx(styles.badge)}>5</span>
+                                <span className={clsx(styles.badge)}>
+                                    {storyProps.reviewCore}
+                                </span>
                             </button>
                             <button className={clsx(styles.button)}>
                                 <svg
@@ -104,14 +112,16 @@ const StoryInfo = () => {
                                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                                 </svg>
                                 Thảo Luận
-                                <span className={clsx(styles.badge)}>8</span>
+                                <span className={clsx(styles.badge)}>
+                                    {storyProps.commentCount}
+                                </span>
                             </button>
                         </div>
 
                         <div className={clsx(styles.stats)}>
                             <div className={clsx(styles.statItem)}>
                                 <div className={clsx(styles.statValue)}>
-                                    111
+                                    {storyProps.chapterPerWeek}
                                 </div>
                                 <div className={clsx(styles.statLabel)}>
                                     Chương/tuần
@@ -119,14 +129,16 @@ const StoryInfo = () => {
                             </div>
                             <div className={clsx(styles.statItem)}>
                                 <div className={clsx(styles.statValue)}>
-                                    19426
+                                    {storyProps.viewCount}
                                 </div>
                                 <div className={clsx(styles.statLabel)}>
                                     Lượt đọc
                                 </div>
                             </div>
                             <div className={clsx(styles.statItem)}>
-                                <div className={clsx(styles.statValue)}>1</div>
+                                <div className={clsx(styles.statValue)}>
+                                    {storyProps.voteCount}
+                                </div>
                                 <div className={clsx(styles.statLabel)}>
                                     Đề cử
                                 </div>

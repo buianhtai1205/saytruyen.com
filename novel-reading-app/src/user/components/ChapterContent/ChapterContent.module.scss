@@ -1,0 +1,134 @@
+.chapterContentContainer {
+    margin: 0 auto;
+    padding: 0 2rem;
+    color: #e0e0e0;
+}
+
+.chapterHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.novelTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.author {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    .chapterInfo {
+        font-size: 1.1rem;
+        color: #d4b36e; // Golden color from the screenshot
+    }
+}
+
+.navButton {
+    background: transparent;
+    border: none;
+    color: #d4b36e;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    .navArrow {
+        font-size: 1.2rem;
+    }
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.toolbarButton {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    span {
+        font-size: 1.1rem;
+    }
+}
+
+.chapterBody {
+    margin: 0 auto;
+}
+
+.chapterHeading {
+    font-size: 1.5rem;
+    color: #d4b36e;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: normal;
+}
+
+.paragraph {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+    text-align: justify;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Icons
+.iconGear,
+.iconList,
+.iconBookmark {
+    display: inline-block;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .chapterContentContainer {
+        padding: 1rem;
+    }
+
+    .novelTitle {
+        font-size: 1.5rem;
+    }
+
+    .toolbar {
+        flex-wrap: wrap;
+    }
+
+    .paragraph {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}

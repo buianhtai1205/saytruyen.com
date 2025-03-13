@@ -1,5 +1,5 @@
 .topContainer {
-    max-width: 1024px;
+    max-width: 900px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -55,9 +55,13 @@
 
         .coverImage {
             width: 60px;
-            height: 90px;
-            object-fit: cover;
             margin-left: 0.5rem;
+
+            img {
+                width: 100%;
+                height: 90px;
+                object-fit: cover;
+            }
         }
 
         .bookInfo {
@@ -65,19 +69,16 @@
             flex-direction: column;
             justify-content: space-between;
             flex-grow: 1;
+            width: calc(100% - 60px - 25px - 0.75rem);
         }
 
         .bookTitle {
             font-size: 0.9rem;
             margin: auto 0;
-            line-height: 1.2;
-            max-height: 3.6em; // Increased to accommodate 3 lines
+            margin-right: 1rem;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3; // Changed to 3 lines
-            line-clamp: 3; // Changed to 3 lines
-            -webkit-box-orient: vertical;
         }
 
         .readers {
@@ -106,6 +107,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin-right: 2rem;
     }
 }
 

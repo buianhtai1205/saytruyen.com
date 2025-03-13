@@ -1,7 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import styles from './ListChapter.module.scss';
+import { format, formatDistanceToNow } from 'date-fns';
+import { vi } from 'date-fns/locale';
+import { ChapterResponse } from '@api/services/story-service/chapterService';
+import { PageableResponse } from '@api/common/pageableResponse';
 
 interface Chapter {
     id: number;
@@ -52,9 +57,49 @@ const allChapters: Chapter[] = Array.from({ length: 14 }, (_, i) => ({
     timestamp: i < 10 ? '2024-04-12 11:35:54' : '2024-04-12 20:25:12',
 }));
 
-export default function ListChapter() {
+interface ChapterInfoProps {
+    chapterListProps: PageableResponse<ChapterResponse>;
+}
+
+const ListChapter: React.FC<ChapterInfoProps> = ({ chapterListProps }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('DS Chương');
+    const [newChapters, setNewChapters] = useState<ChapterResponse[]>([]);
+
+    const { nameWithId } = useParams<{ nameWithId: string }>();
+
+    const formatTimeAgo = (date: string) => {
+        try {
+            const dateObj = new Date(date);
+            return formatDistanceToNow(dateObj, {
+                addSuffix: true,
+                locale: vi,
+            })
+                .replace('khoảng ', '')
+                .replace('trong ', '');
+        } catch (error) {
+            return date;
+        }
+    };
+
+    const formatTimeYmdHsm = (date: string) => {
+        try {
+            const dateObj = new Date(date);
+            return format(dateObj, 'yyyy-MM-dd HH:mm:ss');
+        } catch (error) {
+            return date;
+        }
+    };
+
+    useEffect(() => {
+        let newChapters: ChapterResponse[] = [];
+        if (chapterListProps.data && chapterListProps.data.length > 0) {
+            // Get last 3 elements using slice(-3)
+            newChapters = chapterListProps.data.slice(-3).reverse();
+        }
+        console.log(newChapters);
+        setNewChapters(newChapters);
+    }, [chapterListProps]);
 
     return (
         <div className={clsx(styles.container)}>
@@ -83,16 +128,19 @@ export default function ListChapter() {
                 </div>
 
                 <div className={clsx(styles.chapterList)}>
-                    {chapters.map((chapter) => (
+                    {newChapters.map((chapter) => (
                         <div
                             key={chapter.id}
                             className={clsx(styles.chapterItem)}
                         >
-                            <a href="/#" className={styles.chapterLink}>
-                                Chương {chapter.id}: {chapter.title}
+                            <a
+                                href={`/truyen/${nameWithId}/chuong/${chapter.id}`}
+                                className={styles.chapterLink}
+                            >
+                                {chapter.name}
                             </a>
                             <div className={styles.timestamp}>
-                                {chapter.timestamp}
+                                {formatTimeAgo(chapter.createdAt)}
                             </div>
                         </div>
                     ))}
@@ -164,24 +212,21 @@ export default function ListChapter() {
                         <div className={styles.modalBody}>
                             {activeTab === 'DS Chương' && (
                                 <div className={styles.chapterGrid}>
-                                    {allChapters.map((chapter) => (
+                                    {chapterListProps.data.map((chapter) => (
                                         <div
                                             key={chapter.id}
                                             className={styles.chapterItem}
                                         >
                                             <a
-                                                href="/#"
+                                                href={`/truyen/${nameWithId}/chuong/${chapter.id}`}
                                                 className={styles.chapterLink}
                                             >
-                                                Chương{' '}
-                                                {String(chapter.id).padStart(
-                                                    2,
-                                                    '0'
-                                                )}
-                                                : {chapter.title}
+                                                {chapter.name}
                                             </a>
                                             <div className={styles.timestamp}>
-                                                {chapter.timestamp}
+                                                {formatTimeYmdHsm(
+                                                    chapter.createdAt
+                                                )}
                                             </div>
                                         </div>
                                     ))}
@@ -203,4 +248,6 @@ export default function ListChapter() {
             )}
         </div>
     );
-}
+};
+
+export default ListChapter;

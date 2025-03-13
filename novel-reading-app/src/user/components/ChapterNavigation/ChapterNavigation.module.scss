@@ -1,0 +1,28 @@
+.navigationContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    color: #d4b36e;
+    border-radius: 5px;
+    margin: 20px 0;
+    border: 1px solid #3e3e3e;
+}
+
+.navButton {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 10px;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.separator {
+    color: #40403f;
+}

@@ -1,57 +1,127 @@
-import React from 'react';
-import Banner from '../../components/Banner/Banner';
-import StoryInfo from '../../components/StoryInfo/StoryInfo';
-import RelatedStory from '../../components/RelatedStory/RelatedStory';
-import ListChapter from '../../components/ListChapter/ListChapter';
-import RatingStory from '../../components/RatingStory/RatingStory';
-import StoryDescription from '../../components/StoryDescription/StoryDescription';
-
-const storyData = {
-    title: 'Bắt Đầu Kim Phong Tế Vũ Lâu Chủ, Một Đao Kinh Thiên Hạ',
-    author: 'Tháng Đầu Yên Dân',
-    stats: {
-        chaptersPerWeek: 20,
-        reads: 2330562,
-        recommendations: 5496,
-        saved: 2676,
-    },
-    latestChapter: [
-        {
-            title: 'Chương 1001: Các người có hay không nghĩ tới, mối ta là hoàng tước',
-            timeAgo: '27 phút trước',
-        },
-        {
-            title: 'Chương 1002: Các người có hay không nghĩ tới, mối ta là hoàng tước',
-            timeAgo: '27 phút trước',
-        },
-        {
-            title: 'Chương 1003: Các người có hay không nghĩ tới, mối ta là hoàng tước',
-            timeAgo: '27 phút trước',
-        },
-    ],
-};
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import _ from 'lodash';
+import Banner from '@userComponents/Banner/Banner';
+import StoryInfo from '@userComponents/StoryInfo/StoryInfo';
+import RelatedStory from '@userComponents/RelatedStory/RelatedStory';
+import ListChapter from '@userComponents/ListChapter/ListChapter';
+import RatingStory from '@userComponents/RatingStory/RatingStory';
+import StoryDescription from '@userComponents/StoryDescription/StoryDescription';
+import { PageableResponse } from '@api/common/pageableResponse';
+import {
+    fetchBanners,
+    BannerResponse,
+} from '@api/services/story-service/bannerService';
+import {
+    fetchStoryById,
+    StoryResponse,
+} from '@api/services/story-service/storyService';
+import { ApiResponse } from '@api/common/apiResponse';
+import {
+    ChapterResponse,
+    fetchChapters,
+} from '@api/services/story-service/chapterService';
+import { DEFAULT } from '@api/common/defaultConstants';
 
 const StoryDetail = () => {
+    const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();
+    const [error, setError] = useState<string | null>(null);
+    const [story, setStory] = useState<ApiResponse<StoryResponse>>();
+    const [chapters, setChapters] =
+        useState<PageableResponse<ChapterResponse>>();
+
+    const { nameWithId } = useParams<{ nameWithId: string }>();
+
+    const loadBanners = async () => {
+        try {
+            const data = await fetchBanners();
+            setBanners(data.data);
+        } catch (err) {
+            setError('Unable to fetch Banners. Please try again later.');
+        }
+    };
+
+    const loadStory = async () => {
+        const storyId = nameWithId ? nameWithId.split('-').pop() : '';
+
+        try {
+            const data = storyId ? await fetchStoryById(storyId) : null;
+            if (_.isEmpty(data?.data)) {
+                setError(
+                    data?.message ||
+                        'Unable to fetch story detail. Please try again later.'
+                );
+                return;
+            }
+            setStory(data);
+        } catch (err) {
+            setError('Unable to fetch story detail. Please try again later.');
+        }
+    };
+
+    const loadChapters = async () => {
+        const storyId = nameWithId ? nameWithId.split('-').pop() : '';
+        try {
+            const data = storyId
+                ? await fetchChapters(
+                      DEFAULT.PAGE_NUMBER_DEFAULT,
+                      DEFAULT.PAGE_SIZE_MAX,
+                      storyId
+                  )
+                : null;
+            if (_.isEmpty(data?.data)) {
+                setError(
+                    data?.message ||
+                        'Unable to fetch Chapter. Please try again later.'
+                );
+                return;
+            }
+            setChapters(data.data);
+        } catch (err) {
+            setError('Unable to fetch Chapters. Please try again later.');
+        }
+    };
+
+    useEffect(() => {
+        loadBanners();
+        loadStory();
+        loadChapters();
+    }, []);
+
+    if (error) return <div>{error}</div>;
+
     return (
         <>
             <Banner
-                imageUrl="https://static.cdnno.com/storage/topbox/1f84ac535622a55309d6da9fcc874397.webp"
-                linkUrl="/story-detail"
-                altText="Lam Ruong Duc Yeu"
+                imageUrl={banners?.data?.[7]?.bannerDesktop || ''}
+                linkUrl={
+                    banners?.data?.[7]?.url +
+                        '-' +
+                        banners?.data?.[7]?.bannerLinkedId || ''
+                }
+                altText={banners?.data?.[7]?.name || ''}
             />
-            <StoryInfo />
-            <ListChapter />
+            {story && <StoryInfo storyProps={story.data} />}
+            {chapters && <ListChapter chapterListProps={chapters} />}
             <Banner
-                imageUrl="https://static.cdnno.com/storage/topbox/28b185eb7cd5474d4cad2723edc3ff45.webp"
-                linkUrl="/story-detail"
-                altText="Lam Ruong Duc Yeu"
+                imageUrl={banners?.data?.[9]?.bannerDesktop || ''}
+                linkUrl={
+                    banners?.data?.[9]?.url +
+                        '-' +
+                        banners?.data?.[9]?.bannerLinkedId || ''
+                }
+                altText={banners?.data?.[9]?.name || ''}
             />
-            <StoryDescription />
+            {story && <StoryDescription storyProps={story.data} />}
             <RelatedStory />
             <Banner
-                imageUrl="https://static.cdnno.com/storage/topbox/24bb76ef34c9a2962727fae9f62ae4de.webp"
-                linkUrl="/story-detail"
-                altText="Lam Ruong Duc Yeu"
+                imageUrl={banners?.data?.[8]?.bannerDesktop || ''}
+                linkUrl={
+                    banners?.data?.[8]?.url +
+                        '-' +
+                        banners?.data?.[8]?.bannerLinkedId || ''
+                }
+                altText={banners?.data?.[8]?.name || ''}
             />
             <RatingStory />
         </>

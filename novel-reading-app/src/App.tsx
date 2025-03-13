@@ -7,6 +7,7 @@ import CommonComponent from './user/pages/CommonComponent/CommonComponent';
 import Dashboard from './admin/components/Dashboard/Dashboard';
 import Table from './admin/components/Table/Table';
 import Story from './admin/components/Story/Story';
+import ChapterDetail from 'user/pages/ChapterDetail/ChapterDetail.';
 
 function App() {
     return (
@@ -27,10 +28,18 @@ function App() {
                         }
                     />
                     <Route
-                        path="/story/:id"
+                        path="/truyen/:nameWithId"
                         element={
                             <UserMainLayout>
                                 <StoryDetail />
+                            </UserMainLayout>
+                        }
+                    />
+                    <Route
+                        path="/truyen/:nameWithId/chuong/:chapterId"
+                        element={
+                            <UserMainLayout>
+                                <ChapterDetail />
                             </UserMainLayout>
                         }
                     />

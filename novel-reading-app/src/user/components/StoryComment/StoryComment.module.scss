@@ -1,0 +1,90 @@
+.commentSection {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    color: #fff;
+    margin: 0 auto;
+    font-size: 1rem;
+}
+
+.commentInput {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #000;
+    color: #fff;
+    resize: none;
+}
+
+.submitButton {
+    background-color: #ffcc00;
+    color: #000;
+    padding: 12px 36px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    float: right;
+}
+
+.commentList {
+    margin-top: 64px;
+}
+
+.comment {
+    background-color: #2e2e2e;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.time {
+    color: #888;
+}
+
+.commentBody {
+    margin-bottom: 10px;
+}
+
+.commentFooter {
+    display: flex;
+    gap: 10px;
+}
+
+.likeButton,
+.replyButton {
+    background: none;
+    border: none;
+    color: #ffcc00;
+    cursor: pointer;
+}
+
+.showMoreButton {
+    background-color: transparent;
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
+    padding: 12px 100px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    font-weight: bold;
+
+    &:hover {
+        background-color: #ffcc00;
+        color: #000;
+    }
+}

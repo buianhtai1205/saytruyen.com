@@ -9,10 +9,7 @@ import {
     ColumnFilterClearTemplateOptions,
     ColumnFilterElementTemplateOptions,
 } from 'primereact/column';
-import {
-    DataTable,
-    DataTableFilterMeta,
-} from 'primereact/datatable';
+import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
@@ -23,7 +20,6 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 import { classNames } from 'primereact/utils';
 
 import type { Demo } from '../../layout/types';
-
 
 const Story: React.FC = () => {
     const [customers, setCustomers] = useState<Demo.Customer[]>([]);
@@ -205,8 +201,8 @@ const Story: React.FC = () => {
                     alt={representative.name}
                     src={`/demo/images/avatar/${representative.image}`}
                     onError={(e) =>
-                    ((e.target as HTMLImageElement).src =
-                        'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')
+                        ((e.target as HTMLImageElement).src =
+                            'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')
                     }
                     width={32}
                     style={{ verticalAlign: 'middle' }}
@@ -468,8 +464,7 @@ const Story: React.FC = () => {
                 </div>
             </div>
         </div>
-
     );
-}
+};
 
 export default Story;
