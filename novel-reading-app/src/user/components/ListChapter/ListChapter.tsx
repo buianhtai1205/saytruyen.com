@@ -4,64 +4,20 @@ import { useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import styles from './ListChapter.module.scss';
 import { format, formatDistanceToNow } from 'date-fns';
-import { vi } from 'date-fns/locale';
+import { is, vi } from 'date-fns/locale';
 import { ChapterResponse } from '@api/services/story-service/chapterService';
 import { PageableResponse } from '@api/common/pageableResponse';
+import { ApiResponse } from '@api/common/apiResponse';
 
-interface Chapter {
-    id: number;
-    title: string;
-    timestamp: string;
+interface ListChapterProps {
+    chapterListProps: PageableResponse<ChapterResponse> | ApiResponse<Array<ChapterResponse>> | undefined;
+    parentIsModalOpen?: boolean;
 }
 
-const chapters: Chapter[] = [
-    { id: 288, title: 'Gặp rủi ro?', timestamp: '11 phút trước' },
-    { id: 287, title: 'Công hãn hậu đỉnh!', timestamp: '11 phút trước' },
-    {
-        id: 286,
-        title: 'Hắn là Đế Quân địch tôn tử, đưa đến ngọc Diệp Dương lát cỏ hậu bảo!',
-        timestamp: 'một ngày trước',
-    },
-];
-
-const allChapters: Chapter[] = Array.from({ length: 14 }, (_, i) => ({
-    id: i + 1,
-    title:
-        i === 0
-            ? 'Kỳ quái cô nhi bởi đường hệ thống'
-            : i === 1
-              ? 'Kỳ quái từ đầu 【thể phách cường kiện】【khéo tay】'
-              : i === 2
-                ? 'Gánh nặng đường xa! Hệ thống thương thành!'
-                : i === 3
-                  ? 'Mỗi ngày kết toán! Thật sự là trời sinh thần lực?'
-                  : i === 4
-                    ? 'Lồng giam'
-                    : i === 5
-                      ? 'Trần Diệp: Bản tọa để người ba chiều! Ra tay đi!'
-                      : i === 6
-                        ? 'Trùng phùng'
-                        : i === 7
-                          ? 'Hoàn thành nhiệm vụ! Mới từ đầu! Mở ra phòng sách!'
-                          : i === 8
-                            ? 'Gió thổi báo giông báo sắp đến'
-                            : i === 9
-                              ? 'Mỗi ngày kết toán! Một ngày mới!'
-                              : i === 10
-                                ? 'Đại Minh, người về sau muốn làm cái này à?'
-                                : i === 11
-                                  ? 'Vội vàng hơn thắng'
-                                  : i === 12
-                                    ? 'Chỉ pháp tiêu thành! Ngọc la sát đa mắc cấu!'
-                                    : 'Đường Phong hạ lạc! Mai hoa chậm!',
-    timestamp: i < 10 ? '2024-04-12 11:35:54' : '2024-04-12 20:25:12',
-}));
-
-interface ChapterInfoProps {
-    chapterListProps: PageableResponse<ChapterResponse>;
-}
-
-const ListChapter: React.FC<ChapterInfoProps> = ({ chapterListProps }) => {
+const ListChapter: React.FC<ListChapterProps> = ({
+    chapterListProps,
+    parentIsModalOpen = false,
+}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('DS Chương');
     const [newChapters, setNewChapters] = useState<ChapterResponse[]>([]);
@@ -93,13 +49,15 @@ const ListChapter: React.FC<ChapterInfoProps> = ({ chapterListProps }) => {
 
     useEffect(() => {
         let newChapters: ChapterResponse[] = [];
-        if (chapterListProps.data && chapterListProps.data.length > 0) {
+        if (chapterListProps && chapterListProps.data && chapterListProps.data.length > 0) {
             // Get last 3 elements using slice(-3)
             newChapters = chapterListProps.data.slice(-3).reverse();
         }
-        console.log(newChapters);
+        console.log("effice");
+        console.log(isModalOpen);
         setNewChapters(newChapters);
-    }, [chapterListProps]);
+        setIsModalOpen(parentIsModalOpen);
+    }, []);
 
     return (
         <div className={clsx(styles.container)}>
@@ -212,7 +170,7 @@ const ListChapter: React.FC<ChapterInfoProps> = ({ chapterListProps }) => {
                         <div className={styles.modalBody}>
                             {activeTab === 'DS Chương' && (
                                 <div className={styles.chapterGrid}>
-                                    {chapterListProps.data.map((chapter) => (
+                                    {chapterListProps && chapterListProps.data.map((chapter) => (
                                         <div
                                             key={chapter.id}
                                             className={styles.chapterItem}

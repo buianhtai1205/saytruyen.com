@@ -15,16 +15,16 @@ const HomePage: React.FC = () => {
     const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();
     const [error, setError] = useState<string | null>(null);
 
-    const loadBanners = async () => {
-        try {
-            const data = await fetchBanners();
-            setBanners(data.data);
-        } catch (err) {
-            setError('Unable to fetch Banners. Please try again later.');
-        }
-    };
-
     useEffect(() => {
+        const loadBanners = async () => {
+            try {
+                const data = await fetchBanners();
+                setBanners(data.data);
+            } catch (err) {
+                setError('Unable to fetch Banners. Please try again later.');
+            }
+        };
+
         loadBanners();
     }, []);
 

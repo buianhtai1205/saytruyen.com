@@ -32,57 +32,57 @@ const StoryDetail = () => {
 
     const { nameWithId } = useParams<{ nameWithId: string }>();
 
-    const loadBanners = async () => {
-        try {
-            const data = await fetchBanners();
-            setBanners(data.data);
-        } catch (err) {
-            setError('Unable to fetch Banners. Please try again later.');
-        }
-    };
-
-    const loadStory = async () => {
-        const storyId = nameWithId ? nameWithId.split('-').pop() : '';
-
-        try {
-            const data = storyId ? await fetchStoryById(storyId) : null;
-            if (_.isEmpty(data?.data)) {
-                setError(
-                    data?.message ||
-                        'Unable to fetch story detail. Please try again later.'
-                );
-                return;
-            }
-            setStory(data);
-        } catch (err) {
-            setError('Unable to fetch story detail. Please try again later.');
-        }
-    };
-
-    const loadChapters = async () => {
-        const storyId = nameWithId ? nameWithId.split('-').pop() : '';
-        try {
-            const data = storyId
-                ? await fetchChapters(
-                      DEFAULT.PAGE_NUMBER_DEFAULT,
-                      DEFAULT.PAGE_SIZE_MAX,
-                      storyId
-                  )
-                : null;
-            if (_.isEmpty(data?.data)) {
-                setError(
-                    data?.message ||
-                        'Unable to fetch Chapter. Please try again later.'
-                );
-                return;
-            }
-            setChapters(data.data);
-        } catch (err) {
-            setError('Unable to fetch Chapters. Please try again later.');
-        }
-    };
-
     useEffect(() => {
+        const loadBanners = async () => {
+            try {
+                const data = await fetchBanners();
+                setBanners(data.data);
+            } catch (err) {
+                setError('Unable to fetch Banners. Please try again later.');
+            }
+        };
+    
+        const loadStory = async () => {
+            const storyId = nameWithId ? nameWithId.split('-').pop() : '';
+    
+            try {
+                const data = storyId ? await fetchStoryById(storyId) : null;
+                if (_.isEmpty(data?.data)) {
+                    setError(
+                        data?.message ||
+                            'Unable to fetch story detail. Please try again later.'
+                    );
+                    return;
+                }
+                setStory(data);
+            } catch (err) {
+                setError('Unable to fetch story detail. Please try again later.');
+            }
+        };
+    
+        const loadChapters = async () => {
+            const storyId = nameWithId ? nameWithId.split('-').pop() : '';
+            try {
+                const data = storyId
+                    ? await fetchChapters(
+                          DEFAULT.PAGE_NUMBER_DEFAULT,
+                          DEFAULT.PAGE_SIZE_MAX,
+                          storyId
+                      )
+                    : null;
+                if (_.isEmpty(data?.data)) {
+                    setError(
+                        data?.message ||
+                            'Unable to fetch Chapter. Please try again later.'
+                    );
+                    return;
+                }
+                setChapters(data.data);
+            } catch (err) {
+                setError('Unable to fetch Chapters. Please try again later.');
+            }
+        };
+
         loadBanners();
         loadStory();
         loadChapters();

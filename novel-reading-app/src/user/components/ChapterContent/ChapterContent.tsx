@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import styles from './ChapterContent.module.scss';
 import GoToTop from '@userComponents/GoToTop/GoToTop';
+import { StoryResponse } from '@api/services/story-service/storyService';
+import { ChapterResponse } from '@api/services/story-service/chapterService';
+import { ApiResponse } from '@api/common/apiResponse';
+import ListChapter from '@userComponents/ListChapter/ListChapter';
 
-const chapterContent = {
-    title: 'Câu Thà Thành Thành Nhân, Tiên Quan Triệu Ta Châm Ngưa',
-    author: 'Nham Nga Tiểu',
-    chapterNumber: 701,
-    chapterTitle: 'Thiên Đình truyện thuyết',
-    content: [],
-};
+interface ChapterContentProps {
+    storyInfo: StoryResponse,
+    chapterInfo: ChapterResponse,
+    chapterData: {
+        chapterList: ApiResponse<Array<ChapterResponse>> | undefined,
+        onFetchChapterList: () => void
+    }
+}
 
-const ChapterContent: React.FC = () => {
+const ChapterContent: React.FC<ChapterContentProps> = ({ storyInfo, chapterInfo, chapterData }) => {
+    const [isListVisible, setIsListVisible] = useState(false);
+
+    const handleToggleList = () => {
+        console.log("onclcik");
+        chapterData.onFetchChapterList();
+        setIsListVisible(!isListVisible);
+    };
+
     return (
         <div className={clsx(styles.chapterContentContainer)}>
             <header className={clsx(styles.chapterHeader)}>
                 <h1 className={clsx(styles.novelTitle)}>
-                    {chapterContent.title}
+                    {storyInfo.name}
                 </h1>
                 <div className={clsx(styles.author)}>
-                    {chapterContent.author}
+                    {storyInfo.authorId}
                 </div>
 
                 <div className={clsx(styles.navigation)}>
@@ -27,8 +40,7 @@ const ChapterContent: React.FC = () => {
                         <span className={clsx(styles.navArrow)}>&#9664;</span>
                     </button>
                     <div className={clsx(styles.chapterInfo)}>
-                        Chương {chapterContent.chapterNumber}:{' '}
-                        {chapterContent.chapterTitle}
+                        {chapterInfo.name}
                     </div>
                     <button className={clsx(styles.navButton)}>
                         <span className={clsx(styles.navArrow)}>&#9654;</span>
@@ -40,7 +52,7 @@ const ChapterContent: React.FC = () => {
                         <span className={clsx(styles.iconGear)}>&#9881;</span>{' '}
                         Cấu hình
                     </button>
-                    <button className={clsx(styles.toolbarButton)}>
+                    <button className={clsx(styles.toolbarButton)} onClick={handleToggleList}>
                         <span className={clsx(styles.iconList)}>&#9776;</span>{' '}
                         Mục lục
                     </button>
@@ -54,17 +66,11 @@ const ChapterContent: React.FC = () => {
             </header>
 
             <main className={clsx(styles.chapterBody)}>
-                <h2 className={clsx(styles.chapterHeading)}>
-                    Chương {chapterContent.chapterNumber}:{' '}
-                    {chapterContent.chapterTitle}
-                </h2>
-
-                {chapterContent.content.length > 0 ? (
-                    chapterContent.content.map((paragraph, index) => (
-                        <p key={index} className={clsx(styles.paragraph)}>
-                            {paragraph}
-                        </p>
-                    ))
+                {chapterInfo.content ? (
+                    <p
+                        className={clsx(styles.paragraph)}
+                        dangerouslySetInnerHTML={{ __html: chapterInfo.content }}
+                    />
                 ) : (
                     <>
                         <p className={clsx(styles.paragraph)}>
@@ -77,26 +83,41 @@ const ChapterContent: React.FC = () => {
                             đại thế giới thời gian tồn tại cũng không bằng Thiên
                             Đế sống được lâu."
                         </p>
-                        <p className={clsx(styles.paragraph)}>
-                            Vô Lượng Đại Hư Kiếm Tổ nhìn xem trên bàn ấm trà,
-                            ngữ khí chậm rãi nói, mà Cố An nghiêm túc nghe.
-                        </p>
-                        <p className={clsx(styles.paragraph)}>
-                            Xuyên việt tọa ủng mười tỉ tài sản, bắt đầu một cái
-                            gọi cảm quyến rũ thê tử, bảy cái phong hoa tuyệt đại
-                            nữ nhi. Nhưng mà Hứa Hạo lại hoảng sợ được một nhóm.
-                            Bởi vì thân phận của hắn là đại phản phái, kết cục
-                            là nghịch tử nhân vật chính trở về, giết hắn chiếm
-                            lấy thê nữ. Cũng may còn có thời gian hai năm rưỡi,
-                            Hứa Hạo có thể trước giờ bỏ cục. Mời đọc Trước Giờ
-                            Xuyên Thành Phản Phái, Bức Nhân Vật Chính Mụ Mụ Sinh
-                            Hài Tử
-                        </p>
+
                     </>
                 )}
+                <p className={clsx(styles.paragraph)}>
+                    ---
+                </p>
+                <p className={clsx(styles.paragraph)}>
+                    Vô Lượng Đại Hư Kiếm Tổ nhìn xem trên bàn ấm trà,
+                    ngữ khí chậm rãi nói, mà Cố An nghiêm túc nghe.
+                </p>
+                <p className={clsx(styles.paragraph)}>
+                    Xuyên việt tọa ủng mười tỉ tài sản, bắt đầu một cái
+                    gọi cảm quyến rũ thê tử, bảy cái phong hoa tuyệt đại
+                    nữ nhi. Nhưng mà Hứa Hạo lại hoảng sợ được một nhóm.
+                    Bởi vì thân phận của hắn là đại phản phái, kết cục
+                    là nghịch tử nhân vật chính trở về, giết hắn chiếm
+                    lấy thê nữ. Cũng may còn có thời gian hai năm rưỡi,
+                    Hứa Hạo có thể trước giờ bỏ cục.
+                </p>
+                <p className={clsx(styles.paragraph)}>
+                    Mời đọc
+                    <span className={clsx(styles.paragraph, styles.referStory)}>
+                        Trước Giờ Xuyên Thành Phản Phái,
+                        Bức Nhân Vật Chính Mụ Mụ Sinh Hài Tử
+                    </span>
+
+                </p>
             </main>
 
             <GoToTop />
+            {isListVisible 
+                && <ListChapter 
+                    chapterListProps={chapterData.chapterList} 
+                    parentIsModalOpen={true}
+                />}
         </div>
     );
 };

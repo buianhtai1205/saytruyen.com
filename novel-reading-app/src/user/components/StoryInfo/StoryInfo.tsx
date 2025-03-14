@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './StoryInfo.module.scss';
-import { StoryResponse } from '../../../api/services/story-service/storyService';
+import { StoryResponse } from '@api/services/story-service/storyService';
 
 interface StoryInfoProps {
     storyProps: StoryResponse;

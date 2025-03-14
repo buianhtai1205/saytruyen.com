@@ -53,6 +53,14 @@ export const fetchChapterById = async (
     return response.data;
 };
 
+// Hàm lấy mục lục
+export const fetchSimpleChapter = async (storyId: string): Promise<ApiResponse<Array<ChapterResponse>>> => {
+    const response = await apiClient.get<ApiResponse<Array<ChapterResponse>>>(
+        `${basePath}/chapter/list-chapter-simple/${storyId}`
+    );
+    return response.data;
+}
+
 // Hàm gọi API để tạo một chapter mới
 export const createChapter = async (
     chapter: Partial<ChapterRequest>

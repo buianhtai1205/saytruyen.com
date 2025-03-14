@@ -97,13 +97,17 @@
 .paragraph {
     font-size: 1.1rem;
     line-height: 1.8;
-    margin-bottom: 1.5rem;
     color: #e0e0e0;
     text-align: justify;
 
     &:last-child {
-        margin-bottom: 0;
+        margin-bottom: 16px;
     }
+}
+
+.referStory {
+    color: #feae00;
+    margin-left: 8px;
 }
 
 // Icons
