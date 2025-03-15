@@ -17,7 +17,7 @@ import {
 import {
     ChapterResponse,
     fetchChapterById,
-    fetchSimpleChapter
+    fetchSimpleChapter,
 } from '@api/services/story-service/chapterService';
 import { ApiResponse } from '@api/common/apiResponse';
 
@@ -25,12 +25,13 @@ const ChapterDetail: React.FC = () => {
     const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();
     const [story, setStory] = useState<StoryResponse>();
     const [chapter, setChapter] = useState<ChapterResponse>();
-    const [chapterList, setChapterList] = useState<ApiResponse<Array<ChapterResponse>>>();
+    const [chapterList, setChapterList] =
+        useState<ApiResponse<Array<ChapterResponse>>>();
     const [error, setError] = useState<string | null>(null);
 
-    const { nameWithId, chapterId } = useParams<{ 
-        nameWithId: string, 
-        chapterId: string 
+    const { nameWithId, chapterId } = useParams<{
+        nameWithId: string;
+        chapterId: string;
     }>();
 
     const fetchSimpleChapterListData = async () => {
@@ -46,9 +47,11 @@ const ChapterDetail: React.FC = () => {
             }
             setChapterList(data);
         } catch (err) {
-            setError('Unable to fetch List Chapter Simple. Please try again later.');
+            setError(
+                'Unable to fetch List Chapter Simple. Please try again later.'
+            );
         }
-    }
+    };
 
     useEffect(() => {
         const loadBanners = async () => {
@@ -59,10 +62,10 @@ const ChapterDetail: React.FC = () => {
                 setError('Unable to fetch Banners. Please try again later.');
             }
         };
-    
+
         const loadStory = async () => {
             const storyId = nameWithId ? nameWithId.split('-').pop() : '';
-    
+
             try {
                 const data = storyId ? await fetchStoryById(storyId) : null;
                 if (_.isEmpty(data?.data)) {
@@ -74,16 +77,16 @@ const ChapterDetail: React.FC = () => {
                 }
                 setStory(data.data);
             } catch (err) {
-                setError('Unable to fetch story detail. Please try again later.');
+                setError(
+                    'Unable to fetch story detail. Please try again later.'
+                );
             }
         };
-    
+
         const loadChapter = async () => {
             try {
                 const data = chapterId
-                    ? await fetchChapterById(
-                        chapterId
-                      )
+                    ? await fetchChapterById(chapterId)
                     : null;
                 if (_.isEmpty(data?.data)) {
                     setError(
@@ -111,27 +114,27 @@ const ChapterDetail: React.FC = () => {
                 imageUrl={banners?.data?.[0]?.bannerDesktop || ''}
                 linkUrl={
                     banners?.data?.[0]?.url +
-                    '-' +
-                    banners?.data?.[0]?.bannerLinkedId || ''
+                        '-' +
+                        banners?.data?.[0]?.bannerLinkedId || ''
                 }
                 altText={banners?.data?.[0]?.name || ''}
             />
-            {story 
-                && chapter 
-                && <ChapterContent 
-                    storyInfo={story} 
-                    chapterInfo={chapter} 
+            {story && chapter && (
+                <ChapterContent
+                    storyInfo={story}
+                    chapterInfo={chapter}
                     chapterData={{
                         chapterList: chapterList,
-                        onFetchChapterList: fetchSimpleChapterListData
+                        onFetchChapterList: fetchSimpleChapterListData,
                     }}
-                />}
+                />
+            )}
             <Banner
                 imageUrl={banners?.data?.[1]?.bannerDesktop || ''}
                 linkUrl={
                     banners?.data?.[1]?.url +
-                    '-' +
-                    banners?.data?.[1]?.bannerLinkedId || ''
+                        '-' +
+                        banners?.data?.[1]?.bannerLinkedId || ''
                 }
                 altText={banners?.data?.[1]?.name || ''}
             />

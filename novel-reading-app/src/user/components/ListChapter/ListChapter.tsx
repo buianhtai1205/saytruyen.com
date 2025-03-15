@@ -10,13 +10,18 @@ import { PageableResponse } from '@api/common/pageableResponse';
 import { ApiResponse } from '@api/common/apiResponse';
 
 interface ListChapterProps {
-    chapterListProps: PageableResponse<ChapterResponse> | ApiResponse<Array<ChapterResponse>> | undefined;
+    chapterListProps:
+        | PageableResponse<ChapterResponse>
+        | ApiResponse<Array<ChapterResponse>>
+        | undefined;
     parentIsModalOpen?: boolean;
+    onClose?: () => void;
 }
 
 const ListChapter: React.FC<ListChapterProps> = ({
     chapterListProps,
     parentIsModalOpen = false,
+    onClose,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('DS Chương');
@@ -49,15 +54,24 @@ const ListChapter: React.FC<ListChapterProps> = ({
 
     useEffect(() => {
         let newChapters: ChapterResponse[] = [];
-        if (chapterListProps && chapterListProps.data && chapterListProps.data.length > 0) {
+        if (
+            chapterListProps &&
+            chapterListProps.data &&
+            chapterListProps.data.length > 0
+        ) {
             // Get last 3 elements using slice(-3)
             newChapters = chapterListProps.data.slice(-3).reverse();
         }
-        console.log("effice");
+        console.log('effice');
         console.log(isModalOpen);
         setNewChapters(newChapters);
         setIsModalOpen(parentIsModalOpen);
-    }, []);
+    }, [chapterListProps, parentIsModalOpen]);
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        if (onClose) onClose();
+    };
 
     return (
         <div className={clsx(styles.container)}>
@@ -116,7 +130,7 @@ const ListChapter: React.FC<ListChapterProps> = ({
                                 Đường
                             </h2>
                             <button
-                                onClick={() => setIsModalOpen(false)}
+                                onClick={handleCloseModal}
                                 className={styles.closeButton}
                             >
                                 <svg
@@ -170,24 +184,29 @@ const ListChapter: React.FC<ListChapterProps> = ({
                         <div className={styles.modalBody}>
                             {activeTab === 'DS Chương' && (
                                 <div className={styles.chapterGrid}>
-                                    {chapterListProps && chapterListProps.data.map((chapter) => (
-                                        <div
-                                            key={chapter.id}
-                                            className={styles.chapterItem}
-                                        >
-                                            <a
-                                                href={`/truyen/${nameWithId}/chuong/${chapter.id}`}
-                                                className={styles.chapterLink}
+                                    {chapterListProps &&
+                                        chapterListProps.data.map((chapter) => (
+                                            <div
+                                                key={chapter.id}
+                                                className={styles.chapterItem}
                                             >
-                                                {chapter.name}
-                                            </a>
-                                            <div className={styles.timestamp}>
-                                                {formatTimeYmdHsm(
-                                                    chapter.createdAt
-                                                )}
+                                                <a
+                                                    href={`/truyen/${nameWithId}/chuong/${chapter.id}`}
+                                                    className={
+                                                        styles.chapterLink
+                                                    }
+                                                >
+                                                    {chapter.name}
+                                                </a>
+                                                <div
+                                                    className={styles.timestamp}
+                                                >
+                                                    {formatTimeYmdHsm(
+                                                        chapter.createdAt
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
                                 </div>
                             )}
                             {activeTab === 'Đang Đọc' && (

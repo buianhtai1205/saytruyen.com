@@ -41,10 +41,10 @@ const StoryDetail = () => {
                 setError('Unable to fetch Banners. Please try again later.');
             }
         };
-    
+
         const loadStory = async () => {
             const storyId = nameWithId ? nameWithId.split('-').pop() : '';
-    
+
             try {
                 const data = storyId ? await fetchStoryById(storyId) : null;
                 if (_.isEmpty(data?.data)) {
@@ -56,10 +56,12 @@ const StoryDetail = () => {
                 }
                 setStory(data);
             } catch (err) {
-                setError('Unable to fetch story detail. Please try again later.');
+                setError(
+                    'Unable to fetch story detail. Please try again later.'
+                );
             }
         };
-    
+
         const loadChapters = async () => {
             const storyId = nameWithId ? nameWithId.split('-').pop() : '';
             try {
