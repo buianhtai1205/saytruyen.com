@@ -9,7 +9,7 @@ import RatingStory from '@userComponents/RatingStory/RatingStory';
 import StoryDescription from '@userComponents/StoryDescription/StoryDescription';
 import { PageableResponse } from '@api/common/pageableResponse';
 import {
-    fetchBanners,
+    fetchRandomBanners,
     BannerResponse,
 } from '@api/services/story-service/bannerService';
 import {
@@ -24,7 +24,7 @@ import {
 import { DEFAULT } from '@api/common/defaultConstants';
 
 const StoryDetail = () => {
-    const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();
+    const [banners, setBanners] = useState<Array<BannerResponse>>();
     const [error, setError] = useState<string | null>(null);
     const [story, setStory] = useState<ApiResponse<StoryResponse>>();
     const [chapters, setChapters] =
@@ -35,7 +35,7 @@ const StoryDetail = () => {
     useEffect(() => {
         const loadBanners = async () => {
             try {
-                const data = await fetchBanners();
+                const data = await fetchRandomBanners();
                 setBanners(data.data);
             } catch (err) {
                 setError('Unable to fetch Banners. Please try again later.');
@@ -95,35 +95,29 @@ const StoryDetail = () => {
     return (
         <>
             <Banner
-                imageUrl={banners?.data?.[7]?.bannerDesktop || ''}
+                imageUrl={banners?.[7]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[7]?.url +
-                        '-' +
-                        banners?.data?.[7]?.bannerLinkedId || ''
+                    banners?.[7]?.url + '-' + banners?.[7]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[7]?.name || ''}
+                altText={banners?.[7]?.name || ''}
             />
             {story && <StoryInfo storyProps={story.data} />}
             {chapters && <ListChapter chapterListProps={chapters} />}
             <Banner
-                imageUrl={banners?.data?.[9]?.bannerDesktop || ''}
+                imageUrl={banners?.[9]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[9]?.url +
-                        '-' +
-                        banners?.data?.[9]?.bannerLinkedId || ''
+                    banners?.[9]?.url + '-' + banners?.[9]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[9]?.name || ''}
+                altText={banners?.[9]?.name || ''}
             />
             {story && <StoryDescription storyProps={story.data} />}
             <RelatedStory />
             <Banner
-                imageUrl={banners?.data?.[8]?.bannerDesktop || ''}
+                imageUrl={banners?.[8]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[8]?.url +
-                        '-' +
-                        banners?.data?.[8]?.bannerLinkedId || ''
+                    banners?.[8]?.url + '-' + banners?.[8]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[8]?.name || ''}
+                altText={banners?.[8]?.name || ''}
             />
             <RatingStory />
         </>

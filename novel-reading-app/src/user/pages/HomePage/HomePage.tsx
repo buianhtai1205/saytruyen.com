@@ -5,20 +5,19 @@ import Top from '@userComponents/Top/Top';
 import NewChapters from '@userComponents/NewChapters/NewChapters';
 import NewCompletedStory from '@userComponents/NewCompletedStory/NewCompletedStory';
 import Evaluation from '@userComponents/Evaluation/Evaluation';
-import { PageableResponse } from '@api/common/pageableResponse';
 import {
-    fetchBanners,
+    fetchRandomBanners,
     BannerResponse,
 } from '@api/services/story-service/bannerService';
 
 const HomePage: React.FC = () => {
-    const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();
+    const [banners, setBanners] = useState<Array<BannerResponse>>();
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const loadBanners = async () => {
             try {
-                const data = await fetchBanners();
+                const data = await fetchRandomBanners();
                 setBanners(data.data);
             } catch (err) {
                 setError('Unable to fetch Banners. Please try again later.');
@@ -33,34 +32,28 @@ const HomePage: React.FC = () => {
     return (
         <>
             <Banner
-                imageUrl={banners?.data?.[0]?.bannerDesktop || ''}
+                imageUrl={banners?.[0]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[0]?.url +
-                        '-' +
-                        banners?.data?.[0]?.bannerLinkedId || ''
+                    banners?.[0]?.url + '-' + banners?.[0]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[0]?.name || ''}
+                altText={banners?.[0]?.name || ''}
             />
             <BookList />
             <Banner
-                imageUrl={banners?.data?.[1]?.bannerDesktop || ''}
+                imageUrl={banners?.[1]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[1]?.url +
-                        '-' +
-                        banners?.data?.[1]?.bannerLinkedId || ''
+                    banners?.[1]?.url + '-' + banners?.[1]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[1]?.name || ''}
+                altText={banners?.[1]?.name || ''}
             />
             <Top />
             <NewChapters />
             <Banner
-                imageUrl={banners?.data?.[2]?.bannerDesktop || ''}
+                imageUrl={banners?.[2]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[2]?.url +
-                        '-' +
-                        banners?.data?.[2]?.bannerLinkedId || ''
+                    banners?.[2]?.url + '-' + banners?.[2]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[2]?.name || ''}
+                altText={banners?.[2]?.name || ''}
             />
             <NewCompletedStory />
             <Evaluation />

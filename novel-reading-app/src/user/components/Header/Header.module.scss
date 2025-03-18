@@ -1,17 +1,27 @@
 .header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 0.75rem 0.25rem;
+    padding: 0 0.25rem;
+
+    .topBar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.25rem 0;
+    }
 
     .searchIcon {
         width: 24px;
         height: auto;
+        cursor: pointer;
+        margin-top: 8px;
     }
 
     .menuIcon {
         width: 32px;
         height: auto;
+        cursor: pointer;
     }
 }
 
@@ -21,7 +31,34 @@
     cursor: pointer;
 }
 
-.searchIcon,
-.menuIcon {
+.searchBar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #b78a28;
+    margin-bottom: 8px;
+}
+
+.searchButton {
+    background: none;
+    right: 0.5rem; // Position the icon inside the input
+    top: 45%;
+    transform: translateY(-50%);
+    border: none;
     cursor: pointer;
+    position: absolute;
+
+    .searchIconSub {
+        width: 16px;
+        height: auto;
+    }
 }

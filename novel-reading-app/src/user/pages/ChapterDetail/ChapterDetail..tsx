@@ -1,13 +1,12 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import _ from 'lodash';
 import Banner from '@userComponents/Banner/Banner';
 import ChapterContent from '@userComponents/ChapterContent/ChapterContent';
 import ChapterNavigation from '@userComponents/ChapterNavigation/ChapterNavigation';
 import StoryComment from '@userComponents/StoryComment/StoryComment';
-import { PageableResponse } from '@api/common/pageableResponse';
 import {
-    fetchBanners,
+    fetchRandomBanners,
     BannerResponse,
 } from '@api/services/story-service/bannerService';
 import {
@@ -22,7 +21,7 @@ import {
 import { ApiResponse } from '@api/common/apiResponse';
 
 const ChapterDetail: React.FC = () => {
-    const [banners, setBanners] = useState<PageableResponse<BannerResponse>>();
+    const [banners, setBanners] = useState<Array<BannerResponse>>();
     const [story, setStory] = useState<StoryResponse>();
     const [chapter, setChapter] = useState<ChapterResponse>();
     const [chapterList, setChapterList] =
@@ -56,7 +55,7 @@ const ChapterDetail: React.FC = () => {
     useEffect(() => {
         const loadBanners = async () => {
             try {
-                const data = await fetchBanners();
+                const data = await fetchRandomBanners();
                 setBanners(data.data);
             } catch (err) {
                 setError('Unable to fetch Banners. Please try again later.');
@@ -111,13 +110,11 @@ const ChapterDetail: React.FC = () => {
     return (
         <>
             <Banner
-                imageUrl={banners?.data?.[0]?.bannerDesktop || ''}
+                imageUrl={banners?.[0]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[0]?.url +
-                        '-' +
-                        banners?.data?.[0]?.bannerLinkedId || ''
+                    banners?.[0]?.url + '-' + banners?.[0]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[0]?.name || ''}
+                altText={banners?.[0]?.name || ''}
             />
             {story && chapter && (
                 <ChapterContent
@@ -130,13 +127,11 @@ const ChapterDetail: React.FC = () => {
                 />
             )}
             <Banner
-                imageUrl={banners?.data?.[1]?.bannerDesktop || ''}
+                imageUrl={banners?.[1]?.bannerDesktop || ''}
                 linkUrl={
-                    banners?.data?.[1]?.url +
-                        '-' +
-                        banners?.data?.[1]?.bannerLinkedId || ''
+                    banners?.[1]?.url + '-' + banners?.[1]?.bannerLinkedId || ''
                 }
-                altText={banners?.data?.[1]?.name || ''}
+                altText={banners?.[1]?.name || ''}
             />
             <ChapterNavigation />
             <StoryComment />

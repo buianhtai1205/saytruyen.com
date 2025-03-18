@@ -62,6 +62,15 @@ export const fetchStories = async (): Promise<
     return response.data;
 };
 
+export const fetchRandomStories = async (): Promise<
+    ApiResponse<Array<StoryResponse>>
+> => {
+    const respone = await apiClient.get<ApiResponse<Array<StoryResponse>>>(
+        `${basePath}/story/get-random-story`
+    );
+    return respone.data;
+};
+
 // Hàm gọi API để lấy thông tin một story theo ID
 export const fetchStoryById = async (
     id: string

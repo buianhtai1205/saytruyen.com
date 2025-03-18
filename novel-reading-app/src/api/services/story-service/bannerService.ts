@@ -39,3 +39,13 @@ export const fetchBanners = async (): Promise<
     >(`${basePath}/banner`);
     return response.data;
 };
+
+// hàm gọi API lấy random 10 banners
+export const fetchRandomBanners = async (): Promise<
+    ApiResponse<Array<BannerResponse>>
+> => {
+    const response = await apiClient.get<ApiResponse<Array<BannerResponse>>>(
+        `${basePath}/banner/get-random-banner`
+    );
+    return response.data;
+};

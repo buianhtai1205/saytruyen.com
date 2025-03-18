@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import styles from './BookList.module.scss';
-import { PageableResponse } from '../../../api/common/pageableResponse';
 import {
-    fetchStories,
+    fetchRandomStories,
     StoryResponse,
 } from '../../../api/services/story-service/storyService';
 
 const BookList: React.FC = () => {
-    const [stories, setStories] = useState<PageableResponse<StoryResponse>>();
+    const [stories, setStories] = useState<Array<StoryResponse>>();
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const loadStories = async () => {
             try {
-                const data = await fetchStories();
+                const data = await fetchRandomStories();
                 setStories(data.data);
             } catch (err) {
                 setError('Unable to fetch stories. Please try again later.');
@@ -27,10 +26,10 @@ const BookList: React.FC = () => {
 
     return (
         <div className={clsx(styles.bookList)}>
-            <h2 className={clsx(styles.title)}>BTV DE CU</h2>
+            <h2 className={clsx(styles.title)}>BTV ĐỀ CỬ</h2>
             <div className={clsx(styles.books)}>
                 {stories &&
-                    stories.data.map((story) => (
+                    stories.map((story) => (
                         <a
                             href={`/truyen/${story.slug}-${story.id}`}
                             className={clsx(styles.bookLink)}
