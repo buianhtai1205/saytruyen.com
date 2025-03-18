@@ -7,24 +7,24 @@ def run_maven_commands(version):
 
     try:
         # Maven command to build the project
-        subprocess.run(["mvn", "clean", "install"], check=True)
+        subprocess.run(["mvn", "clean", "install"], check=True, shell=True)
         print("Maven build completed successfully.")
 
         # GPG command to sign the JAR and POM files
-        subprocess.run(["gpg", "-ab", f"./target/{jar_name}.jar"], check=True)
+        subprocess.run(["gpg", "-ab", f"./target/{jar_name}.jar"], check=True, shell=True)
         print(f"Signed {jar_name}.jar successfully.")
 
-        subprocess.run(["gpg", "-ab", f"./target/{jar_name}.pom"], check=True)
+        subprocess.run(["gpg", "-ab", f"./target/{jar_name}.pom"], check=True, shell=True)
         print(f"Signed {jar_name}.pom successfully.")
 
-        subprocess.run(["gpg", "-ab", f"./target/{jar_name}-javadoc.jar"], check=True)
+        subprocess.run(["gpg", "-ab", f"./target/{jar_name}-javadoc.jar"], check=True, shell=True)
         print(f"Signed {jar_name}-javadoc.jar successfully.")
 
-        subprocess.run(["gpg", "-ab", f"./target/{jar_name}-sources.jar"], check=True)
+        subprocess.run(["gpg", "-ab", f"./target/{jar_name}-sources.jar"], check=True, shell=True)
         print(f"Signed {jar_name}-sources.jar successfully.")
 
         # Maven command to deploy
-        subprocess.run(["mvn", "deploy"], check=True)
+        subprocess.run(["mvn", "deploy"], check=True, shell=True)
         print("Maven deploy completed successfully.")
 
     except Exception as e:
