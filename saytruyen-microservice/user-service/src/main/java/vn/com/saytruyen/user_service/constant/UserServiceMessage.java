@@ -14,4 +14,9 @@ public class UserServiceMessage {
      * The constant UT_E000002.
      */
     public static final String UT_E000002 = "UT_E000002";
+
+    /**
+     * The constant UT_E000003.
+     */
+    public static final String UT_E000003 = "UT_E000003";
 }

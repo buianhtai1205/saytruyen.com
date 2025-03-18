@@ -20,6 +20,7 @@ import vn.com.saytruyen.story_service.response.StoryResponse;
 import vn.com.saytruyen.story_service.service.StoryService;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -108,6 +109,14 @@ public class StoryServiceImpl implements StoryService {
         List<Story> lstDeleteStory = storyRepository.findByNowCreatedAt(LocalDate.now().atStartOfDay());
         storyRepository.deleteAll(lstDeleteStory);
         return lstDeleteStory.size();
+    }
+
+    @Override
+    public List<StoryResponse> getRandomStory() {
+        List<Story> lstStory = storyRepository.findAll();
+        Collections.shuffle(lstStory);
+        List<Story> randomStories = lstStory.stream().limit(10).toList();
+        return StoryConverter.INSTANCE.lstStoryToLstStoryResponse(randomStories);
     }
 
     /**

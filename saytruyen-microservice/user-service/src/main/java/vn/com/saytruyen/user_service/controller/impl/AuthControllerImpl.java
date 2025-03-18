@@ -39,7 +39,8 @@ public class AuthControllerImpl implements AuthController {
 
     @Override
     public ApiResponse<Boolean> logout(String token) {
-        return null;
+        authService.logout(token);
+        return new ApiResponse<>(Boolean.TRUE);
     }
 
     @Override

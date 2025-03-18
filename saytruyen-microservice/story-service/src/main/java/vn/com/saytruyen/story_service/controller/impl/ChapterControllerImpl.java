@@ -9,6 +9,8 @@ import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
 import vn.com.saytruyen.story_service.service.ChapterService;
 
+import java.util.List;
+
 /**
  * The type Chapter controller.
  */
@@ -44,5 +46,10 @@ public class ChapterControllerImpl implements ChapterController {
     @Override
     public ApiResponse<PageableResponse> getAllChapter(Integer pageNumber, Integer pageSize, String storyId) {
         return new ApiResponse<>(chapterService.getAllChapter(pageNumber, pageSize, storyId));
+    }
+
+    @Override
+    public ApiResponse<List<ChapterResponse>> getListChapterSimpleByStoryId(String storyId) {
+        return new ApiResponse<>(chapterService.getListChapterSimpleByStoryId(storyId));
     }
 }

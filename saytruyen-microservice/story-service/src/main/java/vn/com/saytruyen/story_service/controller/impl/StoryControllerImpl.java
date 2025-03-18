@@ -58,4 +58,9 @@ public class StoryControllerImpl implements StoryController {
     public ApiResponse<Integer> deleteStoryCrawl() {
         return new ApiResponse<>(storyService.deleteStoryCrawl());
     }
+
+    @Override
+    public ApiResponse<List<StoryResponse>> getRandomStory() {
+        return new ApiResponse<>(storyService.getRandomStory());
+    }
 }

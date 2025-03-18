@@ -4,6 +4,8 @@ import io.github.buianhtai1205.saytruyen_common_service.response.PageableRespons
 import vn.com.saytruyen.story_service.request.BannerRequest;
 import vn.com.saytruyen.story_service.response.BannerResponse;
 
+import java.util.List;
+
 /**
  * The interface Banner service.
  */
@@ -53,4 +55,11 @@ public interface BannerService {
      * @param id the id
      */
     void hardDeleteBanner(String id);
+
+    /**
+     * Gets random banner.
+     *
+     * @return the random banner
+     */
+    List<BannerResponse> getRandomBanner();
 }

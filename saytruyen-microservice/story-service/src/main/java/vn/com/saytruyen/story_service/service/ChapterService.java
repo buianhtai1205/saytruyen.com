@@ -4,6 +4,8 @@ import io.github.buianhtai1205.saytruyen_common_service.response.PageableRespons
 import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
 
+import java.util.List;
+
 /**
  * The interface Chapter service.
  */
@@ -55,4 +57,12 @@ public interface ChapterService {
      * @param chapterId the chapter id
      */
     void hardDeleteChapter(String chapterId);
+
+    /**
+     * Gets list chapter simple by story id.
+     *
+     * @param storyId the story id
+     * @return the list chapter simple by story id
+     */
+    List<ChapterResponse> getListChapterSimpleByStoryId(String storyId);
 }

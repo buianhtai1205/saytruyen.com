@@ -25,4 +25,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "LEFT JOIN FETCH ur.role r " +
             "WHERE u.username = :username ")
     Optional<User> findUserAndRoleToLogin(String username);
+
+    /**
+     * Find by username user.
+     *
+     * @param username the username
+     * @return the user
+     */
+    User findByUsername(String username);
 }

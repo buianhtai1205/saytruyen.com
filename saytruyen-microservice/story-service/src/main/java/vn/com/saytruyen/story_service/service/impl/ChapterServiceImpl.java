@@ -23,6 +23,7 @@ import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
 import vn.com.saytruyen.story_service.service.ChapterService;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -100,6 +101,12 @@ public class ChapterServiceImpl implements ChapterService {
     public void hardDeleteChapter(String chapterId) {
         Chapter existChapter = getExistingChapter(chapterId);
         chapterRepository.delete(existChapter);
+    }
+
+    @Override
+    public List<ChapterResponse> getListChapterSimpleByStoryId(String storyId) {
+        List<Chapter> lstChapter = chapterRepository.getListChapterSimpleByStoryId(storyId);
+        return ChapterConverter.INSTANCE.lstChapterToListChapterResponse(lstChapter);
     }
 
     /**

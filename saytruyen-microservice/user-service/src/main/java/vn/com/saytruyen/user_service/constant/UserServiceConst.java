@@ -29,4 +29,9 @@ public class UserServiceConst {
      * The constant LEVEL.
      */
     public static final String LEVEL = "Level";
+
+    /**
+     * The constant BLACKLISTED.
+     */
+    public static final String BLACKLISTED = "blacklisted";
 }

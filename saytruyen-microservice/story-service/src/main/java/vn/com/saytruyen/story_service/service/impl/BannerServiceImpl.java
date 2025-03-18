@@ -18,8 +18,11 @@ import vn.com.saytruyen.story_service.request.BannerRequest;
 import vn.com.saytruyen.story_service.response.BannerResponse;
 import vn.com.saytruyen.story_service.service.BannerService;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * The type Banner service.
@@ -91,6 +94,14 @@ public class BannerServiceImpl implements BannerService {
     public void hardDeleteBanner(String id) {
         Banner banner = getExistingBanner(id);
         bannerRepository.delete(banner);
+    }
+
+    @Override
+    public List<BannerResponse> getRandomBanner() {
+        List<Banner> lstBanner = bannerRepository.findAll();
+        Collections.shuffle(lstBanner);
+        List<Banner> randomBanners = lstBanner.stream().limit(10).collect(Collectors.toList());
+        return BannerConverter.INSTANCE.lstBannerToLstBannerResponse(randomBanners);
     }
 
     /**

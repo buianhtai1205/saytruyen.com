@@ -23,4 +23,27 @@ public interface AuthService {
      * @param request the request
      */
     void signUp(UserSignUpRequest request);
+
+    /**
+     * Logout.
+     *
+     * @param token the token
+     */
+    void logout(String token);
+
+    /**
+     * Add token to black list.
+     *
+     * @param token        the token
+     * @param timeToExpire the time to expire
+     */
+    void addTokenToBlackList(String token, long timeToExpire);
+
+    /**
+     * Is token in black list boolean.
+     *
+     * @param token the token
+     * @return the boolean
+     */
+    boolean isTokenInBlackList(String token);
 }

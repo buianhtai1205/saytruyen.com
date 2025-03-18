@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import vn.com.saytruyen.story_service.request.BannerRequest;
 import vn.com.saytruyen.story_service.response.BannerResponse;
 
+import java.util.List;
+
 /**
  * The interface Banner controller.
  */
@@ -79,4 +81,13 @@ public interface BannerController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     ApiResponse<BannerResponse> getBanner(@PathVariable String id);
+
+    /**
+     * Gets random banner.
+     *
+     * @return the random banner
+     */
+    @GetMapping("/get-random-banner")
+    @ResponseStatus(HttpStatus.OK)
+    ApiResponse<List<BannerResponse>> getRandomBanner();
 }

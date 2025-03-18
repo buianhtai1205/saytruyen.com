@@ -71,4 +71,11 @@ public interface StoryService {
      * @return the integer
      */
     Integer deleteStoryCrawl();
+
+    /**
+     * Gets random story.
+     *
+     * @return the random story
+     */
+    List<StoryResponse> getRandomStory();
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import vn.com.saytruyen.story_service.request.ChapterRequest;
 import vn.com.saytruyen.story_service.response.ChapterResponse;
 
+import java.util.List;
+
 /**
  * The interface Chapter controller.
  */
@@ -77,4 +79,14 @@ public interface ChapterController {
     ApiResponse<PageableResponse> getAllChapter(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                 @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                 @RequestParam(value = "storyId", required = false) String storyId);
+
+    /**
+     * Gets list chapter simple by story id.
+     *
+     * @param storyId the story id
+     * @return the list chapter simple by story id
+     */
+    @GetMapping("/list-chapter-simple/{storyId}")
+    @ResponseStatus(HttpStatus.OK)
+    ApiResponse<List<ChapterResponse>> getListChapterSimpleByStoryId(@PathVariable("storyId") String storyId);
 }

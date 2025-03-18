@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 import reactor.core.Exceptions;
+import vn.com.saytruyen.user_service.service.AuthService;
 
 
 /**
@@ -20,6 +21,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsCustomService userDetailsCustomService;
+
+    @Autowired
+    private AuthService authService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -33,6 +37,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 token = authHeader.substring(7);
                 username = JwtUtil.extractUsername(token);
+
+                // check token in blacklist
+                if (authService.isTokenInBlackList(token)) {
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("Token is blacklisted!");
+                    return;
+                }
             }
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

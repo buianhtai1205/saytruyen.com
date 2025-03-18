@@ -96,4 +96,13 @@ public interface StoryController {
     @DeleteMapping("/crawl/delete")
     @ResponseStatus(HttpStatus.OK)
     ApiResponse<Integer> deleteStoryCrawl();
+
+    /**
+     * Gets random story.
+     *
+     * @return the random story
+     */
+    @GetMapping("/get-random-story")
+    @ResponseStatus(HttpStatus.OK)
+    ApiResponse<List<StoryResponse>> getRandomStory();
 }
