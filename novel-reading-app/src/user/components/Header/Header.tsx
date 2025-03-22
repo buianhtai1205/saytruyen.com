@@ -3,11 +3,15 @@ import clsx from 'clsx';
 import styles from './Header.module.scss';
 import logo from '../../assets/images/logo150.png';
 import { images } from '../../assets/svg';
-import loginIcon from '../../assets/images/loginIcon.svg'; // Adjust the path as necessary
+import LoginModal from '../LoginModal/LoginModal';
+import { DEFAULT } from '@api/common/defaultConstants';
 
 const Header = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [isThemeLight, setIsThemeLight] = useState(false);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
     const toggleSearch = () => {
         setIsSearchVisible(!isSearchVisible);
@@ -18,7 +22,17 @@ const Header = () => {
     };
 
     const toggleTheme = () => {
-        // Theme toggle logic here
+        setIsThemeLight(!isThemeLight);
+    };
+
+    const openLoginModal = () => {
+        setIsLoginModalOpen(true);
+        setIsMenuVisible(false);
+    };
+
+    const openRegisterModal = () => {
+        setIsRegisterModalOpen(true);
+        setIsMenuVisible(false);
     };
 
     return (
@@ -61,43 +75,45 @@ const Header = () => {
             {isMenuVisible && (
                 <div className={clsx(styles.menuOverlay)}>
                     <div className={clsx(styles.menuBar)}>
-                        <div>
+                        <div className={clsx(styles.menuHeader)}>
                             <div
-                                className={styles.toggleButton}
+                                className={clsx(styles.toggleButton)}
                                 onClick={toggleTheme}
                             >
-                                <span>🌙</span>
+                                {isThemeLight
+                                    ? <span>🔆</span>
+                                    : <span>🌙</span>}
+
                             </div>
                             <div
-                                className={styles.closeButton}
+                                className={clsx(styles.closeButton)}
                                 onClick={toggleMenu}
                             >
-                                <span>X</span>
+                                <span>✕</span>
                             </div>
                         </div>
                         <ul>
-                            <li className={styles.menuItem}>
-                                <span className={styles.icon}>🗝️</span> Đăng
-                                nhập
+                            <li className={clsx(styles.menuItem)} onClick={openLoginModal}>
+                                <span className={clsx(styles.icon)}>🗝️</span> Đăng nhập
                             </li>
-                            <li className={styles.menuItem}>
-                                <span className={styles.icon}>📝</span> Đăng ký
+                            <li className={clsx(styles.menuItem)} onClick={openRegisterModal}>
+                                <span className={clsx(styles.icon)}>📝</span> Đăng ký
                                 tài khoản
                             </li>
-                            <li className={styles.menuItem}>
-                                <span className={styles.icon}>📚</span> Đăng
+                            <li className={clsx(styles.menuItem)}>
+                                <span className={clsx(styles.icon)}>📚</span> Đăng
                                 truyện
                             </li>
-                            <li className={styles.menuItem}>
-                                <span className={styles.icon}>📖</span> Kho
+                            <li className={clsx(styles.menuItem)}>
+                                <span className={clsx(styles.icon)}>📖</span> Kho
                                 truyện
                                 <ul>
                                     <li>Truyện mới</li>
                                     <li>Truyện full</li>
                                 </ul>
                             </li>
-                            <li className={styles.menuItem}>
-                                <span className={styles.icon}>🏆</span> Xếp hạng
+                            <li className={clsx(styles.menuItem)}>
+                                <span className={clsx(styles.icon)}>🏆</span> Xếp hạng
                                 <ul>
                                     <li>Xếp hạng lượt đọc</li>
                                     <li>Xếp hạng đề cử</li>
@@ -105,18 +121,28 @@ const Header = () => {
                                     <li>Xếp hạng bình luận</li>
                                 </ul>
                             </li>
-                            <li className={styles.menuItem}>
-                                <span className={styles.icon}>⏱️</span> Thời
+                            <li className={clsx(styles.menuItem)}>
+                                <span className={clsx(styles.icon)}>⏱️</span> Thời
                                 gian thực
                             </li>
-                            <li className={styles.menuItem}>
-                                <span className={styles.icon}>⭐</span> Đánh giá
+                            <li className={clsx(styles.menuItem)}>
+                                <span className={clsx(styles.icon)}>⭐</span> Đánh giá
                                 mới
                             </li>
                         </ul>
                     </div>
                 </div>
             )}
+            <LoginModal 
+                isOpen={isLoginModalOpen} 
+                type={DEFAULT.LOGIN_TYPE.LOGIN}
+                onClose={() => setIsLoginModalOpen(false)} 
+            />
+            <LoginModal 
+                isOpen={isRegisterModalOpen} 
+                type={DEFAULT.LOGIN_TYPE.REGISTER}
+                onClose={() => setIsRegisterModalOpen(false)} 
+            />
         </>
     );
 };
