@@ -34,11 +34,9 @@ const BookList: React.FC = () => {
                             href={`/truyen/${story.slug}-${story.id}`}
                             className={clsx(styles.bookLink)}
                             target="_blank"
+                            key={story.id}
                         >
-                            <div
-                                key={story.id}
-                                className={clsx(styles.bookCard)}
-                            >
+                            <div className={clsx(styles.bookCard)}>
                                 <div className={clsx(styles.imageWrapper)}>
                                     <img
                                         src={story.poster[1]}

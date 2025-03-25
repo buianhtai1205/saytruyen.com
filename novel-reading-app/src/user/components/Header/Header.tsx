@@ -80,10 +80,11 @@ const Header = () => {
                                 className={clsx(styles.toggleButton)}
                                 onClick={toggleTheme}
                             >
-                                {isThemeLight
-                                    ? <span>🔆</span>
-                                    : <span>🌙</span>}
-
+                                {isThemeLight ? (
+                                    <span>🔆</span>
+                                ) : (
+                                    <span>🌙</span>
+                                )}
                             </div>
                             <div
                                 className={clsx(styles.closeButton)}
@@ -93,27 +94,35 @@ const Header = () => {
                             </div>
                         </div>
                         <ul>
-                            <li className={clsx(styles.menuItem)} onClick={openLoginModal}>
-                                <span className={clsx(styles.icon)}>🗝️</span> Đăng nhập
+                            <li
+                                className={clsx(styles.menuItem)}
+                                onClick={openLoginModal}
+                            >
+                                <span className={clsx(styles.icon)}>🗝️</span>{' '}
+                                Đăng nhập
                             </li>
-                            <li className={clsx(styles.menuItem)} onClick={openRegisterModal}>
-                                <span className={clsx(styles.icon)}>📝</span> Đăng ký
-                                tài khoản
+                            <li
+                                className={clsx(styles.menuItem)}
+                                onClick={openRegisterModal}
+                            >
+                                <span className={clsx(styles.icon)}>📝</span>{' '}
+                                Đăng ký tài khoản
                             </li>
                             <li className={clsx(styles.menuItem)}>
-                                <span className={clsx(styles.icon)}>📚</span> Đăng
-                                truyện
+                                <span className={clsx(styles.icon)}>📚</span>{' '}
+                                Đăng truyện
                             </li>
                             <li className={clsx(styles.menuItem)}>
-                                <span className={clsx(styles.icon)}>📖</span> Kho
-                                truyện
+                                <span className={clsx(styles.icon)}>📖</span>{' '}
+                                Kho truyện
                                 <ul>
                                     <li>Truyện mới</li>
                                     <li>Truyện full</li>
                                 </ul>
                             </li>
                             <li className={clsx(styles.menuItem)}>
-                                <span className={clsx(styles.icon)}>🏆</span> Xếp hạng
+                                <span className={clsx(styles.icon)}>🏆</span>{' '}
+                                Xếp hạng
                                 <ul>
                                     <li>Xếp hạng lượt đọc</li>
                                     <li>Xếp hạng đề cử</li>
@@ -122,26 +131,26 @@ const Header = () => {
                                 </ul>
                             </li>
                             <li className={clsx(styles.menuItem)}>
-                                <span className={clsx(styles.icon)}>⏱️</span> Thời
-                                gian thực
+                                <span className={clsx(styles.icon)}>⏱️</span>{' '}
+                                Thời gian thực
                             </li>
                             <li className={clsx(styles.menuItem)}>
-                                <span className={clsx(styles.icon)}>⭐</span> Đánh giá
-                                mới
+                                <span className={clsx(styles.icon)}>⭐</span>{' '}
+                                Đánh giá mới
                             </li>
                         </ul>
                     </div>
                 </div>
             )}
-            <LoginModal 
-                isOpen={isLoginModalOpen} 
+            <LoginModal
+                isOpen={isLoginModalOpen}
                 type={DEFAULT.LOGIN_TYPE.LOGIN}
-                onClose={() => setIsLoginModalOpen(false)} 
+                onClose={() => setIsLoginModalOpen(false)}
             />
-            <LoginModal 
-                isOpen={isRegisterModalOpen} 
+            <LoginModal
+                isOpen={isRegisterModalOpen}
                 type={DEFAULT.LOGIN_TYPE.REGISTER}
-                onClose={() => setIsRegisterModalOpen(false)} 
+                onClose={() => setIsRegisterModalOpen(false)}
             />
         </>
     );

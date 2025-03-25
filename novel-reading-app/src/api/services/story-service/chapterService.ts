@@ -1,7 +1,7 @@
-import apiClient from '../../axiosConfig';
-import { ApiResponse } from '../../common/apiResponse';
-import { PageableResponse } from '../../common/pageableResponse';
-import { storyServicePath as basePath } from '../../apiPaths';
+import apiClient from '@api/axiosConfig';
+import { ApiResponse } from '@api/common/apiResponse';
+import { PageableResponse } from '@api/common/pageableResponse';
+import { storyServicePath as basePath } from '@api/apiPaths';
 
 // Định nghĩa interface tương ứng với `ChapterRequest`
 export interface ChapterRequest {
