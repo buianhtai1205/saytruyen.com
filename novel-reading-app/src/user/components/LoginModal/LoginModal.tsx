@@ -65,6 +65,7 @@ const LoginModal = ({ isOpen, type, onClose }: LoginModalProps) => {
                         response.data.refreshToken
                     );
                     onClose();
+                    window.location.reload();
                 } else {
                     setError(response.message || 'Đăng nhập thất bại');
                 }

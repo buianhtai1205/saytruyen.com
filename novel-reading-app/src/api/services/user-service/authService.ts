@@ -1,4 +1,4 @@
-import apiClient from '@api/axiosConfig';
+import apiClient, { authApiClient } from '@api/axiosConfig';
 import { ApiResponse } from '@api/common/apiResponse';
 import { userServicePath as basePath } from '@api/apiPaths';
 
@@ -23,6 +23,17 @@ export interface LoginResponse {
     refreshToken: string;
 }
 
+export interface UserInfoResponse {
+    id: number;
+    username: string;
+    password: string;
+    authorities: Array<Object>;
+    enabled: boolean;
+    credentialsNonExpired: boolean;
+    accountNonExpired: boolean;
+    accountNonLocked: boolean;
+}
+
 export const signUp = async (
     request: UserSignUpRequest
 ): Promise<ApiResponse<Boolean>> => {
@@ -44,17 +55,24 @@ export const login = async (
 };
 
 export const logout = async (token: string): Promise<ApiResponse<Boolean>> => {
-    const response = await apiClient.post<ApiResponse<Boolean>>(
+    const response = await authApiClient.post<ApiResponse<Boolean>>(
         `${basePath}/auth/logout?token=${token}`
     );
     return response.data;
 };
 
 export const refreshToken = async (
-    token: string
+    refreshToken: string
 ): Promise<ApiResponse<LoginResponse>> => {
     const response = await apiClient.post<ApiResponse<LoginResponse>>(
-        `${basePath}/auth/refresh-token?token=${token}`
+        `${basePath}/auth/refresh-token?refreshToken=${refreshToken}`
+    );
+    return response.data;
+};
+
+export const userInfo = async (): Promise<ApiResponse<UserInfoResponse>> => {
+    const response = await authApiClient.get<ApiResponse<UserInfoResponse>>(
+        `${basePath}/auth`
     );
     return response.data;
 };

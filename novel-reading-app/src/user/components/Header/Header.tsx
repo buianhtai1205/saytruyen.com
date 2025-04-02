@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import styles from './Header.module.scss';
 import logo from '../../assets/images/logo150.png';
+import avatarDefault from '../../assets/images/avatar-default-icon.png';
 import { images } from '../../assets/svg';
 import LoginModal from '../LoginModal/LoginModal';
 import { DEFAULT } from '@api/common/defaultConstants';
+import { useAuth } from '../../../contexts/auth';
+import { logout } from '@api/services/user-service/authService';
 
 const Header = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -12,6 +15,7 @@ const Header = () => {
     const [isThemeLight, setIsThemeLight] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const { isLoggedIn, setIsLoggedIn } = useAuth();
 
     const toggleSearch = () => {
         setIsSearchVisible(!isSearchVisible);
@@ -33,6 +37,22 @@ const Header = () => {
     const openRegisterModal = () => {
         setIsRegisterModalOpen(true);
         setIsMenuVisible(false);
+    };
+
+    const onLogoutClick = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const response = await logout(token);
+            if (response.code === 200) {
+                // Clear tokens from localStorage
+                localStorage.removeItem('token');
+                localStorage.removeItem('refreshToken');
+                // Update auth state
+                setIsLoggedIn(false);
+                // Close the menu
+                setIsMenuVisible(false);
+            }
+        }
     };
 
     return (
@@ -94,20 +114,172 @@ const Header = () => {
                             </div>
                         </div>
                         <ul>
-                            <li
-                                className={clsx(styles.menuItem)}
-                                onClick={openLoginModal}
-                            >
-                                <span className={clsx(styles.icon)}>🗝️</span>{' '}
-                                Đăng nhập
-                            </li>
-                            <li
-                                className={clsx(styles.menuItem)}
-                                onClick={openRegisterModal}
-                            >
-                                <span className={clsx(styles.icon)}>📝</span>{' '}
-                                Đăng ký tài khoản
-                            </li>
+                            {!isLoggedIn ? (
+                                <>
+                                    <li
+                                        className={clsx(styles.menuItem)}
+                                        onClick={openLoginModal}
+                                    >
+                                        <span className={clsx(styles.icon)}>
+                                            🗝️
+                                        </span>{' '}
+                                        Đăng nhập
+                                    </li>
+                                    <li
+                                        className={clsx(styles.menuItem)}
+                                        onClick={openRegisterModal}
+                                    >
+                                        <span className={clsx(styles.icon)}>
+                                            📝
+                                        </span>{' '}
+                                        Đăng ký tài khoản
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li
+                                        className={clsx(
+                                            styles.menuItem,
+                                            styles.userInfoContainer
+                                        )}
+                                    >
+                                        <div className={styles.userInfo}>
+                                            <div className={styles.userAvatar}>
+                                                <img
+                                                    src={avatarDefault}
+                                                    alt="User avatar"
+                                                />
+                                            </div>
+                                            <div className={styles.userDetails}>
+                                                <span
+                                                    className={styles.userName}
+                                                >
+                                                    isQUd30119
+                                                </span>
+                                            </div>
+                                            <span className={styles.userLevel}>
+                                                0
+                                            </span>
+                                            <button
+                                                className={styles.logoutButton}
+                                                onClick={onLogoutClick}
+                                            >
+                                                Thoát
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li
+                                                className={clsx(
+                                                    styles.menuItem
+                                                )}
+                                            >
+                                                <span
+                                                    className={clsx(
+                                                        styles.icon
+                                                    )}
+                                                >
+                                                    👤
+                                                </span>{' '}
+                                                Nâng cấp tài khoản{' '}
+                                                <span
+                                                    className={styles.newBadge}
+                                                >
+                                                    🆕
+                                                </span>
+                                            </li>
+                                            <li
+                                                className={clsx(
+                                                    styles.menuItem
+                                                )}
+                                            >
+                                                <span
+                                                    className={clsx(
+                                                        styles.icon
+                                                    )}
+                                                >
+                                                    📚
+                                                </span>{' '}
+                                                Tủ truyện của tôi
+                                            </li>
+                                            <li
+                                                className={clsx(
+                                                    styles.menuItem
+                                                )}
+                                            >
+                                                <span
+                                                    className={clsx(
+                                                        styles.icon
+                                                    )}
+                                                >
+                                                    💰
+                                                </span>{' '}
+                                                Lịch sử giao dịch
+                                            </li>
+                                            <li
+                                                className={clsx(
+                                                    styles.menuItem
+                                                )}
+                                            >
+                                                <span
+                                                    className={clsx(
+                                                        styles.icon
+                                                    )}
+                                                >
+                                                    ⚙️
+                                                </span>{' '}
+                                                Cài đặt cá nhân
+                                            </li>
+                                            <li
+                                                className={clsx(
+                                                    styles.menuItem
+                                                )}
+                                            >
+                                                <span
+                                                    className={clsx(
+                                                        styles.icon
+                                                    )}
+                                                >
+                                                    ❓
+                                                </span>{' '}
+                                                Yêu cầu hỗ trợ
+                                            </li>
+                                            <li
+                                                className={clsx(
+                                                    styles.menuItem
+                                                )}
+                                            >
+                                                <div
+                                                    className={styles.userStats}
+                                                >
+                                                    <div>
+                                                        <span>🦋 0</span>
+                                                        <span>🎁 0</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>🔑 0</span>
+                                                        <span>💰 1</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                className={clsx(
+                                                    styles.menuItem
+                                                )}
+                                            >
+                                                <button
+                                                    className={
+                                                        styles.topupButton
+                                                    }
+                                                >
+                                                    Nạp 🦋
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </>
+                            )}
                             <li className={clsx(styles.menuItem)}>
                                 <span className={clsx(styles.icon)}>📚</span>{' '}
                                 Đăng truyện

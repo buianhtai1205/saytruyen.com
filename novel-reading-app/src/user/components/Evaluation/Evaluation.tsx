@@ -70,15 +70,12 @@ function Evaluation() {
     useEffect(() => {
         evaluations.forEach((evaluation, index) => {
             const contentElement = contentRefs.current[index];
-            console.log(contentElement);
             if (contentElement) {
                 const lineHeight = parseFloat(
                     getComputedStyle(contentElement).lineHeight
                 );
                 const maxHeight = lineHeight * 10; // 10 lines
                 const isOverflowing = contentElement.scrollHeight > maxHeight;
-
-                console.log(isOverflowing);
 
                 setShowReadMore((prev) => {
                     const newShowReadMore = [...prev];
@@ -88,8 +85,6 @@ function Evaluation() {
             }
         });
     }, [evaluations]);
-
-    console.log(showReadMore);
 
     return (
         <div className={clsx(styles.evaluation)}>

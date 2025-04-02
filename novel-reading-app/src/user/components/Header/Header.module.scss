@@ -79,7 +79,7 @@
     top: 0;
     right: 0;
     height: 100vh;
-    width: 250px;
+    width: 360px;
     background-color: #333;
     color: #fff;
     padding: 1rem;
@@ -123,5 +123,102 @@
                 }
             }
         }
+    }
+}
+
+.userStats {
+    padding: 10px 0;
+
+    div {
+        display: flex;
+        justify-content: space-around;
+        margin: 5px 0;
+
+        span {
+            margin: 0 10px;
+        }
+    }
+}
+
+.topupButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #f0ad4e;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken(#f0ad4e, 10%);
+    }
+}
+
+.newBadge {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.userInfoContainer {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.userAvatar {
+    width: 40px;
+    height: 40px;
+
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.userDetails {
+    flex: 1;
+
+    .userName {
+        color: white;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+}
+
+.userLevel {
+    background-color: #f44336;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 24px;
+}
+
+.logoutButton {
+    width: 64px;
+    height: 32px;
+    background-color: transparent;
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    float: right;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken(#f0ad4e, 10%);
+        color: white;
     }
 }
