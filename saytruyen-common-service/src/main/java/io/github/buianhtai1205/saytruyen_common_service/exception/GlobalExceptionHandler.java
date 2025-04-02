@@ -1,8 +1,14 @@
 package io.github.buianhtai1205.saytruyen_common_service.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -95,100 +101,106 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
-//    /**
-//     * Handle bad credentials exception response entity.
-//     *
-//     * @param ex the ex
-//     * @return the response entity
-//     */
-//    @ExceptionHandler(BadCredentialsException.class)
-//    public ResponseEntity<ApiResponse<?>> handleBadCredentialsException(BadCredentialsException ex) {
-//        ApiResponse<?> response = ApiResponse.builder()
-//                .code(HttpStatus.UNAUTHORIZED.value())
-//                .message(ex.getMessage())
-//                .build();
-//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-//    }
-//
-//    /**
-//     * Handle access denied exception response entity.
-//     *
-//     * @param ex the ex
-//     * @return the response entity
-//     */
-//    @ExceptionHandler(AccessDeniedException.class)
-//    public ResponseEntity<ApiResponse<?>> handleAccessDeniedException(AccessDeniedException ex) {
-//        log.error(ex.getMessage());
-//        ApiResponse<?> response = ApiResponse.builder()
-//                .code(HttpStatus.FORBIDDEN.value())
-//                .message(ex.getMessage())
-//                .build();
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
-//    }
-//
-//    /**
-//     * Handle insufficient authentication exception response entity.
-//     *
-//     * @param ex the ex
-//     * @return the response entity
-//     */
-//    @ExceptionHandler(InsufficientAuthenticationException.class)
-//    public ResponseEntity<ApiResponse<?>> handleInsufficientAuthenticationException(InsufficientAuthenticationException ex) {
-//        log.error(ex.getMessage());
-//        ApiResponse<?> response = ApiResponse.builder()
-//                .code(HttpStatus.FORBIDDEN.value())
-//                .message(ex.getMessage())
-//                .build();
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
-//    }
-//
-//    /**
-//     * Handle signature exception response entity.
-//     *
-//     * @param ex the ex
-//     * @return the response entity
-//     */
-//    @ExceptionHandler(SignatureException.class)
-//    public ResponseEntity<ApiResponse<?>> handleSignatureException(SignatureException ex) {
-//        log.error(ex.getMessage());
-//        ApiResponse<?> response = ApiResponse.builder()
-//                .code(HttpStatus.FORBIDDEN.value())
-//                .message(ex.getMessage())
-//                .build();
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
-//    }
-//
-//    /**
-//     * Handle malformed jwt exception response entity.
-//     *
-//     * @param ex the ex
-//     * @return the response entity
-//     */
-//    @ExceptionHandler(MalformedJwtException.class)
-//    public ResponseEntity<ApiResponse<?>> handleMalformedJwtException(MalformedJwtException ex) {
-//        log.error(ex.getMessage());
-//        ApiResponse<?> response = ApiResponse.builder()
-//                .code(HttpStatus.FORBIDDEN.value())
-//                .message(ex.getMessage())
-//                .build();
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
-//    }
-//
-//    /**
-//     * Handle expired jwt exception response entity.
-//     *
-//     * @param ex the ex
-//     * @return the response entity
-//     */
-//    @ExceptionHandler(ExpiredJwtException.class)
-//    public ResponseEntity<ApiResponse<?>> handleExpiredJwtException(ExpiredJwtException ex) {
-//        log.error(ex.getMessage());
-//        ApiResponse<?> response = ApiResponse.builder()
-//                .code(HttpStatus.FORBIDDEN.value())
-//                .message(ex.getMessage())
-//                .build();
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
-//    }
+    /**
+     * Handle bad credentials exception response entity.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ApiResponse<?>> handleBadCredentialsException(BadCredentialsException ex) {
+        ApiResponse<?> response = ApiResponse.builder()
+                .code(HttpStatus.UNAUTHORIZED.value())
+                .messageId("CM_E000001")
+                .message(ex.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    }
+
+    /**
+     * Handle access denied exception response entity.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<?>> handleAccessDeniedException(AccessDeniedException ex) {
+        log.error(ex.getMessage());
+        ApiResponse<?> response = ApiResponse.builder()
+                .code(HttpStatus.FORBIDDEN.value())
+                .messageId("CM_E000002")
+                .message(ex.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
+
+    /**
+     * Handle insufficient authentication exception response entity.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
+    @ExceptionHandler(InsufficientAuthenticationException.class)
+    public ResponseEntity<ApiResponse<?>> handleInsufficientAuthenticationException(InsufficientAuthenticationException ex) {
+        log.error(ex.getMessage());
+        ApiResponse<?> response = ApiResponse.builder()
+                .code(HttpStatus.FORBIDDEN.value())
+                .messageId("CM_E000003")
+                .message(ex.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
+
+    /**
+     * Handle signature exception response entity.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
+    @ExceptionHandler(SignatureException.class)
+    public ResponseEntity<ApiResponse<?>> handleSignatureException(SignatureException ex) {
+        log.error(ex.getMessage());
+        ApiResponse<?> response = ApiResponse.builder()
+                .code(HttpStatus.FORBIDDEN.value())
+                .messageId("CM_E000004")
+                .message(ex.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
+
+    /**
+     * Handle malformed jwt exception response entity.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
+    @ExceptionHandler(MalformedJwtException.class)
+    public ResponseEntity<ApiResponse<?>> handleMalformedJwtException(MalformedJwtException ex) {
+        log.error(ex.getMessage());
+        ApiResponse<?> response = ApiResponse.builder()
+                .code(HttpStatus.FORBIDDEN.value())
+                .messageId("CM_E000005")
+                .message(ex.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
+
+    /**
+     * Handle expired jwt exception response entity.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ApiResponse<?>> handleExpiredJwtException(ExpiredJwtException ex) {
+        log.error(ex.getMessage());
+        ApiResponse<?> response = ApiResponse.builder()
+                .code(HttpStatus.FORBIDDEN.value())
+                .messageId("CM_E000006")
+                .message(ex.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
 
     /**
      * Handle exception response entity.

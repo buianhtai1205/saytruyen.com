@@ -20,6 +20,8 @@ public class ApiResponse<T> {
     @Builder.Default
     private Integer code = CommonConstants.SUCCESS_CODE;
 
+    private String messageId;
+
     @Builder.Default
     private String message = CommonConstants.SUCCESS_REQUEST;
 
