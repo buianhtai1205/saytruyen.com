@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
-import reactor.core.Exceptions;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import vn.com.saytruyen.user_service.service.AuthService;
 
 
@@ -19,11 +19,23 @@ import vn.com.saytruyen.user_service.service.AuthService;
  */
 public class JwtAuthFilter extends OncePerRequestFilter {
 
+    private final HandlerExceptionResolver handlerExceptionResolver;
+
     @Autowired
     private UserDetailsCustomService userDetailsCustomService;
 
     @Autowired
     private AuthService authService;
+
+    /**
+     * Instantiates a new Jwt auth filter.
+     *
+     * @param handlerExceptionResolver the handler exception resolver
+     */
+    @Autowired
+    public JwtAuthFilter(HandlerExceptionResolver handlerExceptionResolver) {
+        this.handlerExceptionResolver = handlerExceptionResolver;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -52,7 +64,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 if (JwtUtil.validateToken(token, userDetails.getUsername())) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
-                            null,
+                            token,
                             userDetails.getAuthorities()
                     );
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -62,7 +74,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
         } catch (Exception ex) {
-            throw Exceptions.propagate(ex);
+            handlerExceptionResolver.resolveException(request, response, null, ex);
         }
     }
 }

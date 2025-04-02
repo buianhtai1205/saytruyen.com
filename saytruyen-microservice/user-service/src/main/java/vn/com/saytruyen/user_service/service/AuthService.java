@@ -46,4 +46,19 @@ public interface AuthService {
      * @return the boolean
      */
     boolean isTokenInBlackList(String token);
+
+    /**
+     * User info object.
+     *
+     * @return the object
+     */
+    Object userInfo();
+
+    /**
+     * Refresh token login response.
+     *
+     * @param refreshToken the refresh token
+     * @return the login response
+     */
+    LoginResponse refreshToken(String refreshToken);
 }

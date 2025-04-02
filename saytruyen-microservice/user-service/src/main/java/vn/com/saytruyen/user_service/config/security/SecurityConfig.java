@@ -1,5 +1,7 @@
 package vn.com.saytruyen.user_service.config.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 /**
  * The type Security config.
@@ -23,6 +26,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+
+    @Autowired
+    @Qualifier("handlerExceptionResolver")
+    private HandlerExceptionResolver handlerExceptionResolver;
 
     /**
      * Security filter chain security filter chain.
@@ -41,6 +48,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(customAuthenticationEntryPoint())
+                        .accessDeniedHandler(customAccessDeniedHandler())
+                )
                 .build();
     }
 
@@ -84,6 +95,26 @@ public class SecurityConfig {
      */
     @Bean
     public JwtAuthFilter jwtAuthFilter() {
-        return new JwtAuthFilter();
+        return new JwtAuthFilter(handlerExceptionResolver);
+    }
+
+    /**
+     * Custom access denied handler custom access denied handler.
+     *
+     * @return the custom access denied handler
+     */
+    @Bean
+    public CustomAccessDeniedHandler customAccessDeniedHandler() {
+        return new CustomAccessDeniedHandler(handlerExceptionResolver);
+    }
+
+    /**
+     * Custom authentication entry point custom authentication entry point.
+     *
+     * @return the custom authentication entry point
+     */
+    @Bean
+    public CustomAuthenticationEntryPoint customAuthenticationEntryPoint() {
+        return new CustomAuthenticationEntryPoint(handlerExceptionResolver);
     }
 }

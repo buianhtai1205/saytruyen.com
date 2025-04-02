@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.com.saytruyen.user_service.constant.RoleEnum;
@@ -29,7 +33,9 @@ import vn.com.saytruyen.user_service.response.LoginResponse;
 import vn.com.saytruyen.user_service.service.AuthService;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -77,6 +83,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public LoginResponse login(LoginRequest request) {
         Optional<User> user = userRepository.findUserAndRoleToLogin(request.getUsername());
 
@@ -107,12 +114,15 @@ public class AuthServiceImpl implements AuthService {
                 .collect(Collectors.toList());
         String token = JwtUtil.generateToken(request.getUsername(), roles);
 
+        refreshTokenRepository.deleteAllByUser(user.get());
+
         // create refresh token
         String refreshToken = RandomUtils.generateRandomString(12);
         // save refresh token
         refreshTokenRepository.save(
                 RefreshToken.builder()
                         .token(refreshToken)
+                        .expiryDate(Instant.now().plusSeconds(86400 * 30)) // 30 days
                         .user(user.get())
                         .build()
         );
@@ -159,7 +169,7 @@ public class AuthServiceImpl implements AuthService {
             );
         }
 
-        if (JwtUtil.validateToken(token, user.getUsername())) {
+        if (!JwtUtil.validateToken(token, user.getUsername())) {
             throw new BusinessException(
                     messageSource.getMessage(
                             UserServiceMessage.UT_E000003,
@@ -192,5 +202,65 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean isTokenInBlackList(String token) {
         return redisTemplate.hasKey(token);
+    }
+
+    @Override
+    public Object userInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)
+                && Objects.nonNull(authentication.getCredentials())
+                && !isTokenInBlackList(authentication.getCredentials().toString())) {
+            return authentication.getPrincipal();
+        } else throw new BadCredentialsException(
+                messageSource.getMessage(
+                        UserServiceMessage.UT_E000005,
+                        null,
+                        LocaleContextHolder.getLocale()
+                )
+        );
+    }
+
+    @Override
+    public LoginResponse refreshToken(String refreshToken) {
+        Optional<RefreshToken> refreshTokenOptional = refreshTokenRepository.findByToken(refreshToken);
+        if (refreshTokenOptional.isPresent()) {
+            RefreshToken refreshTokenEntity = refreshTokenOptional.get();
+            if (Objects.isNull(refreshTokenEntity.getUser())) {
+                throw new BusinessException(
+                        messageSource.getMessage(
+                                UserServiceMessage.UT_E000004,
+                                null,
+                                LocaleContextHolder.getLocale()
+                        )
+                );
+            }
+            if (refreshTokenEntity.getExpiryDate().compareTo(Instant.now()) < 0) {
+                refreshTokenRepository.delete(refreshTokenEntity);
+                throw new BusinessException(
+                        messageSource.getMessage(
+                                UserServiceMessage.UT_E000005,
+                                null,
+                                LocaleContextHolder.getLocale()
+                        )
+                );
+            }
+            User user = refreshTokenEntity.getUser();
+            List<String> roles = user.getUserRoles().stream()
+                    .map(item -> item.getRole().getRoleName())
+                    .collect(Collectors.toList());
+            String token = JwtUtil.generateToken(user.getUsername(), roles);
+            return LoginResponse.builder()
+                    .token(token)
+                    .refreshToken(refreshToken)
+                    .build();
+        } else {
+            throw new ResourceNotFoundException(
+                    messageSource.getMessage(
+                            UserServiceMessage.UT_E000005,
+                            null,
+                            LocaleContextHolder.getLocale()
+                    )
+            );
+        }
     }
 }

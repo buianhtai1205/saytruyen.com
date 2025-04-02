@@ -34,7 +34,7 @@ public class AuthControllerImpl implements AuthController {
 
     @Override
     public ApiResponse<LoginResponse> refreshToken(String refreshToken) {
-        return null;
+        return new ApiResponse<>(authService.refreshToken(refreshToken));
     }
 
     @Override
@@ -47,5 +47,10 @@ public class AuthControllerImpl implements AuthController {
     public ApiResponse<Boolean> signUp(UserSignUpRequest request) {
         authService.signUp(request);
         return new ApiResponse<>(Boolean.TRUE);
+    }
+
+    @Override
+    public ApiResponse<?> userInfo() {
+        return new ApiResponse<>(authService.userInfo());
     }
 }

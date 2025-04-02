@@ -1,6 +1,8 @@
 package vn.com.saytruyen.user_service.controller;
 
 import io.github.buianhtai1205.saytruyen_common_service.response.ApiResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,7 @@ public interface AuthController {
      * @return the api response
      */
     @PostMapping("/logout")
+    @PreAuthorize("hasRole('USER')")
     ApiResponse<Boolean> logout(@RequestParam String token);
 
     /**
@@ -52,4 +55,13 @@ public interface AuthController {
      */
     @PostMapping("/sign-up")
     ApiResponse<Boolean> signUp(@RequestBody UserSignUpRequest request);
+
+    /**
+     * User info api response.
+     *
+     * @return the api response
+     */
+    @GetMapping()
+    @PreAuthorize("hasRole('USER')")
+    ApiResponse<?> userInfo();
 }
