@@ -9,18 +9,16 @@ import Table from './admin/components/Table/Table';
 import Story from './admin/components/Story/Story';
 import ChapterDetail from './user/pages/ChapterDetail/ChapterDetail';
 import { AuthProvider } from './contexts/auth';
+import Page404 from './user/pages/ErrorPage/Page404';
+import Page500 from './user/pages/ErrorPage/Page500';
 
 function App() {
     return (
         <AuthProvider>
             <Router>
                 <div className="app">
-                    {/* User routes */}
                     <Routes>
-                        <Route
-                            path="/common-component"
-                            element={<CommonComponent />}
-                        />
+                        {/* User routes */}
                         <Route
                             path="/"
                             element={
@@ -28,6 +26,10 @@ function App() {
                                     <HomePage />
                                 </UserMainLayout>
                             }
+                        />
+                        <Route
+                            path="/common-component"
+                            element={<CommonComponent />}
                         />
                         <Route
                             path="/truyen/:nameWithId"
@@ -45,25 +47,21 @@ function App() {
                                 </UserMainLayout>
                             }
                         />
-                    </Routes>
 
-                    {/* Admin routes */}
-                    <Routes>
-                        <Route
-                            path="/admin/common-component"
-                            element={
-                                <AdminMainLayout>
-                                    <CommonComponent />
-                                </AdminMainLayout>
-                            }
-                        />
-                    </Routes>
-                    <Routes>
+                        {/* Admin routes */}
                         <Route
                             path="/admin"
                             element={
                                 <AdminMainLayout>
                                     <Dashboard />
+                                </AdminMainLayout>
+                            }
+                        />
+                        <Route
+                            path="/admin/common-component"
+                            element={
+                                <AdminMainLayout>
+                                    <CommonComponent />
                                 </AdminMainLayout>
                             }
                         />
@@ -123,6 +121,9 @@ function App() {
                                 </AdminMainLayout>
                             }
                         />
+
+                        {/* 404 route - must be last */}
+                        <Route path="*" element={<Page404 />} />
                     </Routes>
                 </div>
             </Router>

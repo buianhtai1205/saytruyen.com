@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300..700&display=swap');
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: rgb(40, 40, 40);
+    overflow: hidden;
+}
+
+.title {
+    font-family: 'Bevan' !important;
+    font-size: 130px;
+    text-align: center;
+    letter-spacing: 5px;
+    background-color: black;
+    color: transparent;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+
+    .number {
+        font-size: 1.2em;
+    }
+}
+
+.codeBlock {
+    background-color: rgb(40, 40, 40);
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.codeLine {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+
+    &:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+}
+
+.yellow {
+    color: #f0c674;
+}
+.blue {
+    color: #569cd6;
+}
+.purple {
+    color: #c586c0;
+}
+.green {
+    color: #6a9955;
+}
+.white {
+    color: #d4d4d4;
+}
+.operator {
+    color: #d4d4d4;
+}
+
+.homeLink {
+    color: #4ec9b0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    position: relative;
+
+    &:hover {
+        &:after {
+            width: 100%;
+        }
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #4ec9b0;
+        transition: width 0.3s ease;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 3rem;
+    }
+
+    .codeBlock {
+        font-size: 1rem;
+    }
+
+    .codeLine {
+        font-size: 1rem;
+    }
+}
