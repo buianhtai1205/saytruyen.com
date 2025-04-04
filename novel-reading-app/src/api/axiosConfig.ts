@@ -42,7 +42,9 @@ export const createAuthApiClient = () => {
         async (error) => {
             // Handle different HTTP status codes
             if (error.response) {
-                switch (error.response.status) {
+                const status = error.response.status;
+
+                switch (status) {
                     case 400:
                     case 401:
                     case 403:
@@ -62,13 +64,13 @@ export const createAuthApiClient = () => {
                         // Server Errors
                         return Promise.reject({
                             message: 'Đã có lỗi xảy ra, vui lòng thử lại sau',
-                            status: error.response.status,
+                            status: status,
                         });
 
                     default:
                         return Promise.reject({
                             message: 'Đã có lỗi xảy ra',
-                            status: error.response.status,
+                            status: status,
                         });
                 }
             }
@@ -100,7 +102,9 @@ apiClient.interceptors.response.use(
     async (error) => {
         // Handle different HTTP status codes
         if (error.response) {
-            switch (error.response.status) {
+            const status = error.response.status;
+
+            switch (status) {
                 case 400:
                 case 401:
                 case 403:
@@ -117,16 +121,18 @@ apiClient.interceptors.response.use(
                 case 501:
                 case 502:
                 case 503:
-                    // Server Errors
+                    // Server Errors - Redirect to page500
+                    console.log('Server Errors - Redirect to page500');
+                    window.location.href = '/internal-server-error';
                     return Promise.reject({
                         message: 'Đã có lỗi xảy ra, vui lòng thử lại sau',
-                        status: error.response.status,
+                        status: status,
                     });
 
                 default:
                     return Promise.reject({
                         message: 'Đã có lỗi xảy ra',
-                        status: error.response.status,
+                        status: status,
                     });
             }
         }

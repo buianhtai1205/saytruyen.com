@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { AuthContext } from './AuthContext';
 import { userInfo, refreshToken } from '@api/services/user-service/authService';
 import { MESSAGE_ID } from '@api/common/messageIdConstant';
-import { toast } from 'react-toastify';
-import { Bounce } from 'react-toastify';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,17 +41,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     useEffect(() => {
-        toast('🦄 Wow so easy!', {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-            transition: Bounce,
-        });
         checkLogin();
     }, []);
 

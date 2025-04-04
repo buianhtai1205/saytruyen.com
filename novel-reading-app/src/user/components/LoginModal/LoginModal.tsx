@@ -4,6 +4,8 @@ import styles from './LoginModal.module.scss';
 import logo from '../../assets/images/logo150.png';
 import { DEFAULT } from '@api/common/defaultConstants';
 import { login, signUp } from '@api/services/user-service/authService';
+import { ToastContainer } from 'react-toastify';
+import { apiCallWithToast } from '../../../utils/apiUtils';
 
 interface LoginModalProps {
     isOpen: boolean;
@@ -37,35 +39,49 @@ const LoginModal = ({ isOpen, type, onClose }: LoginModalProps) => {
                     setError('Mật khẩu không khớp');
                     return;
                 }
-                const response = await signUp({
+                const signUpPromise = signUp({
                     email,
                     password,
-                    username: email, // Using email as username
-                    fullName: email.split('@')[0], // These fields can be updated later
+                    username: email,
+                    fullName: email.split('@')[0],
                     gender: 0,
                     address: '',
                     imageUrl: '',
                     backgroundUrl: '',
                 });
+
+                const response = await apiCallWithToast(
+                    signUpPromise,
+                    'Đăng ký thành công!',
+                    'Đăng ký thất bại'
+                );
+
                 if (response.code === 200) {
                     setCurrentType(DEFAULT.LOGIN_TYPE.LOGIN);
                 } else {
                     setError(response.message || 'Đăng ký thất bại');
                 }
             } else {
-                const response = await login({
+                const loginPromise = login({
                     username: email,
                     password,
                 });
+
+                const response = await apiCallWithToast(
+                    loginPromise,
+                    'Đăng nhập thành công!',
+                    'Đăng nhập thất bại'
+                );
+
                 if (response.code === 200) {
-                    // Store tokens and close modal
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem(
                         'refreshToken',
                         response.data.refreshToken
                     );
-                    onClose();
-                    window.location.reload();
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
                 } else {
                     setError(response.message || 'Đăng nhập thất bại');
                 }
@@ -161,6 +177,7 @@ const LoginModal = ({ isOpen, type, onClose }: LoginModalProps) => {
                         </a>
                     </div>
                 </div>
+                <ToastContainer />
             </div>
         </div>
     );

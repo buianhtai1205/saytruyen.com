@@ -8,6 +8,8 @@ import LoginModal from '../LoginModal/LoginModal';
 import { DEFAULT } from '@api/common/defaultConstants';
 import { useAuth } from '../../../contexts/auth';
 import { logout } from '@api/services/user-service/authService';
+import { apiCallWithToast } from '../../../utils/apiUtils';
+import { ToastContainer } from 'react-toastify';
 
 const Header = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -41,17 +43,31 @@ const Header = () => {
 
     const onLogoutClick = async () => {
         const token = localStorage.getItem('token');
-        if (token) {
-            const response = await logout(token);
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+
+        try {
+            const logoutPromise = logout(token);
+
+            const response = await apiCallWithToast(
+                logoutPromise,
+                'Đăng xuất thành công!',
+                'Đăng xuất thất bại'
+            );
+
             if (response.code === 200) {
-                // Clear tokens from localStorage
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');
-                // Update auth state
                 setIsLoggedIn(false);
-                // Close the menu
                 setIsMenuVisible(false);
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
+        } catch (error) {
+            console.error('Logout failed:', error);
         }
     };
 
@@ -324,6 +340,7 @@ const Header = () => {
                 type={DEFAULT.LOGIN_TYPE.REGISTER}
                 onClose={() => setIsRegisterModalOpen(false)}
             />
+            <ToastContainer />
         </>
     );
 };

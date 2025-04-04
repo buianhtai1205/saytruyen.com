@@ -122,6 +122,11 @@ function App() {
                             }
                         />
 
+                        <Route
+                            path="/internal-server-error"
+                            element={<Page500 />}
+                        />
+
                         {/* 404 route - must be last */}
                         <Route path="*" element={<Page404 />} />
                     </Routes>
