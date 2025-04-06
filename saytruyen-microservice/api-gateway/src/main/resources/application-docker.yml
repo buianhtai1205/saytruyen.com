@@ -1,0 +1,60 @@
+server:
+    servlet:
+        context-path: /
+    port: 8080
+
+spring:
+    application:
+        name: api-gateway
+    cloud:
+        gateway:
+            httpclient:
+                connect-timeout: 20000
+                response-timeout: 300s
+            globalcors:
+                cors-configurations:
+                    '[/**]':
+                        allowedOrigins: "https://saytruyen-com.vercel.app, http://localhost:3000"
+                        allowedMethods: GET, POST, PUT, DELETE, PATCH, OPTIONS
+                        allowedHeaders: "*"
+                        allowCredentials: true
+            routes:
+                -   id: story-service
+                    uri: lb://story-service
+                    predicates:
+                        - Path=/api/story-service/**, /api/story-service/v3/api-docs
+                -   id: admin-service
+                    uri: lb://admin-service
+                    predicates:
+                        - Path=/api/admin-service/**, /api/admin-service/v3/api-docs
+                -   id: user-service
+                    uri: lb://user-service
+                    predicates:
+                        - Path=/api/user-service/**, /api/user-service/v3/api-docs
+
+springdoc:
+    enable-native-support: true
+    api-docs:
+        enabled: true
+    swagger-ui:
+        enabled: true
+        path: /swagger-ui.html
+        config-url: /v3/api-docs/swagger-config
+        urls:
+            -   url: /v3/api-docs
+                name: API Gateway Service
+            -   url: /api/story-service/v3/api-docs
+                name: Story Service
+            -   url: /api/admin-service/v3/api-docs
+                name: Admin Service
+            -   url: /api/user-service/v3/api-docs
+                name: User Service
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://discovery-server:8761/eureka
+        register-with-eureka: true
+        fetch-registry: true
+    instance:
+        hostname: api-gateway

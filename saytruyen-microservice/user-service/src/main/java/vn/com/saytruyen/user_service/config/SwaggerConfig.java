@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         url = "https://github.com/buianhtai1205"
                 ),
                 description = "OpenApi documentation for Spring Boot",
-                title = "Story-Service",
+                title = "User-Service",
                 version = "1.0",
                 license = @License(
                         name = "License name",

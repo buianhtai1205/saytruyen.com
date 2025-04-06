@@ -58,6 +58,8 @@ services:
             ZOOKEEPER_TICK_TIME: 2000
         ports:
             - 22181:2181
+        networks:
+            - my-network
 
     # kafka
     kafka:
@@ -67,6 +69,7 @@ services:
             - zookeeper
         ports:
             - 29092:29092
+            - 9092:9092
         environment:
             KAFKA_BROKER_ID: 1
             KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -75,6 +78,8 @@ services:
             KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
             KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
             KAFKA_OFFSETS_RETENTION_MINUTES: 15
+        networks:
+            - my-network
 
     # redis
     redis:
@@ -117,4 +122,84 @@ services:
             - mysql-user-service-data:/var/lib/mysql
         networks:
             - my-network
+        restart: always
+
+    # discovery-server (Eureka)
+    discovery-server:
+        image: buianhtai/saytruyen_discovery-server:v1
+        container_name: discovery-server
+        environment:
+            EUREKA_CLIENT_REGISTER_WITH_EUREKA: "false"
+            EUREKA_CLIENT_FETCH_REGISTRY: "false"
+            EUREKA_INSTANCE_HOSTNAME: discovery-server
+        ports:
+            - "8761:8761"
+        networks:
+            - my-network
+        restart: always
+
+    # api-gateway
+    api-gateway:
+        image: buianhtai/saytruyen_api-gateway:v1
+        container_name: api-gateway
+        environment:
+            EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+        ports:
+            - "8080:8080"
+        networks:
+            - my-network
+        depends_on:
+            - discovery-server
+        restart: always
+
+    # admin-service
+    admin-service:
+        image: buianhtai/saytruyen_admin-service:v1
+        container_name: admin-service
+        environment:
+            SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+            EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+        ports:
+            - "8081:8081"
+        networks:
+            - my-network
+        depends_on:
+            - discovery-server
+            - kafka
+            - redis
+            - mysql-admin-service
+        restart: always
+
+    # story-service
+    story-service:
+        image: buianhtai/saytruyen_story-service:v1
+        container_name: story-service
+        environment:
+            SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+            EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+        ports:
+            - "8082:8082"
+        networks:
+            - my-network
+        depends_on:
+            - discovery-server
+            - mongo
+            - kafka
+        restart: always
+
+    # user-service
+    user-service:
+        image: buianhtai/saytruyen_user-service:v1
+        container_name: user-service
+        environment:
+            EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+        ports:
+            - "8083:8083"
+        networks:
+            - my-network
+        depends_on:
+            - discovery-server
+            - kafka
+            - redis
+            - mysql-user-service
         restart: always

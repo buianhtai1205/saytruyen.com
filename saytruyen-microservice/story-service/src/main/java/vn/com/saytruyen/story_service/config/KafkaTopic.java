@@ -20,7 +20,7 @@ public class KafkaTopic {
     public NewTopic getAllStoriesReplyTopic() {
         return TopicBuilder.name("story-service-reply")
                 .partitions(10)
-                .replicas(2)
+                .replicas(1)
                 .build();
     }
 }
